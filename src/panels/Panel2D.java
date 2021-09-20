@@ -19,7 +19,7 @@ import main.Main;
 public class Panel2D extends javax.swing.JInternalFrame {
     private int assistantX = 0, assistantY = 0;
     private Polygon polygon = new Polygon();
-    private PanelBoard panelBoard = new PanelBoard();
+    private PanelBoard panelBoard;
     private Transformation2D transformation2D = new Transformation2D();
     
     public void setPolygon(Polygon polygon) {
@@ -28,13 +28,13 @@ public class Panel2D extends javax.swing.JInternalFrame {
 
     public void setPanelBoard(PanelBoard panelBoard) {
         this.panelBoard = panelBoard;
+        this.panelBoard.setPolygon(this.polygon);
     }
 
     /**
      * Creates new form Panel2D
      */
     public Panel2D() {
-        this.panelBoard.setPolygon(this.polygon);
         initComponents();
         
         transformacoesComboBox.removeAllItems();

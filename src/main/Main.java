@@ -85,13 +85,16 @@ public class Main extends javax.swing.JFrame {
     private void itemDeMenuTransformacoes2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoes2DActionPerformed
         // TODO add your handling code here:
         Panel2D panel2d = new Panel2D();
+        PanelBoard panelBoard = new PanelBoard();
+        panel2d.setPanelBoard(panelBoard);
+
         panel2d.setVisible(true);
         this.add(panel2d);
         
-        PanelBoard panelBoard = new PanelBoard();
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
+
     }//GEN-LAST:event_itemDeMenuTransformacoes2DActionPerformed
 
     /**

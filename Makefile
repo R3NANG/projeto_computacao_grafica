@@ -1,7 +1,7 @@
 #:: Windows
 #> dir /s /B *.java > sources.txt
 #> javac @sources.txt
-DESTINATION=build
+DESTINATION=build/classes
 SRC=sources.txt
 CC=javac
 
