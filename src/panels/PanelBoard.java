@@ -24,7 +24,7 @@ public class PanelBoard extends javax.swing.JInternalFrame {
         repaint(); 
     }
 
-   public Polygon polygon = new Polygon();
+   public Polygon polygon;
 
    public void setPolygon(Polygon polygon) {
        this.polygon = polygon;

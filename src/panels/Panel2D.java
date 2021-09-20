@@ -34,6 +34,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
      * Creates new form Panel2D
      */
     public Panel2D() {
+        this.panelBoard.setPolygon(this.polygon);
         initComponents();
         
         transformacoesComboBox.removeAllItems();
