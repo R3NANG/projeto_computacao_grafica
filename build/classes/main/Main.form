@@ -7,10 +7,13 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="menu2D">
+        <Menu class="javax.swing.JMenu" name="menuPrimitivas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lab1 (Em Breve)"/>
+            <Property name="text" type="java.lang.String" value="Primitivas Geom&#xe9;tricas"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="menuPrimitivasMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuTransformacoes">
           <Properties>

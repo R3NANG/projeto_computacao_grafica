@@ -7,6 +7,7 @@ package main;
 
 import panels.Panel2D;
 import panels.PanelBoard;
+import panels.PanelPrimitive;
 /**
  *
  * @author Renan
@@ -30,7 +31,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         menu = new javax.swing.JMenuBar();
-        menu2D = new javax.swing.JMenu();
+        menuPrimitivas = new javax.swing.JMenu();
         menuTransformacoes = new javax.swing.JMenu();
         itemDeMenuTransformacoes2D = new javax.swing.JMenuItem();
         itemDeMenuTransformacoes3D = new javax.swing.JMenuItem();
@@ -39,8 +40,17 @@ public class Main extends javax.swing.JFrame {
 
         menu.setToolTipText("");
 
-        menu2D.setText("Lab1 (Em Breve)");
-        menu.add(menu2D);
+        menuPrimitivas.setText("Primitivas Geométricas");
+        menuPrimitivas.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuPrimitivasMenuSelected(evt);
+            }
+        });
+        menu.add(menuPrimitivas);
 
         menuTransformacoes.setText("Transformações");
 
@@ -97,6 +107,20 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_itemDeMenuTransformacoes2DActionPerformed
 
+    private void menuPrimitivasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuPrimitivasMenuSelected
+        // TODO add your handling code here:
+        PanelPrimitive panelPrimitive = new PanelPrimitive();
+        PanelBoard panelBoard = new PanelBoard();
+        panelPrimitive.setPanelBoard(panelBoard);
+        
+        panelPrimitive.setVisible(true);
+        this.add(panelPrimitive);
+        
+        panelBoard.setLocation(222, 0);
+        panelBoard.setVisible(true);
+        this.add(panelBoard);
+    }//GEN-LAST:event_menuPrimitivasMenuSelected
+
     /**
      * @param args the command line arguments
      */
@@ -136,7 +160,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDeMenuTransformacoes2D;
     private javax.swing.JMenuItem itemDeMenuTransformacoes3D;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenu menu2D;
+    private javax.swing.JMenu menuPrimitivas;
     private javax.swing.JMenu menuTransformacoes;
     // End of variables declaration//GEN-END:variables
 }

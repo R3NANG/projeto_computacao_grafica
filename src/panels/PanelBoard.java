@@ -66,7 +66,6 @@ public class PanelBoard extends javax.swing.JInternalFrame {
    }
    
    public Dimension getPreferredSize() {
-      //return new Dimension(RECT_WIDTH + 2 * (int)square[0][0], RECT_HEIGHT + 2 * (int)square[1][0]);
       return new Dimension(355, 445);
    }
     

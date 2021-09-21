@@ -71,6 +71,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
         emXText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         emYText = new javax.swing.JTextField();
+        resetButton = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Transformações 2D");
@@ -155,6 +156,13 @@ public class Panel2D extends javax.swing.JInternalFrame {
             }
         });
 
+        resetButton.setText("Resetar");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,8 +209,13 @@ public class Panel2D extends javax.swing.JInternalFrame {
                                 .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(resetButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -236,7 +249,9 @@ public class Panel2D extends javax.swing.JInternalFrame {
                     .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(aplicarNoObjetoButton)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(resetButton)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -253,20 +268,30 @@ public class Panel2D extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Translacao")) {
-            System.out.println("Translacao");
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
             
             polygon.setSquare(transformation2D.translation(polygon.getSquare(), assistantX, assistantY));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Escala")) {
-            System.out.println("Escala");
-        } else if(transformacoesComboBox.getSelectedItem().equals("Escala")) {
-            System.out.println("Rotacao");
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+
+            polygon.setSquare(transformation2D.scaling(polygon.getSquare(), assistantX, assistantY));
+            panelBoard.repaint();
+        } else if(transformacoesComboBox.getSelectedItem().equals("Rotacao")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            polygon.setSquare(transformation2D.rotation(polygon.getSquare(), assistantX));
+            panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflexao")) {
-            System.out.println("Reflexao");
+            polygon.setSquare(transformation2D.reflection(polygon.getSquare(), emXText.getText().charAt(0)));
+            panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Cisalhamento")) {
-            System.out.println("Cisalhamento");
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+
+            polygon.setSquare(transformation2D.shear(polygon.getSquare(), assistantX, assistantY));
+            panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
@@ -334,6 +359,12 @@ public class Panel2D extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
 
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        polygon.reset();
+        panelBoard.repaint();
+    }//GEN-LAST:event_resetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alturaText;
@@ -350,6 +381,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField larguraText;
+    private javax.swing.JButton resetButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     private javax.swing.JTextField x;
     private javax.swing.JTextField y;
