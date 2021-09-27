@@ -6,6 +6,8 @@
 package panels;
 
 import java.awt.event.ItemEvent;
+import java.awt.Graphics2D;
+import java.awt.Color;
 import panels.PanelBoard;
 import transformations.Matrix;
 import transformations.Polygon;
@@ -29,6 +31,23 @@ public class Panel2D extends javax.swing.JInternalFrame {
     public void setPanelBoard(PanelBoard panelBoard) {
         this.panelBoard = panelBoard;
         this.panelBoard.setPolygon(this.polygon);
+        this.panelBoard.setPencil(new PencilPanel(){
+            @Override
+            public void draw(panelBoard.getRootPane().getGraphics()) {
+                g.setColor(Color.black);
+                // Draw N polygon
+                for (int i = 0; i < this.polygon.getSize(); i++)
+                {
+                    if (i == this.polygon.getSize() - 1) {
+                            g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
+                                        getCenterX() + (int)polygon.getPolygon()[0][0], getCenterY() - (int)polygon.getPolygon()[1][0]);
+                            continue;
+                    }
+                    g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
+                                getCenterX() + (int)polygon.getPolygon()[0][i+1], getCenterY() - (int)polygon.getPolygon()[1][i+1]);
+                }
+            }
+        });
     }
 
     /**
@@ -271,26 +290,26 @@ public class Panel2D extends javax.swing.JInternalFrame {
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
             
-            polygon.setSquare(transformation2D.translation(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.translation(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Escala")) {
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
 
-            polygon.setSquare(transformation2D.scaling(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.scaling(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotacao")) {
             assistantX = Integer.parseInt(emXText.getText());
-            polygon.setSquare(transformation2D.rotation(polygon.getSquare(), assistantX));
+            polygon.setPolygon(transformation2D.rotation(polygon.getPolygon(), assistantX));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflexao")) {
-            polygon.setSquare(transformation2D.reflection(polygon.getSquare(), emXText.getText().charAt(0)));
+            polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emXText.getText().charAt(0)));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Cisalhamento")) {
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
 
-            polygon.setSquare(transformation2D.shear(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.shear(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -361,7 +380,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        polygon.reset();
+        polygon.reset2D();
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 

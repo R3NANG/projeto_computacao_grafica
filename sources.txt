@@ -1,6 +1,9 @@
 ./src/panels/PanelBoard.java
+./src/panels/PencilPanel.java
 ./src/panels/Panel2D.java
+./src/panels/PanelPrimitive.java
 ./src/main/Main.java
 ./src/transformations/Polygon.java
 ./src/transformations/Transformation2D.java
 ./src/transformations/Matrix.java
+./src/geometric/Line.java

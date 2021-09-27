@@ -8,7 +8,9 @@ package panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import transformations.Polygon;
+import panels.PencilPanel;
 
 /**
  *
@@ -19,25 +21,33 @@ public class PanelBoard extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelBoard
      */
+    private PencilPanel pencil;
+    public Polygon polygon;
+
     public PanelBoard() {
         initComponents();
         repaint(); 
     }
 
-   public Polygon polygon;
+    public void setPencil(PencilPanel pencil) {
+        this.pencil = pencil;
+    }
+    public PencilPanel getPencil() {
+        return this.pencil;
+    }
 
-   public void setPolygon(Polygon polygon) {
-       this.polygon = polygon;
-   }
+    public void setPolygon(Polygon polygon) {
+        this.polygon = polygon;
+    }
 
-   private int getCenterX() {
-       return super.getWidth()/2;
-   }
+    private int getCenterX() {
+        return super.getWidth()/2;
+    }
 
-   private int getCenterY() {
-       return super.getHeight()/2;
-   }
-   
+    private int getCenterY() {
+        return super.getHeight()/2;
+    }
+    
    public void paint(Graphics g) {
        super.paint(g);
        this.setBackground(Color.white);
@@ -49,8 +59,23 @@ public class PanelBoard extends javax.swing.JInternalFrame {
        g.setColor(Color.green);
        g.drawLine(super.getWidth()/2, 0, super.getWidth()/2, super.getHeight());
 
+
+       pencil.draw();
+       /*
        // Draw Square
-       g.setColor(Color.black);
+       for (int i = 0; i < this.polygon.getSize(); i++)
+       {
+           if (i == this.polygon.getSize() - 1) {
+                g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
+                            getCenterX() + (int)polygon.getPolygon()[0][0], getCenterY() - (int)polygon.getPolygon()[1][0]);
+                continue;
+           }
+           g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
+                      getCenterX() + (int)polygon.getPolygon()[0][i+1], getCenterY() - (int)polygon.getPolygon()[1][i+1]);
+       }
+        */
+
+       /*
        g.drawLine(
                getCenterX() + (int)polygon.getSquare()[0][0], getCenterY() - (int)polygon.getSquare()[1][0], 
                getCenterX() + (int)polygon.getSquare()[0][1], getCenterY() - (int)polygon.getSquare()[1][1]);
@@ -63,8 +88,9 @@ public class PanelBoard extends javax.swing.JInternalFrame {
        g.drawLine(
                getCenterX() + (int)polygon.getSquare()[0][3], getCenterY() - (int)polygon.getSquare()[1][3],
                getCenterX() + (int)polygon.getSquare()[0][0], getCenterY() - (int)polygon.getSquare()[1][0]);
+        */
    }
-   
+
    public Dimension getPreferredSize() {
       return new Dimension(355, 445);
    }

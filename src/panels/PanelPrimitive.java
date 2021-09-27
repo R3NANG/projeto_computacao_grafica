@@ -224,26 +224,26 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             assistantX = Integer.parseInt(emX1Text.getText());
             assistantY = Integer.parseInt(emY1Text.getText());
             
-            polygon.setSquare(transformation2D.translation(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.translation(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Escala")) {
             assistantX = Integer.parseInt(emX1Text.getText());
             assistantY = Integer.parseInt(emY1Text.getText());
 
-            polygon.setSquare(transformation2D.scaling(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.scaling(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotacao")) {
             assistantX = Integer.parseInt(emX1Text.getText());
-            polygon.setSquare(transformation2D.rotation(polygon.getSquare(), assistantX));
+            polygon.setPolygon(transformation2D.rotation(polygon.getPolygon(), assistantX));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflexao")) {
-            polygon.setSquare(transformation2D.reflection(polygon.getSquare(), emX1Text.getText().charAt(0)));
+            polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emX1Text.getText().charAt(0)));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Cisalhamento")) {
             assistantX = Integer.parseInt(emX1Text.getText());
             assistantY = Integer.parseInt(emY1Text.getText());
 
-            polygon.setSquare(transformation2D.shear(polygon.getSquare(), assistantX, assistantY));
+            polygon.setPolygon(transformation2D.shear(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -345,7 +345,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        polygon.reset();
+        polygon.reset2D();
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
