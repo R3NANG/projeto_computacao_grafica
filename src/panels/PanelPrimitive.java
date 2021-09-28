@@ -6,6 +6,8 @@
 package panels;
 
 import java.awt.event.ItemEvent;
+import java.awt.Color;
+import java.awt.Graphics;
 import panels.PanelBoard;
 import transformations.Matrix;
 import transformations.Polygon;
@@ -29,6 +31,18 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     public void setPanelBoard(PanelBoard panelBoard) {
         this.panelBoard = panelBoard;
         this.panelBoard.setPolygon(this.polygon);
+        this.panelBoard.setPencil(new PencilPanel() {
+            @Override
+            public void draw (PanelBoard board, Graphics g) {
+                g.setColor(Color.black);
+                for (int i = 0; i < board.getPolygon().getSize(); i++)
+                {
+                    g.drawRect(
+                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
+                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i], 1, 1);
+                }
+            }
+        });
     }
 
     /**

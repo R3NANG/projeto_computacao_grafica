@@ -6,9 +6,10 @@
 package panels;
 
 import java.awt.event.ItemEvent;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.Color;
 import panels.PanelBoard;
+import panels.PencilPanel;
 import transformations.Matrix;
 import transformations.Polygon;
 import transformations.Transformation2D;
@@ -33,18 +34,24 @@ public class Panel2D extends javax.swing.JInternalFrame {
         this.panelBoard.setPolygon(this.polygon);
         this.panelBoard.setPencil(new PencilPanel(){
             @Override
-            public void draw(panelBoard.getRootPane().getGraphics()) {
+            public void draw (PanelBoard board, Graphics g) {
                 g.setColor(Color.black);
                 // Draw N polygon
-                for (int i = 0; i < this.polygon.getSize(); i++)
+                for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
-                    if (i == this.polygon.getSize() - 1) {
-                            g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
-                                        getCenterX() + (int)polygon.getPolygon()[0][0], getCenterY() - (int)polygon.getPolygon()[1][0]);
+                    if (i == board.getPolygon().getSize() - 1) {
+                            g.drawLine(
+                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
+                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
+                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][0],
+                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][0]);
                             continue;
                     }
-                    g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
-                                getCenterX() + (int)polygon.getPolygon()[0][i+1], getCenterY() - (int)polygon.getPolygon()[1][i+1]);
+                    g.drawLine(
+                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
+                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
+                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
+                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
                 }
             }
         });

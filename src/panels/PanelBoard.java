@@ -22,7 +22,7 @@ public class PanelBoard extends javax.swing.JInternalFrame {
      * Creates new form PanelBoard
      */
     private PencilPanel pencil;
-    public Polygon polygon;
+    private Polygon polygon;
 
     public PanelBoard() {
         initComponents();
@@ -39,12 +39,15 @@ public class PanelBoard extends javax.swing.JInternalFrame {
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
     }
+    public Polygon getPolygon() {
+        return this.polygon;
+    }
 
-    private int getCenterX() {
+    public int getCenterX() {
         return super.getWidth()/2;
     }
 
-    private int getCenterY() {
+    public int getCenterY() {
         return super.getHeight()/2;
     }
     
@@ -60,7 +63,7 @@ public class PanelBoard extends javax.swing.JInternalFrame {
        g.drawLine(super.getWidth()/2, 0, super.getWidth()/2, super.getHeight());
 
 
-       pencil.draw();
+       pencil.draw(this, g);
        /*
        // Draw Square
        for (int i = 0; i < this.polygon.getSize(); i++)

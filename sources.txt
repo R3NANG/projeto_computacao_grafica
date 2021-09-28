@@ -6,4 +6,5 @@
 ./src/transformations/Polygon.java
 ./src/transformations/Transformation2D.java
 ./src/transformations/Matrix.java
+./src/geometric/Circle.java
 ./src/geometric/Line.java
