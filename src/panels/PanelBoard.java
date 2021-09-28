@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import transformations.Polygon;
+import math.Polygon;
 import panels.PencilPanel;
 
 /**

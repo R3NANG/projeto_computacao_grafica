@@ -1,7 +1,7 @@
 package geometric;
 
 import java.awt.Graphics;
-import transformations.Polygon;
+import math.Polygon;
 
 public class Line {
     public static void bresenhem (Polygon polygon, int x1, int y1, int x2, int y2) {

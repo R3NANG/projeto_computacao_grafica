@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import panels.PanelBoard;
 import transformations.Matrix;
-import transformations.Polygon;
+import math.Polygon;
 import transformations.Transformation2D;
 import main.Main;
 
@@ -234,30 +234,24 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
-        if(transformacoesComboBox.getSelectedItem().equals("Translacao")) {
-            assistantX = Integer.parseInt(emX1Text.getText());
-            assistantY = Integer.parseInt(emY1Text.getText());
+        if(transformacoesComboBox.getSelectedItem().equals("Bresenham")) {
             
-            polygon.setPolygon(transformation2D.translation(polygon.getPolygon(), assistantX, assistantY));
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Escala")) {
+        } else if(transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
+            
+            panelBoard.repaint();
+        } else if(transformacoesComboBox.getSelectedItem().equals("DDA")) {
             assistantX = Integer.parseInt(emX1Text.getText());
-            assistantY = Integer.parseInt(emY1Text.getText());
-
-            polygon.setPolygon(transformation2D.scaling(polygon.getPolygon(), assistantX, assistantY));
+            
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Rotacao")) {
-            assistantX = Integer.parseInt(emX1Text.getText());
-            polygon.setPolygon(transformation2D.rotation(polygon.getPolygon(), assistantX));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Mid Point Circle")) {
+            
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Reflexao")) {
-            polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emX1Text.getText().charAt(0)));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Polynomial Circle")) {
+            
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Cisalhamento")) {
-            assistantX = Integer.parseInt(emX1Text.getText());
-            assistantY = Integer.parseInt(emY1Text.getText());
-
-            polygon.setPolygon(transformation2D.shear(polygon.getPolygon(), assistantX, assistantY));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Trigonometric Circle")) {
+            
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed

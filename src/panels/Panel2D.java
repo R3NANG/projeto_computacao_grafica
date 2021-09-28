@@ -11,7 +11,7 @@ import java.awt.Color;
 import panels.PanelBoard;
 import panels.PencilPanel;
 import transformations.Matrix;
-import transformations.Polygon;
+import math.Polygon;
 import transformations.Transformation2D;
 import main.Main;
 

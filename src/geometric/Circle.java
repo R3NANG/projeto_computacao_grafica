@@ -1,6 +1,6 @@
 package geometric;
 
-import transformations.Polygon;
+import math.Polygon;
 
 public class Circle {
     public static void mid_point_circle (
