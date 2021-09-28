@@ -11,7 +11,8 @@ import java.awt.Graphics;
 import panels.PanelBoard;
 import transformations.Matrix;
 import math.Polygon;
-import transformations.Transformation2D;
+import geometrics.Line;
+import geometrics.Circle;
 import main.Main;
 
 /**
@@ -19,7 +20,11 @@ import main.Main;
  * @author Renan
  */
 public class PanelPrimitive extends javax.swing.JInternalFrame {
-    private int assistantX = 0, assistantY = 0;
+    private int assistantX1 = 0,
+    private int assistantY1 = 0;
+    private int assistantX2 = 0;
+    private int assistantY2 = 0;
+    private int radius;
     private Polygon polygon = new Polygon();
     private PanelBoard panelBoard;
     private Transformation2D transformation2D = new Transformation2D();
@@ -235,23 +240,38 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Bresenham")) {
-            
+            assistantX1 = Integer.parseInt(falta-o-nome.getText());
+            assistantY1 = Integer.parseInt(falta-o-nome.getText());
+            assistantX2 = Integer.parseInt(falta-o-nome.getText());
+            assistantY2 = Integer.parseInt(falta-o-nome.getText());
+            Line.bresenham(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
-            
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("DDA")) {
-            assistantX = Integer.parseInt(emX1Text.getText());
-            
+            assistantX1 = Integer.parseInt(falta-o-nome.getText());
+            assistantY1 = Integer.parseInt(falta-o-nome.getText());
+            assistantX2 = Integer.parseInt(falta-o-nome.getText());
+            assistantY2 = Integer.parseInt(falta-o-nome.getText());
+            Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Mid Point Circle")) {
-            
+            assistantX1 = Integer.parseInt(falta-o-nome.getText());
+            assistantY1 = Integer.parseInt(falta-o-nome.getText());
+            radius = Integer.parseInt(falta-o-nome.getText());
+            Circle.mid_point_circle(this.polygon, assistantX1, assistantY2, radius);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Polynomial Circle")) {
-            
+            assistantX1 = Integer.parseInt(falta-o-nome.getText());
+            assistantY1 = Integer.parseInt(falta-o-nome.getText());
+            radius = Integer.parseInt(falta-o-nome.getText());
+            Circle.polynomial_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Trigonometric Circle")) {
-            
+            assistantX1 = Integer.parseInt(falta-o-nome.getText());
+            assistantY1 = Integer.parseInt(falta-o-nome.getText());
+            radius = Integer.parseInt(falta-o-nome.getText());
+            Circle.trigonometric_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
