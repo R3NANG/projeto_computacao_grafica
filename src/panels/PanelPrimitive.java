@@ -11,16 +11,17 @@ import java.awt.Graphics;
 import panels.PanelBoard;
 import transformations.Matrix;
 import math.Polygon;
-import geometrics.Line;
-import geometrics.Circle;
+import geometric.Line;
+import geometric.Circle;
 import main.Main;
+import transformations.Transformation2D;
 
 /**
  *
  * @author Renan
  */
 public class PanelPrimitive extends javax.swing.JInternalFrame {
-    private int assistantX1 = 0,
+    private int assistantX1 = 0;
     private int assistantY1 = 0;
     private int assistantX2 = 0;
     private int assistantY2 = 0;
@@ -51,7 +52,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     }
 
     /**
-     * Creates new form Panel2D
+     * Creates new form PanelPrimitive
      */
     public PanelPrimitive() {
         initComponents();
@@ -240,37 +241,37 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Bresenham")) {
-            assistantX1 = Integer.parseInt(falta-o-nome.getText());
-            assistantY1 = Integer.parseInt(falta-o-nome.getText());
-            assistantX2 = Integer.parseInt(falta-o-nome.getText());
-            assistantY2 = Integer.parseInt(falta-o-nome.getText());
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            assistantX2 = Integer.parseInt(emX2Text.getText());
+            assistantY2 = Integer.parseInt(emY2Text.getText());
             Line.bresenham(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("DDA")) {
-            assistantX1 = Integer.parseInt(falta-o-nome.getText());
-            assistantY1 = Integer.parseInt(falta-o-nome.getText());
-            assistantX2 = Integer.parseInt(falta-o-nome.getText());
-            assistantY2 = Integer.parseInt(falta-o-nome.getText());
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            assistantX2 = Integer.parseInt(emX2Text.getText());
+            assistantY2 = Integer.parseInt(emY2Text.getText());
             Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Mid Point Circle")) {
-            assistantX1 = Integer.parseInt(falta-o-nome.getText());
-            assistantY1 = Integer.parseInt(falta-o-nome.getText());
-            radius = Integer.parseInt(falta-o-nome.getText());
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            radius = Integer.parseInt(emX2Text.getText());
             Circle.mid_point_circle(this.polygon, assistantX1, assistantY2, radius);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Polynomial Circle")) {
-            assistantX1 = Integer.parseInt(falta-o-nome.getText());
-            assistantY1 = Integer.parseInt(falta-o-nome.getText());
-            radius = Integer.parseInt(falta-o-nome.getText());
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            radius = Integer.parseInt(emX2Text.getText());
             Circle.polynomial_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Trigonometric Circle")) {
-            assistantX1 = Integer.parseInt(falta-o-nome.getText());
-            assistantY1 = Integer.parseInt(falta-o-nome.getText());
-            radius = Integer.parseInt(falta-o-nome.getText());
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            radius = Integer.parseInt(emX2Text.getText());
             Circle.trigonometric_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
         }

@@ -6,6 +6,7 @@
 package main;
 
 import panels.Panel2D;
+import panels.Panel3D;
 import panels.PanelBoard;
 import panels.PanelPrimitive;
 /**
@@ -90,6 +91,16 @@ public class Main extends javax.swing.JFrame {
 
     private void itemDeMenuTransformacoes3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoes3DActionPerformed
         // TODO add your handling code here:
+        Panel3D panel3d = new Panel3D();
+        PanelBoard panelBoard = new PanelBoard();
+        panel3d.setPanelBoard(panelBoard);
+
+        panel3d.setVisible(true);
+        this.add(panel3d);
+        
+        panelBoard.setLocation(222, 0);
+        panelBoard.setVisible(true);
+        this.add(panelBoard);
     }//GEN-LAST:event_itemDeMenuTransformacoes3DActionPerformed
 
     private void itemDeMenuTransformacoes2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoes2DActionPerformed
@@ -104,7 +115,6 @@ public class Main extends javax.swing.JFrame {
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
-
     }//GEN-LAST:event_itemDeMenuTransformacoes2DActionPerformed
 
     private void menuPrimitivasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuPrimitivasMenuSelected

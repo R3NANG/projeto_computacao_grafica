@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import math.Polygon;
 
 public class Line {
-    public static void bresenhem (Polygon polygon, int x1, int y1, int x2, int y2) {
+    public static void bresenham (Polygon polygon, int x1, int y1, int x2, int y2) {
         int delta_x = Math.abs(x2 - x1);
         int delta_y = Math.abs(y2 - y1);
 
