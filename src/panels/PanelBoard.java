@@ -43,6 +43,14 @@ public class PanelBoard extends javax.swing.JInternalFrame {
         return this.polygon;
     }
 
+    public int getWidth() {
+        return super.getWidth();
+    }
+
+    public int getHeight() {
+        return super.getHeight();
+    }
+
     public int getCenterX() {
         return super.getWidth()/2;
     }

@@ -1,10 +1,13 @@
+./src/panels/Panel3D.java
 ./src/panels/PanelBoard.java
 ./src/panels/PencilPanel.java
 ./src/panels/Panel2D.java
 ./src/panels/PanelPrimitive.java
 ./src/math/Polygon.java
+./src/math/PolygonType.java
 ./src/main/Main.java
 ./src/transformations/Transformation2D.java
 ./src/transformations/Matrix.java
 ./src/geometric/Circle.java
 ./src/geometric/Line.java
+./src/geometric/Coordinate.java

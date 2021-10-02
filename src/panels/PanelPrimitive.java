@@ -8,13 +8,15 @@ package panels;
 import java.awt.event.ItemEvent;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Arrays;
 import panels.PanelBoard;
 import transformations.Matrix;
 import math.Polygon;
+import math.PolygonType;
 import geometric.Line;
 import geometric.Circle;
+import geometric.Coordinate;
 import main.Main;
-import transformations.Transformation2D;
 
 /**
  *
@@ -26,9 +28,8 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private int assistantX2 = 0;
     private int assistantY2 = 0;
     private int radius;
-    private Polygon polygon = new Polygon();
+    private Polygon polygon = new Polygon(PolygonType.PRIMITIVE);
     private PanelBoard panelBoard;
-    private Transformation2D transformation2D = new Transformation2D();
     
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
@@ -248,6 +249,9 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             Line.bresenham(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            polygon.setPolygon(Coordinate.world_to_normalized(new int[][]{{assistantX1}, {assistantY1}}, panelBoard.getWidth(), panelBoard.getHeight()));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("DDA")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
@@ -374,7 +378,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        polygon.reset2D();
+        polygon.resetPrimitive();
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 

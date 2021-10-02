@@ -12,7 +12,8 @@ import panels.PanelBoard;
 import panels.PencilPanel;
 import transformations.Matrix;
 import math.Polygon;
-import transformations.Transformation2D;
+import math.PolygonType;
+
 import main.Main;
 
 /**
@@ -21,9 +22,8 @@ import main.Main;
  */
 public class Panel3D extends javax.swing.JInternalFrame {
     private int assistantX = 0, assistantY = 0;
-    private Polygon polygon = new Polygon();
+    private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION3D);
     private PanelBoard panelBoard;
-    private Transformation2D transformation2D = new Transformation2D();
     
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;

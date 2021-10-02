@@ -14,7 +14,7 @@ public class Line {
         {
 
             //g.drawRect(current_x, current_y, 1, 1);
-            polygon.insert2D(current_x, current_y);
+            polygon.insertPrimitive(current_x, current_y);
             if (mid_point > 0)
             {
                 ++current_y;
@@ -45,7 +45,7 @@ public class Line {
         for (int i = 0; i <= step; ++i)
         {
             // g.drawRect(Math.round(current_x), Math.round(current_y), 1, 1);
-            polygon.insert2D(Math.round(current_x), Math.round(current_y));
+            polygon.insertPrimitive(Math.round(current_x), Math.round(current_y));
             current_x += increment_x;
             current_y += increment_y;
         }
