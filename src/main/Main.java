@@ -8,6 +8,7 @@ package main;
 import panels.Panel2D;
 import panels.Panel3D;
 import panels.PanelBoard;
+import panels.PanelImageFilters;
 import panels.PanelPrimitive;
 /**
  *
@@ -36,6 +37,8 @@ public class Main extends javax.swing.JFrame {
         menuTransformacoes = new javax.swing.JMenu();
         itemDeMenuTransformacoes2D = new javax.swing.JMenuItem();
         itemDeMenuTransformacoes3D = new javax.swing.JMenuItem();
+        menuImagens = new javax.swing.JMenu();
+        itemDeMenuFiltrosDeImagens = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +75,18 @@ public class Main extends javax.swing.JFrame {
         menuTransformacoes.add(itemDeMenuTransformacoes3D);
 
         menu.add(menuTransformacoes);
+
+        menuImagens.setText("Imagens");
+
+        itemDeMenuFiltrosDeImagens.setText("Filtros de Imagens");
+        itemDeMenuFiltrosDeImagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDeMenuFiltrosDeImagensActionPerformed(evt);
+            }
+        });
+        menuImagens.add(itemDeMenuFiltrosDeImagens);
+
+        menu.add(menuImagens);
 
         setJMenuBar(menu);
 
@@ -131,6 +146,13 @@ public class Main extends javax.swing.JFrame {
         this.add(panelBoard);
     }//GEN-LAST:event_menuPrimitivasMenuSelected
 
+    private void itemDeMenuFiltrosDeImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuFiltrosDeImagensActionPerformed
+        // TODO add your handling code here:
+        PanelImageFilters panelImageFilters = new PanelImageFilters();
+        panelImageFilters.setVisible(true);
+        this.add(panelImageFilters);
+    }//GEN-LAST:event_itemDeMenuFiltrosDeImagensActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,9 +189,11 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemDeMenuFiltrosDeImagens;
     private javax.swing.JMenuItem itemDeMenuTransformacoes2D;
     private javax.swing.JMenuItem itemDeMenuTransformacoes3D;
     private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuImagens;
     private javax.swing.JMenu menuPrimitivas;
     private javax.swing.JMenu menuTransformacoes;
     // End of variables declaration//GEN-END:variables
