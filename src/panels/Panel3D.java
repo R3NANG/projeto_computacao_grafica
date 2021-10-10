@@ -45,21 +45,157 @@ public class Panel3D extends javax.swing.JInternalFrame {
 
                 // Axis Z
 
+                // Positive
                 g.setColor(Color.blue);
                 g.drawLine(
                         board.getCenterX(), board.getCenterY(),
                         board.getCenterX() + (int)Math.round(Math.cos(Math.toRadians(45)) * board.getCenterY()),
                         board.getCenterY() - (int)Math.round(Math.sin(Math.toRadians(45)) * board.getCenterY())
                 );
+
+                // Negative
                 g.drawLine(
                         board.getCenterX(), board.getCenterY(),
                         board.getCenterX() - (int)Math.round(Math.cos(Math.toRadians(45)) * board.getCenterY()),
                         board.getCenterY() + (int)Math.round(Math.sin(Math.toRadians(45)) * board.getCenterY())
                 );
+            
 
 
                 // Draw N polygon
                 g.setColor(Color.black);
+
+                int cos = (int)Math.round(Math.cos(Math.toRadians(45)));
+                int sin = (int)Math.round(Math.sin(Math.toRadians(45)));
+                int x = -50;
+                int y = 50; 
+                int z = 0;
+                z = -z;
+
+                int width = 100;
+                
+                int height = 100;
+                int depth = -50;
+
+                int baseX = board.getCenterX() + x + z;
+                int baseY = board.getCenterY() - y - z;
+
+                // Point A
+                int aX = baseX + cos;
+                int aY = baseY - sin;
+
+                // Point B
+                int bX = baseX + cos;
+                int bY = baseY - height - sin;
+
+                // Point C
+                int cX = baseX + width + cos;
+                int cY = baseY - height - sin;
+
+                // Point D
+                int dX = baseX + width + cos;
+                int dY = baseY - sin;
+
+                // Point E
+                int eX = baseX + width + cos*depth;
+                int eY = baseY - sin*depth;
+
+                // Point F
+                int fX = baseX + cos*depth;
+                int fY = baseY - sin*depth;
+
+                // Point G
+                int gX = baseX + cos*depth;
+                int gY = baseY - height - sin*depth;
+
+                // Point H
+                int hX = baseX + width + cos*depth;
+                int hY = baseY - height - sin*depth;
+
+
+                // A - B
+                g.drawLine(
+                        aX, aY,
+                        bX, bY
+                );
+
+                // B - C 
+                g.drawLine(
+                        bX, bY,
+                        cX, cY
+                );
+
+                // C - D
+                g.drawLine(
+                        cX, cY,
+                        dX, dY
+                );
+
+                // D - A
+                g.drawLine(
+                    dX, dY,
+                    aX, aY
+                );
+
+                // D - E
+                g.drawLine(
+                        dX, dY,
+                        eX, eY
+                );
+
+                // E - F
+                g.drawLine(
+                        eX, eY,
+                        fX, fY
+                );
+                
+                // F - G
+                g.drawLine(
+                        fX, fY,
+                        gX, gY
+                );
+                
+                // G - H
+                g.drawLine(
+                        gX, gY,
+                        hX, hY
+                );
+
+                // H - E
+                g.drawLine(
+                        hX, hY,
+                        eX, eY
+                );
+
+                // C - H
+                g.drawLine(
+                        cX, cY,
+                        hX, hY
+                );
+
+                // B - G
+                g.drawLine(
+                        bX, bY,
+                        gX, gY
+                );
+
+                // F - A
+                g.drawLine(
+                        aX, aY,
+                        fX, fY
+                );
+
+                /*
+                g.drawLine(
+                        board.getCenterX() + x, board.getCenterY() + y,
+                        board.getCenterX() + x + cos * depth, board.getCenterY() + y - sin * depth
+                );
+
+                g.drawLine(
+                        board.getCenterX() + x + cos, board.getCenterY() + y - sin,
+                        board.getCenterX() + x + cos, board.getCenterY() + y - sin * height
+                );
+                */
                 /*
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
