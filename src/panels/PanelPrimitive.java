@@ -41,6 +41,14 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         this.panelBoard.setPencil(new PencilPanel() {
             @Override
             public void draw (PanelBoard board, Graphics g) {
+                // Axis X
+                g.setColor(Color.red);
+                g.drawLine(0, board.getCenterY(), board.getWidth(), board.getCenterY());
+
+                // Axis Y
+                g.setColor(Color.green);
+                g.drawLine(board.getCenterX(), 0, board.getCenterX(), board.getHeight());
+
                 g.setColor(Color.black);
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
