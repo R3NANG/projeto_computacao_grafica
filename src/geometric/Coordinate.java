@@ -9,7 +9,7 @@ public class Coordinate {
         return normalized;
     }
 
-    public static double[][] normalized_to_device(int[][] point, int screen_width, int screen_height) {
+    public static double[][] normalized_to_device(double[][] point, int screen_width, int screen_height) {
         double[][] device_point = new double[2][1];
         device_point[0][0] = Math.round(point[0][0]*(screen_width - 1));
         device_point[1][0] = Math.round(point[1][0]*(screen_height - 1));

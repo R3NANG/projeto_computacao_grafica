@@ -8,11 +8,15 @@ package panels;
 import java.awt.event.ItemEvent;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import panels.PanelBoard;
 import panels.PencilPanel;
 import transformations.Matrix;
 import math.Polygon;
 import math.PolygonType;
+import geometric.Coordinate;
 import transformations.Transformation2D;
 import main.Main;
 
@@ -21,7 +25,7 @@ import main.Main;
  * @author Renan
  */
 public class Panel2D extends javax.swing.JInternalFrame {
-    private int assistantX = 0, assistantY = 0;
+    private int assistantX = 0, assistantY = 0, assistantZ = 0, assistantW = 0;
     private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION2D);
     private PanelBoard panelBoard;
     private Transformation2D transformation2D = new Transformation2D();
@@ -36,26 +40,44 @@ public class Panel2D extends javax.swing.JInternalFrame {
         this.panelBoard.setPencil(new PencilPanel(){
             @Override
             public void draw (PanelBoard board, Graphics g) {
+                // Axis X
+                g.setColor(Color.red);
+                g.drawLine(0, board.getCenterY(), board.getWidth(), board.getCenterY());
+
+                // Axis Y
+                g.setColor(Color.green);
+                g.drawLine(board.getCenterX(), 0, board.getCenterX(), board.getHeight());
+
                 g.setColor(Color.black);
                 // Draw N polygon
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
                     if (i == board.getPolygon().getSize() - 1) {
                             g.drawLine(
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][0],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][0]);
+                                    (int)board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
+                                    (int)board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
+                                    (int)board.getCenterX() + (int)board.getPolygon().getPolygon()[0][0],
+                                    (int)board.getCenterY() - (int)board.getPolygon().getPolygon()[1][0]);
                             continue;
                     }
                     g.drawLine(
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
+                            (int)board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
+                            (int)board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
+                            (int)board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
+                            (int)board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
                 }
             }
         });
+        /*
+        this.panelBoard.addMouseListener (new MouseAdapter() {
+            @Override 
+            public void mousePressed(MouseEvent e) {
+                //polygon.insert2D(e.getX(), e.getY());
+                polygon.insert2D((int)point[0][0], (int)point[1][0]);
+                panelBoard.repaint();
+            }
+        });   
+        */
     }
 
     /**
@@ -291,7 +313,18 @@ public class Panel2D extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_xActionPerformed
 
     private void desenharObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desenharObjetoButtonActionPerformed
-        // TODO add your handling code here:
+        assistantZ = Integer.parseInt(alturaText.getText());
+        assistantW = Integer.parseInt(larguraText.getText());
+        assistantX = Integer.parseInt(x.getText());
+        assistantY = Integer.parseInt(y.getText());
+
+
+        polygon.insert2D(assistantX, assistantY);
+        polygon.insert2D(assistantX, assistantZ);
+        polygon.insert2D(assistantW, assistantZ);
+        polygon.insert2D(assistantW, assistantY);
+        panelBoard.repaint();
+
     }//GEN-LAST:event_desenharObjetoButtonActionPerformed
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
@@ -310,10 +343,12 @@ public class Panel2D extends javax.swing.JInternalFrame {
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
+
             polygon.setPolygon(transformation2D.rotation(polygon.getPolygon(), assistantX));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-            polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emXText.getText().charAt(0)));
+
+            polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emXText.getText()));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
             assistantX = Integer.parseInt(emXText.getText());

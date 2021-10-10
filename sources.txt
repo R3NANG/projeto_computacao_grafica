@@ -6,6 +6,7 @@
 ./src/math/Polygon.java
 ./src/math/PolygonType.java
 ./src/main/Main.java
+./src/transformations/Transformation3D.java
 ./src/transformations/Transformation2D.java
 ./src/transformations/Matrix.java
 ./src/geometric/Circle.java

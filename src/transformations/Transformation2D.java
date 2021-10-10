@@ -15,7 +15,15 @@ public class Transformation2D {
         double[][] scalingMatrix = Matrix.scalingMatrix2D (scalingX, scalingY);
         double[][] resultingMatrix = new double[scalingMatrix.length][objectMatrix[0].length];
 
-        resultingMatrix = Matrix.multiplication (scalingMatrix, objectMatrix);
+
+        // Ponto pivot 
+        double pivotX = objectMatrix[0][0];
+        double pivotY = objectMatrix[1][0];
+
+        resultingMatrix = Matrix.multiplication (Matrix.translationMatrix2D(pivotX, pivotY), scalingMatrix);
+        resultingMatrix = Matrix.multiplication (resultingMatrix, Matrix.translationMatrix2D (-pivotX, -pivotY));
+        resultingMatrix = Matrix.multiplication (resultingMatrix, objectMatrix);
+
         return resultingMatrix;
     }
 
@@ -23,11 +31,17 @@ public class Transformation2D {
         double[][] rotationMatrix = Matrix.rotationMatrix2D (angle);
         double[][] resultingMatrix = new double[rotationMatrix.length][objectMatrix[0].length];
 
-        resultingMatrix = Matrix.multiplication (rotationMatrix, objectMatrix);
+        // Ponto pivot 
+        double pivotX = objectMatrix[0][0];
+        double pivotY = objectMatrix[1][0];
+
+        resultingMatrix = Matrix.multiplication (Matrix.translationMatrix2D(pivotX, pivotY), rotationMatrix);
+        resultingMatrix = Matrix.multiplication (resultingMatrix, Matrix.translationMatrix2D (-pivotX, -pivotY));
+        resultingMatrix = Matrix.multiplication (resultingMatrix, objectMatrix);
         return resultingMatrix;
     }
 
-    public double[][] reflection (double[][] objectMatrix, char axis) {
+    public double[][] reflection (double[][] objectMatrix, String axis) {
         double[][] reflectionMatrix = Matrix.reflectionMatrix2D (axis);
         double[][] resultingMatrix = new double[reflectionMatrix.length][objectMatrix[0].length];
         
@@ -39,7 +53,14 @@ public class Transformation2D {
         double[][] shearMatrix = Matrix.shearMatrix2D (shearX, shearY);
         double[][] resultingMatrix = new double[shearMatrix.length][objectMatrix[0].length];
 
-        resultingMatrix = Matrix.multiplication (shearMatrix, objectMatrix);
+
+        // Ponto pivot 
+        double pivotX = objectMatrix[0][0];
+        double pivotY = objectMatrix[1][0];
+
+        resultingMatrix = Matrix.multiplication (Matrix.translationMatrix2D(pivotX, pivotY), shearMatrix);
+        resultingMatrix = Matrix.multiplication (resultingMatrix, Matrix.translationMatrix2D(-pivotX, -pivotY));
+        resultingMatrix = Matrix.multiplication (resultingMatrix, objectMatrix);
         return resultingMatrix;
     }
 }

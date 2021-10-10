@@ -8,7 +8,6 @@ package panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import math.Polygon;
 import panels.PencilPanel;
 
@@ -63,49 +62,22 @@ public class PanelBoard extends javax.swing.JInternalFrame {
        super.paint(g);
        this.setBackground(Color.white);
        
+       /*
        // Draw Axis
        g.setColor(Color.red);
        g.drawLine(0, super.getHeight()/2, super.getWidth(), super.getHeight()/2);
 
        g.setColor(Color.green);
        g.drawLine(super.getWidth()/2, 0, super.getWidth()/2, super.getHeight());
-
+        */
 
        pencil.draw(this, g);
-       /*
-       // Draw Square
-       for (int i = 0; i < this.polygon.getSize(); i++)
-       {
-           if (i == this.polygon.getSize() - 1) {
-                g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
-                            getCenterX() + (int)polygon.getPolygon()[0][0], getCenterY() - (int)polygon.getPolygon()[1][0]);
-                continue;
-           }
-           g.drawLine(getCenterX() + (int)polygon.getPolygon()[0][i], getCenterY() - (int)polygon.getPolygon()[1][i],
-                      getCenterX() + (int)polygon.getPolygon()[0][i+1], getCenterY() - (int)polygon.getPolygon()[1][i+1]);
-       }
-        */
-
-       /*
-       g.drawLine(
-               getCenterX() + (int)polygon.getSquare()[0][0], getCenterY() - (int)polygon.getSquare()[1][0], 
-               getCenterX() + (int)polygon.getSquare()[0][1], getCenterY() - (int)polygon.getSquare()[1][1]);
-       g.drawLine(
-               getCenterX() + (int)polygon.getSquare()[0][1], getCenterY() - (int)polygon.getSquare()[1][1],
-               getCenterX() + (int)polygon.getSquare()[0][2], getCenterY() - (int)polygon.getSquare()[1][2]);
-       g.drawLine(
-               getCenterX() + (int)polygon.getSquare()[0][2], getCenterY() - (int)polygon.getSquare()[1][2],
-               getCenterX() + (int)polygon.getSquare()[0][3], getCenterY() - (int)polygon.getSquare()[1][3]);
-       g.drawLine(
-               getCenterX() + (int)polygon.getSquare()[0][3], getCenterY() - (int)polygon.getSquare()[1][3],
-               getCenterX() + (int)polygon.getSquare()[0][0], getCenterY() - (int)polygon.getSquare()[1][0]);
-        */
    }
 
    public Dimension getPreferredSize() {
       return new Dimension(355, 445);
    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -35,8 +35,32 @@ public class Panel3D extends javax.swing.JInternalFrame {
         this.panelBoard.setPencil(new PencilPanel(){
             @Override
             public void draw (PanelBoard board, Graphics g) {
-                g.setColor(Color.black);
+                // Axis X
+                g.setColor(Color.red);
+                g.drawLine(0, board.getCenterY(), board.getWidth(), board.getCenterY());
+
+                // Axis Y
+                g.setColor(Color.green);
+                g.drawLine(board.getCenterX(), 0, board.getCenterX(), board.getHeight());
+
+                // Axis Z
+
+                g.setColor(Color.blue);
+                g.drawLine(
+                        board.getCenterX(), board.getCenterY(),
+                        board.getCenterX() + (int)Math.round(Math.cos(Math.toRadians(45)) * board.getCenterY()),
+                        board.getCenterY() - (int)Math.round(Math.sin(Math.toRadians(45)) * board.getCenterY())
+                );
+                g.drawLine(
+                        board.getCenterX(), board.getCenterY(),
+                        board.getCenterX() - (int)Math.round(Math.cos(Math.toRadians(45)) * board.getCenterY()),
+                        board.getCenterY() + (int)Math.round(Math.sin(Math.toRadians(45)) * board.getCenterY())
+                );
+
+
                 // Draw N polygon
+                g.setColor(Color.black);
+                /*
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
                     if (i == board.getPolygon().getSize() - 1) {
@@ -53,6 +77,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
                             board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
                             board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
                 }
+                */
             }
         });
     }
