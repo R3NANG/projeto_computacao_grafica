@@ -59,9 +59,11 @@ public class Matrix {
     }
 
     public static double[][] reflectionMatrix2D (String axis) {
-        double position00;
-        double position11;
-        double position22;
+        double position00 = 0;
+        double position11 = 0;
+        double position22 = 0;
+        double position02 = 0;
+        double position20 = 0;
         if (axis.equalsIgnoreCase("x")) {
             position00 = 1;
             position11 = -1;
@@ -70,15 +72,18 @@ public class Matrix {
             position00 = -1;
             position11 = 1;
             position22 = 1;
+        } else if (axis.equalsIgnoreCase("y=x")) {
+           position02 = 1;
+           position20 = 1;
         } else {
             position00 = -1;
             position11 = -1;
             position22 = 1;
         }
         double[][] matrix = new double[][]{
-            {position00, 0, 0},
+            {position00, 0, position02},
             {0, position11, 0},
-            {0, 0, position22}
+            {position20, 0, position22}
         };
         return matrix;
     }

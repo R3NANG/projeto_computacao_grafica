@@ -64,10 +64,82 @@ public class Panel3D extends javax.swing.JInternalFrame {
                 );
             
 
-
                 // Draw N polygon
                 g.setColor(Color.black);
 
+                // A - B
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0],
+                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1]
+                );
+
+                // B - C 
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1],
+                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2]
+                );
+
+                // C - D
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2],
+                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3]
+                );
+
+                // D - A
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3],
+                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0]
+                );
+
+                // D - E
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3],
+                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4]
+                );
+
+                // E - F
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4],
+                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5]
+                );
+                
+                // F - G
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5],
+                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6]
+                );
+                
+                // G - H
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6],
+                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7]
+                );
+
+                // H - E
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7],
+                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4]
+                );
+
+                // C - H
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2],
+                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7] 
+                );
+
+                // B - G
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1],
+                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6]
+                );
+
+                // F - A
+                g.drawLine(
+                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0],
+                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5]
+                );
+                
+                /*
                 int cos = (int)Math.round(Math.cos(Math.toRadians(45)));
                 int sin = (int)Math.round(Math.sin(Math.toRadians(45)));
                 int x = -50;
@@ -115,6 +187,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
                 int hX = baseX + width + cos*depth;
                 int hY = baseY - height - sin*depth;
 
+                
 
                 // A - B
                 g.drawLine(
@@ -187,7 +260,8 @@ public class Panel3D extends javax.swing.JInternalFrame {
                         aX, aY,
                         fX, fY
                 );
-
+                
+                */
                 /*
                 g.drawLine(
                         board.getCenterX() + x, board.getCenterY() + y,
@@ -575,7 +649,73 @@ public class Panel3D extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_xActionPerformed
 
     private void desenharObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desenharObjetoButtonActionPerformed
-        // TODO add your handling code here:
+        assistantBX = Integer.parseInt(alturaText.getText());
+        assistantBY = Integer.parseInt(larguraText.getText());
+        assistantBZ = Integer.parseInt(profundidadeText.getText());
+
+        assistantX = Integer.parseInt(x.getText());
+        assistantY = Integer.parseInt(y.getText());
+        assistantZ = Integer.parseInt(z.getText());
+
+        int cos = (int)Math.round(Math.cos(Math.toRadians(45)));
+        int sin = (int)Math.round(Math.sin(Math.toRadians(45)));
+        int x = assistantX;
+        int y = assistantY; 
+        int z = assistantZ;
+        z = -z;
+
+        int height = assistantBX;
+        int width = assistantBY;
+        int depth = assistantBZ;
+
+        depth = -depth;
+
+        int baseX = panelBoard.getCenterX() + x + z;
+        int baseY = panelBoard.getCenterY() - y - z;
+
+        // Point A
+        int aX = baseX + cos;
+        int aY = baseY - sin;
+
+
+        // Point B
+        int bX = baseX + cos;
+        int bY = baseY - height - sin;
+
+        // Point C
+        int cX = baseX + width + cos;
+        int cY = baseY - height - sin;
+
+        // Point D
+        int dX = baseX + width + cos;
+        int dY = baseY - sin;
+
+        // Point E
+        int eX = baseX + width + cos*depth;
+        int eY = baseY - sin*depth;
+
+        // Point F
+        int fX = baseX + cos*depth;
+        int fY = baseY - sin*depth;
+
+        // Point G
+        int gX = baseX + cos*depth;
+        int gY = baseY - height - sin*depth;
+
+        // Point H
+        int hX = baseX + width + cos*depth;
+        int hY = baseY - height - sin*depth;
+
+        polygon.insert3D(aX, aY);
+        polygon.insert3D(bX, bY);
+        polygon.insert3D(cX, cY);
+        polygon.insert3D(dX, dY);
+        polygon.insert3D(eX, eY);
+        polygon.insert3D(fX, fY);
+        polygon.insert3D(gX, gY);
+        polygon.insert3D(hX, hY);
+        panelBoard.repaint();
+
     }//GEN-LAST:event_desenharObjetoButtonActionPerformed
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
@@ -585,22 +725,22 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantY = Integer.parseInt(emYText.getText());
             assistantZ = Integer.parseInt(emZText.getText());
             
-            polygon.setPolygon(transformation3D.translation(objectMatrix, assistantX, assistantY, assistantZ));
+            //polygon.setPolygon(transformation3D.translation(objectMatrix, assistantX, assistantY, assistantZ));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Scaling")) {
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
             assistantZ = Integer.parseInt(emZText.getText());
             
-            polygon.setPolygon(transformation3D.scaling(objectMatrix, assistantX, assistantY, assistantZ));
+            //polygon.setPolygon(transformation3D.scaling(objectMatrix, assistantX, assistantY, assistantZ));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
             
-            polygon.setPolygon(transformation3D.rotation(objectMatrix, assistantX, title));
+            //polygon.setPolygon(transformation3D.rotation(objectMatrix, assistantX, title));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-            polygon.setPolygon(transformation3D.reflection(objectMatrix, emXText.getText()));
+            //polygon.setPolygon(transformation3D.reflection(objectMatrix, emXText.getText()));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
             assistantX = Integer.parseInt(emXText.getText());
@@ -611,7 +751,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantBY = Integer.parseInt(emYBText.getText());
             assistantBZ = Integer.parseInt(emZBText.getText());
             
-            polygon.setPolygon(transformation3D.shear(objectMatrix, assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
+            //polygon.setPolygon(transformation3D.shear(objectMatrix, assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -733,7 +873,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        polygon.reset2D();
+        polygon.reset3D();
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
