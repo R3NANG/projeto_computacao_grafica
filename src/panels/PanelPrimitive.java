@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Arrays;
 import panels.PanelBoard;
-import transformations.Matrix;
+import math.Matrix;
 import math.Polygon;
 import math.PolygonType;
 import geometric.Line;

@@ -1,6 +1,6 @@
 package transformations;
 
-import transformations.Matrix;
+import math.Matrix;
 
 public class Transformation2D {
     public double[][] translation(double[][] objectMatrix, double translationX, double translationY) {

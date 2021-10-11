@@ -10,20 +10,23 @@ import java.awt.Graphics;
 import java.awt.Color;
 import panels.PanelBoard;
 import panels.PencilPanel;
-import transformations.Matrix;
+import math.Matrix;
 import math.Polygon;
 import math.PolygonType;
 
 import main.Main;
+import transformations.Transformation3D;
 
 /**
  *
  * @author Renan
  */
 public class Panel3D extends javax.swing.JInternalFrame {
-    private int assistantX = 0, assistantY = 0;
+    private int assistantX = 0, assistantY = 0, assistantZ = 0;
+    private int assistantBX = 0, assistantBY = 0, assistantBZ = 0;
     private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION3D);
     private PanelBoard panelBoard;
+    private Transformation3D transformation3D = new Transformation3D();
     
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
@@ -259,6 +262,18 @@ public class Panel3D extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         emZText = new javax.swing.JTextField();
         emZLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        alturaText = new javax.swing.JTextField();
+        larguraText = new javax.swing.JTextField();
+        profundidadeText = new javax.swing.JTextField();
+        emXBLabel = new javax.swing.JLabel();
+        emXBText = new javax.swing.JTextField();
+        emYBText = new javax.swing.JTextField();
+        emZBText = new javax.swing.JTextField();
+        emZBLabel = new javax.swing.JLabel();
+        emYBLabel = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Transformações 3D");
@@ -351,6 +366,54 @@ public class Panel3D extends javax.swing.JInternalFrame {
 
         emZLabel.setText("Em Z:");
 
+        jLabel2.setText("Altura:");
+
+        jLabel3.setText("Largura:");
+
+        jLabel8.setText("Profundidade:");
+
+        alturaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alturaTextActionPerformed(evt);
+            }
+        });
+
+        larguraText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                larguraTextActionPerformed(evt);
+            }
+        });
+
+        profundidadeText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profundidadeTextActionPerformed(evt);
+            }
+        });
+
+        emXBLabel.setText("Em X:");
+
+        emXBText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emXBTextActionPerformed(evt);
+            }
+        });
+
+        emYBText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emYBTextActionPerformed(evt);
+            }
+        });
+
+        emZBText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emZBTextActionPerformed(evt);
+            }
+        });
+
+        emZBLabel.setText("Em Z:");
+
+        emYBLabel.setText("Em Y:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,23 +430,18 @@ public class Panel3D extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(emXLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emXText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(emYLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(emZLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emZText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(resetButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -393,16 +451,55 @@ public class Panel3D extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(x, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(z, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(larguraText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profundidadeText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alturaText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(resetButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emXLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emXText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emYLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emZLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emZText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emXBLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emXBText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emYBLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emYBText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emZBLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emZBText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,15 +509,25 @@ public class Panel3D extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alturaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(larguraText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(profundidadeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(desenharObjetoButton)
                 .addGap(18, 18, 18)
@@ -428,22 +535,36 @@ public class Panel3D extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emXLabel)
-                    .addComponent(emXText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emXLabel)
+                            .addComponent(emXText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emYLabel)
+                            .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emZLabel)
+                            .addComponent(emZText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emXBLabel)
+                            .addComponent(emXBText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emYBLabel)
+                            .addComponent(emYBText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emZBLabel)
+                            .addComponent(emZBText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emYLabel)
-                    .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emZLabel)
-                    .addComponent(emZText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
                 .addComponent(aplicarNoObjetoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(resetButton)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -460,19 +581,37 @@ public class Panel3D extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Translation")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+            assistantZ = Integer.parseInt(emZText.getText());
             
+            polygon.setPolygon(transformation3D.translation(objectMatrix, assistantX, assistantY, assistantZ));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Scaling")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+            assistantZ = Integer.parseInt(emZText.getText());
             
+            polygon.setPolygon(transformation3D.scaling(objectMatrix, assistantX, assistantY, assistantZ));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
+            assistantX = Integer.parseInt(emXText.getText());
             
+            polygon.setPolygon(transformation3D.rotation(objectMatrix, assistantX, title));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-            
+            polygon.setPolygon(transformation3D.reflection(objectMatrix, emXText.getText()));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+            assistantZ = Integer.parseInt(emZText.getText());
             
+            assistantBX = Integer.parseInt(emXBText.getText());
+            assistantBY = Integer.parseInt(emYBText.getText());
+            assistantBZ = Integer.parseInt(emZBText.getText());
+            
+            polygon.setPolygon(transformation3D.shear(objectMatrix, assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -505,6 +644,13 @@ public class Panel3D extends javax.swing.JInternalFrame {
             emZLabel.setText("Em Z:");
             emZLabel.setVisible(true);
             emZText.setVisible(true);
+            
+            emXBLabel.setVisible(false);
+            emXBText.setVisible(false);
+            emYBLabel.setVisible(false);
+            emYBText.setVisible(false);
+            emZBLabel.setVisible(false);
+            emZBText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Scaling")) {
             emXLabel.setText("Em X:");
             emXLabel.setVisible(true);
@@ -515,6 +661,13 @@ public class Panel3D extends javax.swing.JInternalFrame {
             emZLabel.setText("Em Z:");
             emZLabel.setVisible(true);
             emZText.setVisible(true);
+            
+            emXBLabel.setVisible(false);
+            emXBText.setVisible(false);
+            emYBLabel.setVisible(false);
+            emYBText.setVisible(false);
+            emZBLabel.setVisible(false);
+            emZBText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             emXLabel.setText("Rotação:");
             emXLabel.setVisible(true);
@@ -525,6 +678,13 @@ public class Panel3D extends javax.swing.JInternalFrame {
             emZLabel.setText("Em Z:");
             emZLabel.setVisible(false);
             emZText.setVisible(false);
+            
+            emXBLabel.setVisible(false);
+            emXBText.setVisible(false);
+            emYBLabel.setVisible(false);
+            emYBText.setVisible(false);
+            emZBLabel.setVisible(false);
+            emZBText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Reflection")) {
             emXLabel.setText("Reflexão (X, Y, O):");
             emXLabel.setVisible(true);
@@ -535,16 +695,39 @@ public class Panel3D extends javax.swing.JInternalFrame {
             emZLabel.setText("Em Z:");
             emZLabel.setVisible(false);
             emZText.setVisible(false);
+            
+            emXBLabel.setVisible(false);
+            emXBText.setVisible(false);
+            emYBLabel.setVisible(false);
+            emYBText.setVisible(false);
+            emZBLabel.setVisible(false);
+            emZBText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Shear")) {
-            emXLabel.setText("Em X:");
+            emXLabel.setText("AX:");
             emXLabel.setVisible(true);
             emXText.setVisible(true);
-            emYLabel.setText("Em Y:");
+            emYLabel.setText("AY:");
             emYLabel.setVisible(true);
             emYText.setVisible(true);
-            emZLabel.setText("Em Z:");
+            emZLabel.setText("AZ:");
             emZLabel.setVisible(true);
             emZText.setVisible(true);
+            
+            emXBLabel.setText("BX:");
+            emXBLabel.setLocation(108, 239);
+            emXBLabel.setVisible(true);
+            emXBText.setLocation(136, 233);
+            emXBText.setVisible(true);
+            emYBLabel.setText("BY:");
+            emYBLabel.setLocation(108, 273);
+            emYBLabel.setVisible(true);
+            emYBText.setLocation(146, 267);
+            emYBText.setVisible(true);
+            emZBLabel.setText("BZ:");
+            emZBLabel.setLocation(108, 307);
+            emZBLabel.setVisible(true);
+            emZBText.setLocation(146, 301);
+            emZBText.setVisible(true);
         }
     }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
 
@@ -562,21 +745,57 @@ public class Panel3D extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emZTextActionPerformed
 
+    private void alturaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alturaTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alturaTextActionPerformed
+
+    private void larguraTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_larguraTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_larguraTextActionPerformed
+
+    private void profundidadeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profundidadeTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_profundidadeTextActionPerformed
+
+    private void emXBTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emXBTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emXBTextActionPerformed
+
+    private void emYBTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emYBTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emYBTextActionPerformed
+
+    private void emZBTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emZBTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emZBTextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField alturaText;
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JButton desenharObjetoButton;
+    private javax.swing.JLabel emXBLabel;
+    private javax.swing.JTextField emXBText;
     private javax.swing.JLabel emXLabel;
     private javax.swing.JTextField emXText;
+    private javax.swing.JLabel emYBLabel;
+    private javax.swing.JTextField emYBText;
     private javax.swing.JLabel emYLabel;
     private javax.swing.JTextField emYText;
+    private javax.swing.JLabel emZBLabel;
+    private javax.swing.JTextField emZBText;
     private javax.swing.JLabel emZLabel;
     private javax.swing.JTextField emZText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField larguraText;
+    private javax.swing.JTextField profundidadeText;
     private javax.swing.JButton resetButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     private javax.swing.JTextField x;

@@ -13,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import panels.PanelBoard;
 import panels.PencilPanel;
-import transformations.Matrix;
+import math.Matrix;
 import math.Polygon;
 import math.PolygonType;
 import geometric.Coordinate;
@@ -347,7 +347,6 @@ public class Panel2D extends javax.swing.JInternalFrame {
             polygon.setPolygon(transformation2D.rotation(polygon.getPolygon(), assistantX));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-
             polygon.setPolygon(transformation2D.reflection(polygon.getPolygon(), emXText.getText()));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {

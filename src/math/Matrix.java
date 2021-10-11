@@ -1,4 +1,4 @@
-package transformations;
+package math;
 
 public class Matrix {
     public static void show (double[][] matrix) {
