@@ -73,6 +73,12 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         transformacoesComboBox.addItem("Operador de Prewitt");
         transformacoesComboBox.addItem("Alto Reforco (Hight-Boost)");
         transformacoesComboBox.addItem("Operador de Sobel");
+        
+        selecionarImgComboBox.removeAllItems();
+        selecionarImgComboBox.addItem("Airplane");
+        selecionarImgComboBox.addItem("Lenag");
+        selecionarImgComboBox.addItem("Lenasalp");
+        selecionarImgComboBox.addItem("lena");
     }
 
     /**
@@ -87,6 +93,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         transformacoesComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
+        selecionarImgComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Filtros de Imagem");
@@ -112,6 +120,20 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             }
         });
 
+        selecionarImgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selecionarImgComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selecionarImgComboBoxItemStateChanged(evt);
+            }
+        });
+        selecionarImgComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarImgComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Selecionar Imagem");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,13 +144,19 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(aplicarNoObjetoButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 496, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(aplicarNoObjetoButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(selecionarImgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +165,13 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
                 .addComponent(aplicarNoObjetoButton)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selecionarImgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,10 +223,38 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
+    private void selecionarImgComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Airplane")) {
+            
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenag")) {
+            
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenasalp")) {
+            
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("lena")) {
+            
+        }
+    }//GEN-LAST:event_selecionarImgComboBoxItemStateChanged
+
+    private void selecionarImgComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxActionPerformed
+        // TODO add your handling code here:
+        if(transformacoesComboBox.getSelectedItem().equals("Airplane")) {
+            
+        } else if(transformacoesComboBox.getSelectedItem().equals("Lenag")) {
+            
+        } else if(transformacoesComboBox.getSelectedItem().equals("Lenasalp")) {
+            
+        } else if(transformacoesComboBox.getSelectedItem().equals("lena")) {
+            
+        }
+    }//GEN-LAST:event_selecionarImgComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> selecionarImgComboBox;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     // End of variables declaration//GEN-END:variables
 }
