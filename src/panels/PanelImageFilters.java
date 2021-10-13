@@ -83,7 +83,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        panelImageOriginal = new javax.swing.JPanel();
+        panelImageOriginal = new Panelmage();
         selecionarImgButton = new javax.swing.JButton();
         panelImageResult = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();

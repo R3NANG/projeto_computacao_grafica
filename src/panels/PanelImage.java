@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Renan
  */
-public class PanelImage extends javax.swing.JInternalFrame {
+public class PanelImage extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelBoard
