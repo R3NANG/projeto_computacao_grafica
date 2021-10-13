@@ -9,6 +9,8 @@ import panels.Panel2D;
 import panels.Panel3D;
 import panels.PanelBoard;
 import panels.PanelImageFilters;
+import panels.PanelImageOriginal;
+import panels.PanelImageResult;
 import panels.PanelPrimitive;
 /**
  *
@@ -151,6 +153,20 @@ public class Main extends javax.swing.JFrame {
         PanelImageFilters panelImageFilters = new PanelImageFilters();
         panelImageFilters.setVisible(true);
         this.add(panelImageFilters);
+        
+        PanelImageOriginal panelImageOriginal = new PanelImageOriginal();
+        //falta implementar
+        //panelImageFilters.setPanelImageOriginal(panelImageOriginal);
+        panelImageFilters.setLocation(100, 0);
+        panelImageFilters.setVisible(true);
+        this.add(panelImageFilters);
+        
+        PanelImageResult panelImageResult = new PanelImageResult();
+        //falta implementar
+        //panelImageFilters.setPanelImageResult(panelImageResult);
+        panelImageResult.setLocation(100, 100);
+        panelImageResult.setVisible(true);
+        this.add(panelImageResult);
     }//GEN-LAST:event_itemDeMenuFiltrosDeImagensActionPerformed
 
     /**
