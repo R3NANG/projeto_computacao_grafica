@@ -83,12 +83,8 @@ public class PanelImage extends javax.swing.JInternalFrame {
        g.drawLine(super.getWidth()/2, 0, super.getWidth()/2, super.getHeight());
         */
 
-       /*
-       Graphics2D g2d = (Graphics2D) g.create();
-       g2d.drawImage(image, 0, 0, null);
-       g.dispose();
+       //g2d.drawImage(image, 0, 0, null);
 
-       */
        this.panel.repaint();
    }
 
