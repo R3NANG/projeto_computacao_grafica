@@ -19,7 +19,7 @@ public class Polygon {
             case TRANSFORMATION2D:
                 return new double[3][4];
             case TRANSFORMATION3D:
-                return new double[3][8]; // ainda determinar a base do 3D
+                return new double[4][8];
             default:
                 return null;
         }
@@ -50,7 +50,7 @@ public class Polygon {
         this.capacity++;
     }
 
-    public void insert3D(int x, int y) {
+    public void insert3D(int x, int y, int z) {
         if (this.capacity == this.polygon[0].length) {
             for (int i = 0; i < this.polygon.length; i++) {
                 this.polygon[i] = Arrays.copyOf(this.polygon[i], this.polygon[0].length*2);
@@ -59,7 +59,8 @@ public class Polygon {
 
         this.polygon[0][capacity] = (double)x;
         this.polygon[1][capacity] = (double)y;
-        this.polygon[2][capacity] = 1; 
+        this.polygon[2][capacity] = (double)z;
+        this.polygon[3][capacity] = 1; 
         this.capacity++;
     }
 

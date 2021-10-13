@@ -9,54 +9,33 @@ import java.awt.event.ItemEvent;
 import java.awt.Graphics;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import panels.PanelBoard;
-import panels.PencilPanel;
-import math.Matrix;
-import math.Polygon;
-import math.PolygonType;
-import transformations.Transformation2D;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author Renan
  */
 public class PanelImageFilters extends javax.swing.JInternalFrame {
-    private int assistantX = 0, assistantY = 0;
-    private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION2D);
-    private PanelBoard panelBoard;
-    private Transformation2D transformation2D = new Transformation2D();
-    
-    public void setPolygon(Polygon polygon) {
-        this.polygon = polygon;
-    }
-
-    public void setPanelBoard(PanelBoard panelBoard) {
-        this.panelBoard = panelBoard;
-        this.panelBoard.setPolygon(this.polygon);
-        this.panelBoard.setPencil(new PencilPanel(){
-            @Override
-            public void draw (PanelBoard board, Graphics g) {
-                g.setColor(Color.black);
-                // Draw N polygon
-                for (int i = 0; i < board.getPolygon().getSize(); i++)
-                {
-                    if (i == board.getPolygon().getSize() - 1) {
-                            g.drawLine(
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][0],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][0]);
-                            continue;
-                    }
-                    g.drawLine(
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
-                }
-            }
-        });
-    }
+    private static BufferedReader imagem;
+    private BufferedImage imgT;
+    private int[][] imageMatrix;
+    private int[][] imageMatrix1;
+    private int[][] imageMatrix2; 
+    private int imgWidth;
+    private int imgHeight;
+    private int imgValorMaximo;
 
     /**
      * Creates new form PanelImageFilters
@@ -225,6 +204,21 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
     private void selecionarImgComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxItemStateChanged
         // TODO add your handling code here:
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("src/images/"));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(nome-do-botão que invocou a função);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                imageMatrix1 = createImage(fileChooser.getSelectedFile());
+                populaImgInPanel(imageMatrix1, panelImage);
+                btAplicaFiltro.setEnabled(true);
+                panelImgOutput.repaint();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
+        }
         if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Airplane")) {
             
         } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenag")) {
@@ -249,6 +243,72 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_selecionarImgComboBoxActionPerformed
 
+    /**
+     *  Ler o arquivo pgm e monta a popula a matriz imagem
+     */
+    public static int[][] createImage(File file) {
+        FileInputStream fileInputStream = null;
+        Scanner scan = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            scan = new Scanner(fileInputStream);
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Descarta a primeira linha
+        scan.nextLine();
+        // Read pic width, height and max value
+        imgWidth = scan.nextInt();
+        imgHeight = scan.nextInt();
+        imgValorMaximo = scan.nextInt();
+
+        /**
+         * Monta a matriz imagem com os pixels da imagem selecionada
+         */
+        imageMatrix = new int[imgHeight][imgWidth];
+        for (int row = 0; row < imgHeight; row++) {
+            for (int col = 0; col < imgWidth; col++) {
+                // Popula a matriz com os pixels da imagem
+                imageMatrix[row][col] = scan.nextInt();
+            }
+        }
+        try {
+            fileInputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return imageMatrix;
+    }
+
+    /**
+     * Exibe a imagem no jPanel
+     *
+     */
+    public void populaImgInPanel(int[][] img, JPanel imgPanel) {
+        /**
+         * Monta a matriz imagem com os pixels da imagem selecionada
+         */
+        BufferedImage imagemInput = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
+        for (int row = 0; row < img.length; row++) {
+            for (int col = 0; col < img[0].length; col++) {
+                // Prepara a imagem para ser desenhada no jpanel
+                imagemInput.setRGB(col, row, getCorPixel(imageMatrix[row][col]));
+            }
+        }
+        imgT = imagemInput;
+        /**
+         * Exibe a imagem no jpanel
+         */
+        imgPanel.getGraphics().drawImage(imagemInput, 0, 0, null);
+    }
+
+    /**
+     * Retorna o valor em RGB de acordo com o valor do pixel
+     */
+    private int getCorPixel(int corRGB) {
+        return new Color(corRGB, corRGB, corRGB).getRGB();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;

@@ -6,6 +6,7 @@
 ./src/panels/PanelPrimitive.java
 ./src/imageprocessing/transformations/Histogram.java
 ./src/imageprocessing/transformations/Transformation.java
+./src/imageprocessing/transformations/morphology/Morphology.java
 ./src/imageprocessing/Normalization.java
 ./src/imageprocessing/filters/Filter.java
 ./src/imageprocessing/operators/Operator.java

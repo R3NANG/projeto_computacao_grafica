@@ -101,7 +101,7 @@ public class Matrix {
         double[][] matrix = new double[][]{
             {1, 0, 0, translationX},
             {0, 1, 0, translationY},
-            {0, 0, 0, translationZ},
+            {0, 0, 1, translationZ},
             {0, 0, 0, 1}
         };
         return matrix;
@@ -115,7 +115,7 @@ public class Matrix {
             {scalingX, 0, 0, 0},
             {0, scalingY, 0, 0},
             {0, 0, scalingZ, 0},
-            {0, 0, 0, 0}
+            {0, 0, 0, 1}
         };
         return matrix;
     }
