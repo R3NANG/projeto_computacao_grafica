@@ -772,8 +772,9 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantX = Integer.parseInt(emXText.getText());
             assistantY = Integer.parseInt(emYText.getText());
             assistantZ = Integer.parseInt(emZText.getText());
+            assistantZ = -assistantZ;
             
-            //polygon.setPolygon(transformation3D.scaling(objectMatrix, assistantX, assistantY, assistantZ));
+            polygon.setPolygon(transformation3D.scaling(polygon.getPolygon(), assistantX, assistantY, assistantZ));
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());

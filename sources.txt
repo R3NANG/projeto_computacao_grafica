@@ -1,6 +1,7 @@
 ./src/panels/Panel3D.java
 ./src/panels/PanelBoard.java
 ./src/panels/PencilPanel.java
+./src/panels/PanelImageOriginal.java
 ./src/panels/Panel2D.java
 ./src/panels/PanelImageFilters.java
 ./src/panels/PanelPrimitive.java

@@ -21,7 +21,10 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import panels.PanelImageFilters;
 
 /**
  *
@@ -29,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class PanelImageFilters extends javax.swing.JInternalFrame {
     private static BufferedReader imagem;
+    private PanelImageOriginal panelImageOriginal;
     private BufferedImage imgT;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
@@ -37,6 +41,10 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
 
+    public void setPanelImageOriginal(PanelImageO
+            riginal panel) {
+        this.panelImageOriginal = panel;
+    }
     /**
      * Creates new form PanelImageFilters
      */
@@ -183,6 +191,23 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("src/images/"));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                imageMatrix1 = createImage(fileChooser.getSelectedFile());
+                populaImgInPanel(imageMatrix1, panelImageOriginal);
+                //btAplicaFiltro.setEnabled(true);
+                //panelImgOutput.repaint();
+                panelImageOriginal.setImage(imgT);
+                panelImageOriginal.repaint();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
+        }
         if(transformacoesComboBox.getSelectedItem().equals("Media")) {
             
         } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
@@ -204,21 +229,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
     private void selecionarImgComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxItemStateChanged
         // TODO add your handling code here:
-        try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("src/images/"));
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(nome-do-botão que invocou a função);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                imageMatrix1 = createImage(fileChooser.getSelectedFile());
-                populaImgInPanel(imageMatrix1, panelImage);
-                btAplicaFiltro.setEnabled(true);
-                panelImgOutput.repaint();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
-        }
+        
         if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Airplane")) {
             
         } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenag")) {
@@ -246,7 +257,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     /**
      *  Ler o arquivo pgm e monta a popula a matriz imagem
      */
-    public static int[][] createImage(File file) {
+    public int[][] createImage(File file) {
         FileInputStream fileInputStream = null;
         Scanner scan = null;
         try {
@@ -276,7 +287,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         try {
             fileInputStream.close();
         } catch (IOException ex) {
-            Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
         return imageMatrix;
     }
@@ -285,7 +296,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
      * Exibe a imagem no jPanel
      *
      */
-    public void populaImgInPanel(int[][] img, JPanel imgPanel) {
+    public void populaImgInPanel(int[][] img, JInternalFrame imgPanel) {
         /**
          * Monta a matriz imagem com os pixels da imagem selecionada
          */
@@ -296,11 +307,12 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                 imagemInput.setRGB(col, row, getCorPixel(imageMatrix[row][col]));
             }
         }
-        imgT = imagemInput;
         /**
          * Exibe a imagem no jpanel
          */
-        imgPanel.getGraphics().drawImage(imagemInput, 0, 0, null);
+        panelImageOriginal.setImage(imagemInput);
+        panelImageOriginal.getGraphics().drawImage(imagemInput, 75, 75, null);
+        panelImageOriginal.repaint();
     }
 
     /**

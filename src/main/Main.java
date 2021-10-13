@@ -10,7 +10,6 @@ import panels.Panel3D;
 import panels.PanelBoard;
 import panels.PanelImageFilters;
 import panels.PanelImageOriginal;
-import panels.PanelImageResult;
 import panels.PanelPrimitive;
 /**
  *
@@ -151,22 +150,24 @@ public class Main extends javax.swing.JFrame {
     private void itemDeMenuFiltrosDeImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuFiltrosDeImagensActionPerformed
         // TODO add your handling code here:
         PanelImageFilters panelImageFilters = new PanelImageFilters();
-        panelImageFilters.setVisible(true);
-        this.add(panelImageFilters);
-        
         PanelImageOriginal panelImageOriginal = new PanelImageOriginal();
-        //falta implementar
-        //panelImageFilters.setPanelImageOriginal(panelImageOriginal);
-        panelImageFilters.setLocation(100, 0);
+        panelImageFilters.setPanelImageOriginal(panelImageOriginal);
+
         panelImageFilters.setVisible(true);
         this.add(panelImageFilters);
         
-        PanelImageResult panelImageResult = new PanelImageResult();
         //falta implementar
-        //panelImageFilters.setPanelImageResult(panelImageResult);
+        panelImageOriginal.setLocation(222, 0);
+        panelImageOriginal.setVisible(true);
+        this.add(panelImageOriginal);
+        
+        //PanelImageResult panelImageResult = new PanelImageResult();
+        //falta implementar
+        /*panelImageFilters.setPanelImageResult(panelImageResult);
         panelImageResult.setLocation(100, 100);
         panelImageResult.setVisible(true);
         this.add(panelImageResult);
+        */
     }//GEN-LAST:event_itemDeMenuFiltrosDeImagensActionPerformed
 
     /**

@@ -8,9 +8,9 @@ package panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import math.Polygon;
-import panels.PencilPanel;
-
+import java.awt.FlowLayout;
+import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 /**
  *
  * @author Renan
@@ -20,26 +20,41 @@ public class PanelImageOriginal extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelBoard
      */
-    private PencilPanel pencil;
-    private Polygon polygon;
+    private BufferedImage image;
+    private JPanel panel = new JPanel();
 
     public PanelImageOriginal() {
         initComponents();
+        panel.setLayout(new FlowLayout());
+        panel = new JPanel() {
+            @Override
+            public void paint(Graphics g) { // paint() method
+                super.paint(g);
+                g.setColor(Color.black);
+                g.drawImage(image, 0, 0, null);
+            }
+        };
+        getContentPane().add(panel);
+        pack();
+        setVisible(true);
+        //pack();
+        //setVisible(true);
         repaint(); 
     }
 
-    public void setPencil(PencilPanel pencil) {
-        this.pencil = pencil;
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
     }
-    public PencilPanel getPencil() {
-        return this.pencil;
+    public JPanel getPanel() {
+        return this.panel;
     }
 
-    public void setPolygon(Polygon polygon) {
-        this.polygon = polygon;
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
-    public Polygon getPolygon() {
-        return this.polygon;
+
+    public BufferedImage getImage() {
+        return this.image;
     }
 
     public int getWidth() {
@@ -60,18 +75,7 @@ public class PanelImageOriginal extends javax.swing.JInternalFrame {
     
    public void paint(Graphics g) {
        super.paint(g);
-       this.setBackground(Color.white);
-       
-       /*
-       // Draw Axis
-       g.setColor(Color.red);
-       g.drawLine(0, super.getHeight()/2, super.getWidth(), super.getHeight()/2);
-
-       g.setColor(Color.green);
-       g.drawLine(super.getWidth()/2, 0, super.getWidth()/2, super.getHeight());
-        */
-
-       pencil.draw(this, g);
+       //g.drawImage(image, 75, 75, null);
    }
 
    public Dimension getPreferredSize() {
