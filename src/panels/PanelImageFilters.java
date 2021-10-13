@@ -260,7 +260,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Media")) {
-            this.image = Filter.mean(imageMatrix, false);
+            this.imageResult = Filter.mean(imageMatrix, true);
             //this.imageResult = Filter.mean(imageMatrix, false);
             panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
         } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
