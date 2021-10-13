@@ -32,7 +32,7 @@ import panels.PanelImageFilters;
  */
 public class PanelImageFilters extends javax.swing.JInternalFrame {
     private static BufferedReader imagem;
-    private PanelImageOriginal panelImageOriginal;
+    //private PanelImageOriginal panelImageOriginal;
     private BufferedImage imgT;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
@@ -41,10 +41,9 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
 
-    public void setPanelImageOriginal(PanelImageO
-            riginal panel) {
+    /*public void setPanelImageOriginal(PanelImageOriginal panel) {
         this.panelImageOriginal = panel;
-    }
+    }*/
     /**
      * Creates new form PanelImageFilters
      */
@@ -60,12 +59,6 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         transformacoesComboBox.addItem("Operador de Prewitt");
         transformacoesComboBox.addItem("Alto Reforco (Hight-Boost)");
         transformacoesComboBox.addItem("Operador de Sobel");
-        
-        selecionarImgComboBox.removeAllItems();
-        selecionarImgComboBox.addItem("Airplane");
-        selecionarImgComboBox.addItem("Lenag");
-        selecionarImgComboBox.addItem("Lenasalp");
-        selecionarImgComboBox.addItem("lena");
     }
 
     /**
@@ -80,8 +73,9 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         transformacoesComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
-        selecionarImgComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        panelImageOriginal = new javax.swing.JPanel();
+        selecionarImgButton = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Filtros de Imagem");
@@ -107,19 +101,25 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             }
         });
 
-        selecionarImgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        selecionarImgComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                selecionarImgComboBoxItemStateChanged(evt);
-            }
-        });
-        selecionarImgComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecionarImgComboBoxActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Selecionar Imagem");
+
+        javax.swing.GroupLayout panelImageOriginalLayout = new javax.swing.GroupLayout(panelImageOriginal);
+        panelImageOriginal.setLayout(panelImageOriginalLayout);
+        panelImageOriginalLayout.setHorizontalGroup(
+            panelImageOriginalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 271, Short.MAX_VALUE)
+        );
+        panelImageOriginalLayout.setVerticalGroup(
+            panelImageOriginalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
+
+        selecionarImgButton.setText("Selecionar");
+        selecionarImgButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarImgButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,26 +139,29 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(selecionarImgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addComponent(selecionarImgButton))))
+                .addGap(93, 93, 93)
+                .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(aplicarNoObjetoButton)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selecionarImgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(aplicarNoObjetoButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selecionarImgButton)))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,23 +194,6 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("src/images/"));
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                imageMatrix1 = createImage(fileChooser.getSelectedFile());
-                populaImgInPanel(imageMatrix1, panelImageOriginal);
-                //btAplicaFiltro.setEnabled(true);
-                //panelImgOutput.repaint();
-                panelImageOriginal.setImage(imgT);
-                panelImageOriginal.repaint();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
-        }
         if(transformacoesComboBox.getSelectedItem().equals("Media")) {
             
         } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
@@ -227,32 +213,26 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
-    private void selecionarImgComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxItemStateChanged
+    private void selecionarImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgButtonActionPerformed
         // TODO add your handling code here:
-        
-        if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Airplane")) {
-            
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenag")) {
-            
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("Lenasalp")) {
-            
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && selecionarImgComboBox.getSelectedItem().equals("lena")) {
-            
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("src/images/"));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                imageMatrix1 = createImage(fileChooser.getSelectedFile());
+                populaImgInPanel(imageMatrix1, panelImageOriginal);
+                //btAplicaFiltro.setEnabled(true);
+                //panelImgOutput.repaint();
+                panelImageOriginal.setImage(imgT);
+                panelImageOriginal.repaint();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
         }
-    }//GEN-LAST:event_selecionarImgComboBoxItemStateChanged
-
-    private void selecionarImgComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgComboBoxActionPerformed
-        // TODO add your handling code here:
-        if(transformacoesComboBox.getSelectedItem().equals("Airplane")) {
-            
-        } else if(transformacoesComboBox.getSelectedItem().equals("Lenag")) {
-            
-        } else if(transformacoesComboBox.getSelectedItem().equals("Lenasalp")) {
-            
-        } else if(transformacoesComboBox.getSelectedItem().equals("lena")) {
-            
-        }
-    }//GEN-LAST:event_selecionarImgComboBoxActionPerformed
+    }//GEN-LAST:event_selecionarImgButtonActionPerformed
 
     /**
      *  Ler o arquivo pgm e monta a popula a matriz imagem
@@ -296,7 +276,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
      * Exibe a imagem no jPanel
      *
      */
-    public void populaImgInPanel(int[][] img, JInternalFrame imgPanel) {
+    public void populaImgInPanel(int[][] img, JPanel imgPanel) {
         /**
          * Monta a matriz imagem com os pixels da imagem selecionada
          */
@@ -326,7 +306,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JComboBox<String> selecionarImgComboBox;
+    private javax.swing.JPanel panelImageOriginal;
+    private javax.swing.JButton selecionarImgButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     // End of variables declaration//GEN-END:variables
 }
