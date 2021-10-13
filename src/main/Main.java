@@ -150,16 +150,16 @@ public class Main extends javax.swing.JFrame {
     private void itemDeMenuFiltrosDeImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuFiltrosDeImagensActionPerformed
         // TODO add your handling code here:
         PanelImageFilters panelImageFilters = new PanelImageFilters();
-        PanelImage panelImageInput = new PanelImage();
-        panelImageFilters.setPanelImageInput(panelImageInput);
+        //PanelImage panelImageInput = new PanelImage();
+        //panelImageFilters.setPanelImageInput(panelImageInput);
 
         panelImageFilters.setVisible(true);
         this.add(panelImageFilters);
         
         //falta implementar
-        panelImageInput.setLocation(222, 0);
-        panelImageInput.setVisible(true);
-        this.add(panelImageInput);
+        //panelImageInput.setLocation(222, 0);
+        //panelImageInput.setVisible(true);
+       //this.add(panelImageInput);
         
         //PanelImageResult panelImageResult = new PanelImageResult();
         //falta implementar

@@ -37,7 +37,7 @@ import panels.PanelImage;
  * @author Renan
  */
 public class PanelImageFilters extends javax.swing.JInternalFrame {
-    private PanelImage panelImageInput;
+    //private PanelImage panelImageInput;
     private BufferedImage image;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
@@ -46,9 +46,11 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
 
+    /*
     public void setPanelImageInput(PanelImage panel) {
         this.panelImageInput = panel;
     }
+    */
     /**
      * Creates new form PanelImageFilters
      */
@@ -238,8 +240,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                 //panelImgOutput.repaint();
                 //panelImageOriginal.setImage(imgT);
 
-                panelImageInput.setImage(image);
-                panelImageInput.repaint();
+                //panelImageInput.setImage(image);
+                //panelImageInput.repaint();
                 panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
             }
         } catch (Exception e) {
