@@ -10,9 +10,11 @@ import java.awt.Graphics;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,17 +25,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.imageio.ImageIO;
+import java.net.URL;
+
 
 import panels.PanelImageFilters;
+import panels.PanelImage;
 
 /**
  *
  * @author Renan
  */
 public class PanelImageFilters extends javax.swing.JInternalFrame {
-    private static BufferedReader imagem;
-    //private PanelImageOriginal panelImageOriginal;
-    private BufferedImage imgT;
+    private PanelImage panelImageInput;
+    private BufferedImage image;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
     private int[][] imageMatrix2; 
@@ -41,9 +46,9 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
 
-    /*public void setPanelImageOriginal(PanelImageOriginal panel) {
-        this.panelImageOriginal = panel;
-    }*/
+    public void setPanelImageInput(PanelImage panel) {
+        this.panelImageInput = panel;
+    }
     /**
      * Creates new form PanelImageFilters
      */
@@ -222,14 +227,23 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             fileChooser.setFileFilter(filter);
             int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                imageMatrix1 = createImage(fileChooser.getSelectedFile());
-                populaImgInPanel(imageMatrix1, panelImageOriginal);
+                //imageMatrix1 = createImage(fileChooser.getSelectedFile());
+                //populaImgInPanel(imageMatrix1, panelImageOriginal);
+               // createImage(fileChooser.getSelectedFile());
+               
+                File path = fileChooser.getSelectedFile();
+                System.out.println(path);
+                createImage(path.getAbsolutePath());
                 //btAplicaFiltro.setEnabled(true);
                 //panelImgOutput.repaint();
-                panelImageOriginal.setImage(imgT);
-                panelImageOriginal.repaint();
+                //panelImageOriginal.setImage(imgT);
+
+                panelImageInput.setImage(image);
+                panelImageInput.repaint();
+                panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
         }
     }//GEN-LAST:event_selecionarImgButtonActionPerformed
@@ -237,7 +251,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     /**
      *  Ler o arquivo pgm e monta a popula a matriz imagem
      */
-    public int[][] createImage(File file) {
+    public int[][] createImage(String path) {
+        /*
         FileInputStream fileInputStream = null;
         Scanner scan = null;
         try {
@@ -253,22 +268,84 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         imgWidth = scan.nextInt();
         imgHeight = scan.nextInt();
         imgValorMaximo = scan.nextInt();
+        */ 
+        //BufferedImage bimg = null;
+        int width;
+        int height;
 
-        /**
-         * Monta a matriz imagem com os pixels da imagem selecionada
-         */
-        imageMatrix = new int[imgHeight][imgWidth];
-        for (int row = 0; row < imgHeight; row++) {
-            for (int col = 0; col < imgWidth; col++) {
-                // Popula a matriz com os pixels da imagem
-                imageMatrix[row][col] = scan.nextInt();
+        InputStream inputStream = null;
+        Scanner scan = null;
+        try {
+
+            System.out.println(path);
+            inputStream = new FileInputStream(path);
+            scan = new Scanner(inputStream);
+
+            // Descarta a primeira linha
+            scan.nextLine();
+            // Read pic width, height and max value
+            width = scan.nextInt();
+            height = scan.nextInt();
+            imgValorMaximo = scan.nextInt();
+
+            BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            System.out.printf ("W : %d\n", width);
+            System.out.printf ("H : %d\n", height);
+
+            //width = i.getWidth();
+            //height = i.getHeight();
+            /*
+            if (path == null)
+                System.out.println("File Null");
+            if (inputStream == null) 
+                System.out.println("input Null");
+            if (bimg == null)
+                System.out.println("bimg Null");
+
+            width = bimg.getWidth();
+            height = bimg.getHeight();
+            */
+            //this.image = bimg;
+
+            /**
+            * Monta a matriz imagem com os pixels da imagem selecionada
+            */
+            imageMatrix = new int[width][height];
+
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
+                    // Popula a matriz com os pixels da imagem
+                    imageMatrix[row][col] = scan.nextInt();
+                }
             }
+            inputStream.close();
+
+            /**
+            * Monta a matriz imagem com os pixels da imagem selecionada
+            */
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
+                    // Prepara a imagem para ser desenhada no jpanel
+                    bimg.setRGB(col, row, getCorPixel(imageMatrix[row][col]));
+                }
+            }
+
+            this.image = bimg;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "OPS! criar a imagem.");
         }
+
+
+        /*
         try {
             fileInputStream.close();
         } catch (IOException ex) {
             //Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
         return imageMatrix;
     }
 
@@ -290,9 +367,9 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         /**
          * Exibe a imagem no jpanel
          */
-        panelImageOriginal.setImage(imagemInput);
+        //panelImageOriginal.setImage(imagemInput);
         panelImageOriginal.getGraphics().drawImage(imagemInput, 75, 75, null);
-        panelImageOriginal.repaint();
+        //panelImageOriginal.repaint();
     }
 
     /**

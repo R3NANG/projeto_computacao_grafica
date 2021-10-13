@@ -1,10 +1,10 @@
 ./src/panels/Panel3D.java
 ./src/panels/PanelBoard.java
 ./src/panels/PencilPanel.java
-./src/panels/PanelImageOriginal.java
 ./src/panels/Panel2D.java
 ./src/panels/PanelImageFilters.java
 ./src/panels/PanelPrimitive.java
+./src/panels/PanelImage.java
 ./src/imageprocessing/transformations/Histogram.java
 ./src/imageprocessing/transformations/Transformation.java
 ./src/imageprocessing/transformations/morphology/Morphology.java
