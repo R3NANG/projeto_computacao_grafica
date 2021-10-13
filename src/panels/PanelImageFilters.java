@@ -7,6 +7,7 @@ package panels;
 
 import java.awt.event.ItemEvent;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,8 @@ import java.net.URL;
 import panels.PanelImageFilters;
 import panels.PanelImage;
 
+import imageprocessing.filters.Filter;
+
 /**
  *
  * @author Renan
@@ -39,6 +42,7 @@ import panels.PanelImage;
 public class PanelImageFilters extends javax.swing.JInternalFrame {
     //private PanelImage panelImageInput;
     private BufferedImage image;
+    private BufferedImage imageResult;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
     private int[][] imageMatrix2; 
@@ -70,6 +74,22 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         panelImageResult.setBackground(Color.GRAY);
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(image, 285, 50, null);
+        //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
+    }
+
+    /*
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
+        panelImageOriginal.repaint();
+
+    }
+    */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,7 +103,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        panelImageOriginal = new Panelmage();
+        panelImageOriginal = new JPanel();
         selecionarImgButton = new javax.swing.JButton();
         panelImageResult = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -240,7 +260,9 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Media")) {
-            
+            this.image = Filter.mean(imageMatrix, false);
+            //this.imageResult = Filter.mean(imageMatrix, false);
+            panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
         } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Passa alta basico")) {
@@ -280,7 +302,10 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
                 //panelImageInput.setImage(image);
                 //panelImageInput.repaint();
-                panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
+
+                //panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
+                //panelImageOriginal.repaint();
+                this.repaint();
             }
         } catch (Exception e) {
             e.printStackTrace();
