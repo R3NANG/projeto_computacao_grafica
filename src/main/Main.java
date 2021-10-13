@@ -117,6 +117,7 @@ public class Main extends javax.swing.JFrame {
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
+        this.setSize(595, 505);
     }//GEN-LAST:event_itemDeMenuTransformacoes3DActionPerformed
 
     private void itemDeMenuTransformacoes2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoes2DActionPerformed
@@ -131,6 +132,7 @@ public class Main extends javax.swing.JFrame {
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
+        this.setSize(595, 505);
     }//GEN-LAST:event_itemDeMenuTransformacoes2DActionPerformed
 
     private void menuPrimitivasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuPrimitivasMenuSelected
@@ -145,6 +147,7 @@ public class Main extends javax.swing.JFrame {
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
+        this.setSize(595, 505);
     }//GEN-LAST:event_menuPrimitivasMenuSelected
 
     private void itemDeMenuFiltrosDeImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuFiltrosDeImagensActionPerformed
@@ -155,6 +158,7 @@ public class Main extends javax.swing.JFrame {
 
         panelImageFilters.setVisible(true);
         this.add(panelImageFilters);
+        this.setSize(906, 504);
         
         //falta implementar
         //panelImageInput.setLocation(222, 0);

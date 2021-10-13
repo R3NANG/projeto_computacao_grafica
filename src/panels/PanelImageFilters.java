@@ -66,6 +66,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         transformacoesComboBox.addItem("Operador de Prewitt");
         transformacoesComboBox.addItem("Alto Reforco (Hight-Boost)");
         transformacoesComboBox.addItem("Operador de Sobel");
+        panelImageOriginal.setBackground(Color.GRAY);
+        panelImageResult.setBackground(Color.GRAY);
     }
 
     /**
@@ -83,9 +85,13 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         panelImageOriginal = new javax.swing.JPanel();
         selecionarImgButton = new javax.swing.JButton();
+        panelImageResult = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Filtros de Imagem");
+        setPreferredSize(new java.awt.Dimension(890, 444));
 
         transformacoesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         transformacoesComboBox.addItemListener(new java.awt.event.ItemListener() {
@@ -110,15 +116,17 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Selecionar Imagem");
 
+        panelImageOriginal.setPreferredSize(new java.awt.Dimension(300, 300));
+
         javax.swing.GroupLayout panelImageOriginalLayout = new javax.swing.GroupLayout(panelImageOriginal);
         panelImageOriginal.setLayout(panelImageOriginalLayout);
         panelImageOriginalLayout.setHorizontalGroup(
             panelImageOriginalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         panelImageOriginalLayout.setVerticalGroup(
             panelImageOriginalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         selecionarImgButton.setText("Selecionar");
@@ -127,6 +135,23 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                 selecionarImgButtonActionPerformed(evt);
             }
         });
+
+        panelImageResult.setPreferredSize(new java.awt.Dimension(300, 300));
+
+        javax.swing.GroupLayout panelImageResultLayout = new javax.swing.GroupLayout(panelImageResult);
+        panelImageResult.setLayout(panelImageResultLayout);
+        panelImageResultLayout.setHorizontalGroup(
+            panelImageResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelImageResultLayout.setVerticalGroup(
+            panelImageResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jLabel3.setText("Imagem Original");
+
+        jLabel4.setText("Imagem Resultado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,15 +173,24 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(selecionarImgButton))))
-                .addGap(93, 93, 93)
+                .addGap(27, 27, 27)
                 .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(216, 216, 216)
+                .addComponent(jLabel4)
+                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -168,7 +202,11 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selecionarImgButton)))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -385,7 +423,10 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panelImageOriginal;
+    private javax.swing.JPanel panelImageResult;
     private javax.swing.JButton selecionarImgButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     // End of variables declaration//GEN-END:variables
