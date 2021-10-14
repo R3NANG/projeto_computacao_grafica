@@ -21,7 +21,7 @@ public class Histogram {
             }
         }
 
-        // Coloca todos os pixels do buffered image na cor branca //Coloca imagem na cor branca
+        // Coloca todos os pixels do buffered image na cor branca
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 resultingImage.setRGB(i, j, Color.WHITE.getRGB());
