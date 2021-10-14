@@ -12,6 +12,7 @@ import panels.PanelImageFilters;
 import panels.PanelPrimitive;
 import panels.PanelImage;
 import panels.PanelImageHistograms;
+import panels.PanelImageMorphology;
 import panels.PanelImageOperations;
 import panels.PanelImageTransformations;
 /**
@@ -46,6 +47,7 @@ public class Main extends javax.swing.JFrame {
         itemDeMenuOperacoesEntreImagens = new javax.swing.JMenuItem();
         itemDeMenuTransformacoesDeImagens = new javax.swing.JMenuItem();
         itemDeMenuHistograma = new javax.swing.JMenuItem();
+        menuMorfologias = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +120,18 @@ public class Main extends javax.swing.JFrame {
         menuImagens.add(itemDeMenuHistograma);
 
         menu.add(menuImagens);
+
+        menuMorfologias.setText("Morfologias");
+        menuMorfologias.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuMorfologiasMenuSelected(evt);
+            }
+        });
+        menu.add(menuMorfologias);
 
         setJMenuBar(menu);
 
@@ -228,6 +242,14 @@ public class Main extends javax.swing.JFrame {
         this.setSize(906, 800);
     }//GEN-LAST:event_itemDeMenuHistogramaActionPerformed
 
+    private void menuMorfologiasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuMorfologiasMenuSelected
+        // TODO add your handling code here:
+        PanelImageMorphology panelImageMorphology = new PanelImageMorphology();
+        panelImageMorphology.setVisible(true);
+        this.add(panelImageMorphology);
+        this.setSize(906, 504);
+    }//GEN-LAST:event_menuMorfologiasMenuSelected
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +294,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDeMenuTransformacoesDeImagens;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu menuImagens;
+    private javax.swing.JMenu menuMorfologias;
     private javax.swing.JMenu menuPrimitivas;
     private javax.swing.JMenu menuTransformacoes;
     // End of variables declaration//GEN-END:variables

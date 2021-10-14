@@ -448,7 +448,7 @@ public class Morphology {
      * Nesta operação buscamos entre o pixel e seus vizinhos aqueles com o tom de cinza mais escuro (de menor valor).
      * Os pixels considerados na busca são aqueles marcados com true no kernel.
      */
-    public BufferedImage erosion (BufferedImage img, boolean[][] kernel) {
+    public static BufferedImage erosion (BufferedImage img, boolean[][] kernel) {
         //Cria a imagem de saída
         BufferedImage out = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 
@@ -494,7 +494,7 @@ public class Morphology {
      * Nesta operação buscamos entre o pixel e seus vizinhos aqueles com o tom de cinza mais claro (de maior valor).
      * Os pixels considerados na busca são aqueles marcados com true no kernel (pixels ativos).
      */
-    public BufferedImage dilation (BufferedImage img, boolean[][] kernel) {
+    public static BufferedImage dilation (BufferedImage img, boolean[][] kernel) {
         //Cria a imagem de saída
         BufferedImage out = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 
@@ -540,7 +540,7 @@ public class Morphology {
      * Trata-se de várias erosões seguidas do mesmo número de dilatações. Isso faz com que áreas pequenas da imagem
      * tendam a desaparecer, e estruturas maiores sejam mantidas.
      */
-    public BufferedImage opening (BufferedImage img, int times, boolean[][] kernel) {
+    public static BufferedImage opening (BufferedImage img, int times, boolean[][] kernel) {
         BufferedImage c = dilate(erode(img, times, kernel), times, kernel);
         //exibir(c.getRaster());
     	return c;
@@ -551,7 +551,7 @@ public class Morphology {
      * Trata-se de várias dilatações seguidas do mesmo número de erosões. Isso faz com que "buracos" pequenos na imagem
      * tendam a desaparecer.
      */
-    public BufferedImage closure (BufferedImage img, int times, boolean[][] kernel) {
+    public static BufferedImage closure (BufferedImage img, int times, boolean[][] kernel) {
     	BufferedImage c = erode(dilate(img, times, kernel), times, kernel);
     	//exibir(c.getRaster());
     	return c;
@@ -560,7 +560,7 @@ public class Morphology {
     /**
      * Aplica a dilatação times vezes.
      */
-    public BufferedImage dilate(BufferedImage img, int times, boolean[][] kernel) {
+    public static BufferedImage dilate(BufferedImage img, int times, boolean[][] kernel) {
         BufferedImage out = img;
         for (int i = 0; i < times; i++) {
             out = dilation(out, kernel);
@@ -572,7 +572,7 @@ public class Morphology {
     /**
      * Aplica a erosao times vezes.
      */
-    public BufferedImage erode(BufferedImage img, int times, boolean[][] kernel) {
+    public static BufferedImage erode(BufferedImage img, int times, boolean[][] kernel) {
         BufferedImage out = img;
         for (int i = 0; i < times; i++) {
             out = erosion(out, kernel);

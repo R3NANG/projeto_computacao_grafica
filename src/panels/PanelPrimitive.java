@@ -94,7 +94,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         
         primitivasComboBox.removeAllItems();
         primitivasComboBox.addItem("Bresenham");
-        primitivasComboBox.addItem("Coordinates");
+        //primitivasComboBox.addItem("Coordinates");
         primitivasComboBox.addItem("DDA");
         primitivasComboBox.addItem("Mid Point Circle");
         primitivasComboBox.addItem("Polynomial Circle");

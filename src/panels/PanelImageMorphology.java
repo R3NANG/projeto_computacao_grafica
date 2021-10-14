@@ -5,6 +5,7 @@
  */
 package panels;
 
+import imageprocessing.Normalization;
 import java.awt.event.ItemEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,21 +29,23 @@ import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.imageio.ImageIO;
 import java.net.URL;
+import java.lang.*;
 
-
-import panels.PanelImageFilters;
+import panels.PanelImageMorphology;
 import panels.PanelImage;
 
 import imageprocessing.filters.Filter;
+import imageprocessing.transformations.morphology.Morphology;
 
 /**
  *
  * @author Renan
  */
-public class PanelImageFilters extends javax.swing.JInternalFrame {
+public class PanelImageMorphology extends javax.swing.JInternalFrame {
     //private PanelImage panelImageInput;
     private BufferedImage image;
     private BufferedImage imageResult;
+    private BufferedImage imageOperator;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
     private int[][] imageMatrix2; 
@@ -50,6 +53,10 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
     private float valor;
+    
+    private boolean[][] kernel = { { false, true, false }, { true, true, true }, { false, true, false } };
+    
+    boolean ker[][] = new boolean[1][1];
 
     /*
     public void setPanelImageInput(PanelImage panel) {
@@ -59,18 +66,25 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelImageFilters
      */
-    public PanelImageFilters() {
+    public PanelImageMorphology() {
         initComponents();
         
+        
         filtrosComboBox.removeAllItems();
-        filtrosComboBox.addItem("Media");
-        filtrosComboBox.addItem("Mediana");
-        filtrosComboBox.addItem("Passa alta basico");
-        filtrosComboBox.addItem("Operador de Roberts");
-        filtrosComboBox.addItem("Operador de Roberts Cruzado");
-        filtrosComboBox.addItem("Operador de Prewitt");
-        filtrosComboBox.addItem("Alto Reforco (Hight-Boost)");
-        filtrosComboBox.addItem("Operador de Sobel");
+        filtrosComboBox.addItem("Binary Dilation");
+        filtrosComboBox.addItem("Binary Erosion");
+        filtrosComboBox.addItem("Binary Closure");
+        filtrosComboBox.addItem("Binary Opening");
+        filtrosComboBox.addItem("Binary Hitormiss");
+        filtrosComboBox.addItem("Binary Outer Contour");
+        filtrosComboBox.addItem("Binary Inner Contour");
+        filtrosComboBox.addItem("Binary Morphological Gradient");
+        filtrosComboBox.addItem("Erosion");
+        filtrosComboBox.addItem("Dilation");
+        filtrosComboBox.addItem("Opening");
+        filtrosComboBox.addItem("Closure");
+        filtrosComboBox.addItem("Dilate");
+        filtrosComboBox.addItem("Erode");
         panelImageOriginal.setBackground(Color.GRAY);
         panelImageResult.setBackground(Color.GRAY);
     }
@@ -109,11 +123,11 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         panelImageResult = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        valorBoostLabel = new javax.swing.JLabel();
-        valorBoostText = new javax.swing.JTextField();
+        valorLabel = new javax.swing.JLabel();
+        valorText = new javax.swing.JTextField();
 
         setClosable(true);
-        setTitle("Filtros de Imagem");
+        setTitle("Morfologias");
         setPreferredSize(new java.awt.Dimension(890, 444));
 
         filtrosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -128,7 +142,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Filtros de Imagem");
+        jLabel1.setText("Morfologias");
 
         aplicarNaImagemButton.setText("Aplicar na Imagem");
         aplicarNaImagemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +190,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Imagem Resultado");
 
-        valorBoostLabel.setText("Valor do Boost:");
+        valorLabel.setText("Valor:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,9 +198,6 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +209,12 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(valorBoostLabel)
+                        .addComponent(valorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorBoostText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(valorText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel1)))
                 .addGap(27, 27, 27)
                 .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -226,8 +240,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(valorBoostLabel)
-                            .addComponent(valorBoostText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(valorLabel)
+                            .addComponent(valorText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(aplicarNaImagemButton)
                         .addGap(18, 18, 18)
@@ -251,64 +265,110 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private void filtrosComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrosComboBoxItemStateChanged
         // TODO add your handling code here:
         if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Media")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Mediana")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Passa alta basico")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Prewitt")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
-            valorBoostLabel.setVisible(true);
-            valorBoostText.setVisible(true);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
-            valorBoostLabel.setVisible(false);
-            valorBoostText.setVisible(false);
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
         }
     }//GEN-LAST:event_filtrosComboBoxItemStateChanged
 
     private void aplicarNaImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNaImagemButtonActionPerformed
         // TODO add your handling code here:
-        if(filtrosComboBox.getSelectedItem().equals("Media")) {
-            this.imageResult = Filter.mean(imageMatrix, true);
+        int[][] elementoEstruturante = new int[3][2];
+        elementoEstruturante[0][0] = 0;
+        elementoEstruturante[0][1] = -1;
+        elementoEstruturante[1][0] = 0;
+        elementoEstruturante[1][1] = 0;
+        elementoEstruturante[2][0] = 0;
+        elementoEstruturante[2][1] = 1;
+        
+        if(filtrosComboBox.getSelectedItem().equals("Binary Dilation")) {
+            imageMatrix1 = Morphology.binaryDilation(imageMatrix, elementoEstruturante);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(filtrosComboBox.getSelectedItem().equals("Mediana")) {
-            this.imageResult = Filter.median(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Erosion")) {
+            imageMatrix1 = Morphology.binaryErosion(imageMatrix, elementoEstruturante);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(filtrosComboBox.getSelectedItem().equals("Passa alta basico")) {
-            this.imageResult = Filter.highPass(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Closure")) {
+            imageMatrix1 = Morphology.binaryClosure(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Roberts")) {
-            this.imageResult = Filter.roberts(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Opening")) {
+            imageMatrix1 = Morphology.binaryOpening(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
-            this.imageResult = Filter.robertCrossed(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Hitormiss")) {
+            imageMatrix1 = Morphology.binaryHitormiss(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Prewitt")) {
-            this.imageResult = Filter.prewitt(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Outer Contour")) {
+            imageMatrix1 = Morphology.binaryOuterContour(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
-            this.imageResult = Filter.hightBoost(imageMatrix, Integer.parseInt(valorBoostText.getText()), true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Inner Contour")) {
+            imageMatrix1 = Morphology.binaryInnerContour(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
-            this.imageResult = Filter.sobel(imageMatrix, true);
+        } else if(filtrosComboBox.getSelectedItem().equals("Binary Morphological Gradient")) {
+            imageMatrix1 = Morphology.binaryMorphologicalGradient(imageMatrix, imageMatrix);
+            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Erosion")) {
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.erosion(imageOperator, kernel);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Dilation")) {
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.dilation(imageOperator, kernel);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Opening")) {    
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.opening(imageOperator, Integer.parseInt(valorText.getText()), kernel);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Closure")) {
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.closure(imageOperator, Integer.parseInt(valorText.getText()), kernel);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Dilate")) {
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.dilate(imageOperator, Integer.parseInt(valorText.getText()), kernel);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+
+        } else if(filtrosComboBox.getSelectedItem().equals("Erode")) {
+            imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
+            this.imageResult = Morphology.erode(imageOperator, Integer.parseInt(valorText.getText()), kernel);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         }
@@ -488,7 +548,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelImageOriginal;
     private javax.swing.JPanel panelImageResult;
     private javax.swing.JButton selecionarImgButton;
-    private javax.swing.JLabel valorBoostLabel;
-    private javax.swing.JTextField valorBoostText;
+    private javax.swing.JLabel valorLabel;
+    private javax.swing.JTextField valorText;
     // End of variables declaration//GEN-END:variables
 }

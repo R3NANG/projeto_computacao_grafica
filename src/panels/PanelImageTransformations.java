@@ -291,6 +291,8 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
             valorLabel.setText("Alvo:");
             valorLabel.setVisible(true);
             valorText.setVisible(true);
+            valor2Label.setVisible(false);
+            valor2Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Sigmoid")) {
             valorLabel.setText("Grey Center:");
             valorLabel.setVisible(true);
@@ -305,7 +307,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Gamma")) {
             valor3 = Float.parseFloat(valorText.getText());
-            this.imageResult = Transformation.gamma(imageMatrix, valor3, true);
+            this.imageResult = Transformation.gamma(imageMatrix, valor3, false);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
         } else if(transformacoesComboBox.getSelectedItem().equals("Negative")) {
@@ -313,8 +315,8 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
         } else if(transformacoesComboBox.getSelectedItem().equals("Logarithm")) {
-            valor = Integer.parseInt(valorText.getText());
-            this.imageResult = Transformation.logarithm(imageMatrix, valor, true);
+            valor3 = Float.parseFloat(valorText.getText());
+            this.imageResult = Transformation.logarithm(imageMatrix, valor3, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Linear")) {
@@ -325,7 +327,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Dynamic Range")) {
             valor = Integer.parseInt(valorText.getText());
-            this.imageResult = Transformation.dynamicRange(imageMatrix, valor, true);
+            this.imageResult = Transformation.dynamicRange(imageMatrix, valor, false);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Sigmoid")) {

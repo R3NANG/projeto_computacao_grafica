@@ -15,7 +15,7 @@ public class Transformation {
         // percorre toda imagem pixel a pixel para realizar efeito 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-
+                
                 //imageMatrix[i][j] = Normalization.pixelNormalization((int)(Math.round(2*Math.pow(image[i][j], gamma))));
                 //imageMatrix[i][j] = (int) Math.round(c * Math.pow(image[i][j], gamma));  
                 imageMatrix[i][j] = Normalization.pixelNormalization((int)(Math.round(c * Math.pow(image[i][j], gamma))));  
