@@ -783,6 +783,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
             assistantString = emYText.getText();
+            assistantX = -assistantX;
             Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.rotation(polygon.getPolygon(), assistantX, assistantString));
             System.out.println("==============================================");
