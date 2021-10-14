@@ -27,6 +27,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private int assistantY1 = 0;
     private int assistantX2 = 0;
     private int assistantY2 = 0;
+    private int assistantX3 = 0;
+    private int assistantY3 = 0;
+    private int assistantX4 = 0;
+    private int assistantY4 = 0;
     private int radius, smallerRadius, biggerRadius;
     private Polygon polygon = new Polygon(PolygonType.PRIMITIVE);
     private PanelBoard panelBoard;
@@ -74,6 +78,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         primitivasComboBox.addItem("Polynomial Circle");
         primitivasComboBox.addItem("Trigonometric Circle");
         primitivasComboBox.addItem("Mid Point Ellipse");
+        primitivasComboBox.addItem("Cohen Suther Land Clip");
     }
 
     /**
@@ -99,6 +104,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         emX2Text = new javax.swing.JTextField();
         emY2Text = new javax.swing.JTextField();
         point2Label = new javax.swing.JLabel();
+        emY3Label = new javax.swing.JLabel();
+        emX3Label = new javax.swing.JLabel();
+        emX3Text = new javax.swing.JTextField();
+        emY3Text = new javax.swing.JTextField();
+        xMinLabel = new javax.swing.JLabel();
+        xMaxLabel = new javax.swing.JLabel();
+        emY4Label = new javax.swing.JLabel();
+        emX4Label = new javax.swing.JLabel();
+        emX4Text = new javax.swing.JTextField();
+        emY4Text = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Primitivas Geométricas");
@@ -167,38 +182,46 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
         point2Label.setText("Point 2");
 
+        emY3Label.setText("Em Y:");
+
+        emX3Label.setText("Em X:");
+
+        emX3Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emX3TextActionPerformed(evt);
+            }
+        });
+
+        emY3Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emY3TextActionPerformed(evt);
+            }
+        });
+
+        xMinLabel.setText("X Mínimo");
+
+        xMaxLabel.setText("X Máximo");
+
+        emY4Label.setText("Em Y:");
+
+        emX4Label.setText("Em X:");
+
+        emX4Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emX4TextActionPerformed(evt);
+            }
+        });
+
+        emY4Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emY4TextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(emX1Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(emY1Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(point2Label))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(emX2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(aplicarNoObjetoButton)
-                                .addGap(0, 26, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(emX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emY2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -212,8 +235,57 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                         .addComponent(point1Label))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(resetButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(resetButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(emX3Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aplicarNoObjetoButton)
+                                    .addComponent(emX3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(emX1Label)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(emY1Label)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(emX2Label)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(emY2Label)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(106, 106, 106)
+                                    .addComponent(emY3Label)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emY3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(xMinLabel)
+                                    .addComponent(point2Label)
+                                    .addComponent(xMaxLabel)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(emX4Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(emX4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(emY4Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(emY4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +302,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                     .addComponent(emX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emY1Label)
                     .addComponent(emY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(point2Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -238,9 +310,25 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                     .addComponent(emX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emY2Label)
                     .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(xMinLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emX3Label)
+                    .addComponent(emX3Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emY3Label)
+                    .addComponent(emY3Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xMaxLabel)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emX4Label)
+                    .addComponent(emX4Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emY4Label)
+                    .addComponent(emY4Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(aplicarNoObjetoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(resetButton)
                 .addGap(32, 32, 32))
         );
@@ -294,6 +382,18 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             biggerRadius = Integer.parseInt(emY2Text.getText());
             Circle.midPointEllipse(polygon, assistantX1, assistantY1, smallerRadius, biggerRadius);
             panelBoard.repaint();
+        } else if(primitivasComboBox.getSelectedItem().equals("Cohen Suther Land Clip")) {
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            assistantX2 = Integer.parseInt(emX2Text.getText());
+            assistantY2 = Integer.parseInt(emY2Text.getText());
+            assistantX3 = Integer.parseInt(emX3Text.getText());
+            assistantY3 = Integer.parseInt(emY3Text.getText());
+            assistantX4 = Integer.parseInt(emX4Text.getText());
+            assistantY4 = Integer.parseInt(emY4Text.getText());
+            Line.clippingArea(assistantX3, assistantY3, assistantX4, assistantY4);
+            Line.cohenSutherlandClip(polygon, assistantX1, assistantY1, assistantX2, assistantY2);
+            panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
@@ -318,6 +418,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX1Text.setVisible(true);
             emY1Label.setVisible(true);
             emY1Text.setVisible(true);
+            point2Label.setText("Point 2");
             point2Label.setVisible(true);
             emX2Label.setText("Em X:");
             emX2Label.setVisible(true);
@@ -325,6 +426,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emY2Label.setText("Em Y:");
             emY2Label.setVisible(true);
             emY2Text.setVisible(true);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Coordinates")) {
             point1Label.setText("Point");
             point1Label.setVisible(true);
@@ -338,6 +449,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(false);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("DDA")) {
             point1Label.setText("Point 1");
             point1Label.setVisible(true);
@@ -345,6 +466,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX1Text.setVisible(true);
             emY1Label.setVisible(true);
             emY1Text.setVisible(true);
+            point2Label.setText("Point 2");
             point2Label.setVisible(true);
             emX2Label.setText("Em X:");
             emX2Label.setVisible(true);
@@ -352,6 +474,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emY2Label.setText("Em Y:");
             emY2Label.setVisible(true);
             emY2Text.setVisible(true);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -365,6 +497,17 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
+            emY3Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Polynomial Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -378,6 +521,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Trigonometric Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -391,6 +544,16 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Ellipse")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -405,6 +568,41 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emY2Label.setText("B Radius:");
             emY2Label.setVisible(true);
             emY2Text.setVisible(true);
+            xMinLabel.setVisible(false);
+            emX3Label.setVisible(false);
+            emX3Text.setVisible(false);
+            emY3Label.setVisible(false);
+            emY3Text.setVisible(false);
+            xMaxLabel.setVisible(false);
+            emX4Label.setVisible(false);
+            emX4Text.setVisible(false);
+            emY4Label.setVisible(false);
+            emY4Text.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Cohen Suther Land Clip")) {
+            point1Label.setText("Point 1");
+            point1Label.setVisible(true);
+            emX1Label.setVisible(true);
+            emX1Text.setVisible(true);
+            emY1Label.setVisible(true);
+            emY1Text.setVisible(true);
+            point2Label.setText("Point 2");
+            point2Label.setVisible(true);
+            emX2Label.setText("Em X:");
+            emX2Label.setVisible(true);
+            emX2Text.setVisible(true);
+            emY2Label.setText("Em Y:");
+            emY2Label.setVisible(true);
+            emY2Text.setVisible(true);
+            xMinLabel.setVisible(true);
+            emX3Label.setVisible(true);
+            emX3Text.setVisible(true);
+            emY3Label.setVisible(true);
+            emY3Text.setVisible(true);
+            xMaxLabel.setVisible(true);
+            emX4Label.setVisible(true);
+            emX4Text.setVisible(true);
+            emY4Label.setVisible(true);
+            emY4Text.setVisible(true);
         }
     }//GEN-LAST:event_primitivasComboBoxItemStateChanged
 
@@ -422,6 +620,22 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emY2TextActionPerformed
 
+    private void emX3TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emX3TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emX3TextActionPerformed
+
+    private void emY3TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emY3TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emY3TextActionPerformed
+
+    private void emX4TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emX4TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emX4TextActionPerformed
+
+    private void emY4TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emY4TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emY4TextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;
@@ -429,14 +643,24 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private javax.swing.JTextField emX1Text;
     private javax.swing.JLabel emX2Label;
     private javax.swing.JTextField emX2Text;
+    private javax.swing.JLabel emX3Label;
+    private javax.swing.JTextField emX3Text;
+    private javax.swing.JLabel emX4Label;
+    private javax.swing.JTextField emX4Text;
     private javax.swing.JLabel emY1Label;
     private javax.swing.JTextField emY1Text;
     private javax.swing.JLabel emY2Label;
     private javax.swing.JTextField emY2Text;
+    private javax.swing.JLabel emY3Label;
+    private javax.swing.JTextField emY3Text;
+    private javax.swing.JLabel emY4Label;
+    private javax.swing.JTextField emY4Text;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel point1Label;
     private javax.swing.JLabel point2Label;
     private javax.swing.JComboBox<String> primitivasComboBox;
     private javax.swing.JButton resetButton;
+    private javax.swing.JLabel xMaxLabel;
+    private javax.swing.JLabel xMinLabel;
     // End of variables declaration//GEN-END:variables
 }
