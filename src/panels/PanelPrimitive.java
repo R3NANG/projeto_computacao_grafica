@@ -76,9 +76,9 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
-                    g.drawRect(
+                    setPixel(g,
                             board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i], 1, 1);
+                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i]);
                 }
 
 
@@ -736,6 +736,9 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_corteButtonActionPerformed
 
 
+    private void setPixel(Graphics g, int x, int y) {
+        g.fillRect(x, y, 1, 1);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JButton corteButton;
