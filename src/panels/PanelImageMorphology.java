@@ -71,14 +71,6 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
         
         
         filtrosComboBox.removeAllItems();
-        filtrosComboBox.addItem("Binary Dilation");
-        filtrosComboBox.addItem("Binary Erosion");
-        filtrosComboBox.addItem("Binary Closure");
-        filtrosComboBox.addItem("Binary Opening");
-        filtrosComboBox.addItem("Binary Hitormiss");
-        filtrosComboBox.addItem("Binary Outer Contour");
-        filtrosComboBox.addItem("Binary Inner Contour");
-        filtrosComboBox.addItem("Binary Morphological Gradient");
         filtrosComboBox.addItem("Erosion");
         filtrosComboBox.addItem("Dilation");
         filtrosComboBox.addItem("Opening");
@@ -92,7 +84,7 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(image, 270, 50, null);
+        g.drawImage(image, 230, 50, null);
         //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
     }
 
@@ -202,11 +194,7 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(selecionarImgButton)
-                            .addComponent(aplicarNaImagemButton)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(selecionarImgButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(valorLabel)
@@ -214,8 +202,14 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
                         .addComponent(valorText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jLabel1)))
-                .addGap(27, 27, 27)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(aplicarNaImagemButton)))
+                .addGap(43, 43, 43)
                 .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,112 +258,58 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
 
     private void filtrosComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrosComboBoxItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Media")) {
+        if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Erosion")) {
             valorLabel.setVisible(false);
             valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Mediana")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Dilation")) {
             valorLabel.setVisible(false);
             valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Passa alta basico")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Prewitt")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
-            valorLabel.setVisible(false);
-            valorText.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Opening")) {
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Closure")) {
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Dilate")) {
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Erode")) {
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
         }
     }//GEN-LAST:event_filtrosComboBoxItemStateChanged
 
     private void aplicarNaImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNaImagemButtonActionPerformed
         // TODO add your handling code here:
-        int[][] elementoEstruturante = new int[3][2];
-        elementoEstruturante[0][0] = 0;
-        elementoEstruturante[0][1] = -1;
-        elementoEstruturante[1][0] = 0;
-        elementoEstruturante[1][1] = 0;
-        elementoEstruturante[2][0] = 0;
-        elementoEstruturante[2][1] = 1;
-        
-        if(filtrosComboBox.getSelectedItem().equals("Binary Dilation")) {
-            imageMatrix1 = Morphology.binaryDilation(imageMatrix, elementoEstruturante);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-            
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Erosion")) {
-            imageMatrix1 = Morphology.binaryErosion(imageMatrix, elementoEstruturante);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-            
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Closure")) {
-            imageMatrix1 = Morphology.binaryClosure(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Opening")) {
-            imageMatrix1 = Morphology.binaryOpening(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Hitormiss")) {
-            imageMatrix1 = Morphology.binaryHitormiss(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Outer Contour")) {
-            imageMatrix1 = Morphology.binaryOuterContour(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Inner Contour")) {
-            imageMatrix1 = Morphology.binaryInnerContour(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Binary Morphological Gradient")) {
-            imageMatrix1 = Morphology.binaryMorphologicalGradient(imageMatrix, imageMatrix);
-            this.imageResult = Normalization.matrixToBufferedImage(imageMatrix1);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
-
-        } else if(filtrosComboBox.getSelectedItem().equals("Erosion")) {
+        if(filtrosComboBox.getSelectedItem().equals("Erosion")) {
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.erosion(imageOperator, kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Dilation")) {
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.dilation(imageOperator, kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Opening")) {    
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.opening(imageOperator, Integer.parseInt(valorText.getText()), kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Closure")) {
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.closure(imageOperator, Integer.parseInt(valorText.getText()), kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Dilate")) {
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.dilate(imageOperator, Integer.parseInt(valorText.getText()), kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Erode")) {
             imageOperator = Normalization.matrixToBufferedImage(imageMatrix);
             this.imageResult = Morphology.erode(imageOperator, Integer.parseInt(valorText.getText()), kernel);
-            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            this.getGraphics().drawImage(imageResult, 550, 50, null);
 
         }
     }//GEN-LAST:event_aplicarNaImagemButtonActionPerformed
