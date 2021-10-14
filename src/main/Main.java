@@ -12,6 +12,7 @@ import panels.PanelImageFilters;
 import panels.PanelPrimitive;
 import panels.PanelImage;
 import panels.PanelImageOperations;
+import panels.PanelImageTransformations;
 /**
  *
  * @author Renan
@@ -42,6 +43,7 @@ public class Main extends javax.swing.JFrame {
         menuImagens = new javax.swing.JMenu();
         itemDeMenuFiltrosDeImagens = new javax.swing.JMenuItem();
         itemDeMenuOperacoesEntreImagens = new javax.swing.JMenuItem();
+        itemDeMenuTransformacoesDeImagens = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,13 +91,21 @@ public class Main extends javax.swing.JFrame {
         });
         menuImagens.add(itemDeMenuFiltrosDeImagens);
 
-        itemDeMenuOperacoesEntreImagens.setText("Operacoes entre Imagens");
+        itemDeMenuOperacoesEntreImagens.setText("Operações entre Imagens");
         itemDeMenuOperacoesEntreImagens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemDeMenuOperacoesEntreImagensActionPerformed(evt);
             }
         });
         menuImagens.add(itemDeMenuOperacoesEntreImagens);
+
+        itemDeMenuTransformacoesDeImagens.setText("Transformações de Imagens");
+        itemDeMenuTransformacoesDeImagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDeMenuTransformacoesDeImagensActionPerformed(evt);
+            }
+        });
+        menuImagens.add(itemDeMenuTransformacoesDeImagens);
 
         menu.add(menuImagens);
 
@@ -192,6 +202,14 @@ public class Main extends javax.swing.JFrame {
         this.setSize(906, 800);
     }//GEN-LAST:event_itemDeMenuOperacoesEntreImagensActionPerformed
 
+    private void itemDeMenuTransformacoesDeImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoesDeImagensActionPerformed
+        // TODO add your handling code here:
+        PanelImageTransformations panelImageTransformations = new PanelImageTransformations();
+        panelImageTransformations.setVisible(true);
+        this.add(panelImageTransformations);
+        this.setSize(906, 504);
+    }//GEN-LAST:event_itemDeMenuTransformacoesDeImagensActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +250,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDeMenuOperacoesEntreImagens;
     private javax.swing.JMenuItem itemDeMenuTransformacoes2D;
     private javax.swing.JMenuItem itemDeMenuTransformacoes3D;
+    private javax.swing.JMenuItem itemDeMenuTransformacoesDeImagens;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu menuImagens;
     private javax.swing.JMenu menuPrimitivas;

@@ -30,18 +30,19 @@ import javax.imageio.ImageIO;
 import java.net.URL;
 
 
-import panels.PanelImageOperations;
+import panels.PanelImageTransformations;
 import panels.PanelImage;
 
 import imageprocessing.filters.Filter;
-import imageprocessing.operators.Operator;
+import imageprocessing.transformations.Transformation;
 
 /**
  *
  * @author Renan
  */
-public class PanelImageOperations extends javax.swing.JInternalFrame {
-    private BufferedImage image, image2;
+public class PanelImageTransformations extends javax.swing.JInternalFrame {
+    //private PanelImage panelImageInput;
+    private BufferedImage image;
     private BufferedImage imageResult;
     private int[][] imageMatrix;
     private int[][] imageMatrix1;
@@ -49,6 +50,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     private int imgWidth;
     private int imgHeight;
     private int imgValorMaximo;
+    private int valor, valor2;
 
     /*
     public void setPanelImageInput(PanelImage panel) {
@@ -56,31 +58,26 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     }
     */
     /**
-     * Creates new form PanelImageOperations
+     * Creates new form PanelImageFilters
      */
-    public PanelImageOperations() {
+    public PanelImageTransformations() {
         initComponents();
         
-        operacoesComboBox.removeAllItems();
-        operacoesComboBox.addItem("Soma");
-        operacoesComboBox.addItem("Divisao");
-        operacoesComboBox.addItem("Multiplicacao");
-        operacoesComboBox.addItem("Subtracao");
-        operacoesComboBox.addItem("OR");
-        operacoesComboBox.addItem("AND");
-        operacoesComboBox.addItem("XOR");
+        transformacoesComboBox.removeAllItems();
+        transformacoesComboBox.addItem("Gamma");
+        transformacoesComboBox.addItem("Negative");
+        transformacoesComboBox.addItem("Logarithm");
+        transformacoesComboBox.addItem("Linear");
+        transformacoesComboBox.addItem("Dynamic Range");
+        transformacoesComboBox.addItem("Sigmoid");
         panelImageOriginal.setBackground(Color.GRAY);
-        panelImageOriginal2.setBackground(Color.GRAY);
         panelImageResult.setBackground(Color.GRAY);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(image, 230, 50, null);
-        g.drawImage(image2, 550, 50, null);
-        //g.drawImage(imageResult, 380, 420, null);
-
+        g.drawImage(image, 270, 50, null);
         //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
     }
 
@@ -102,37 +99,37 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        operacoesComboBox = new javax.swing.JComboBox<>();
+        transformacoesComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panelImageOriginal = new javax.swing.JPanel();
         selecionarImgButton = new javax.swing.JButton();
-        panelImageOriginal2 = new javax.swing.JPanel();
+        panelImageResult = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        selecionarImgButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        panelImageResult = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        valorLabel = new javax.swing.JLabel();
+        valorText = new javax.swing.JTextField();
+        valor2Label = new javax.swing.JLabel();
+        valor2Text = new javax.swing.JTextField();
 
         setClosable(true);
-        setTitle("Operações entre Imagens");
-        setPreferredSize(new java.awt.Dimension(890, 700));
+        setTitle("Transformações de Imagens");
+        setPreferredSize(new java.awt.Dimension(890, 444));
 
-        operacoesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        operacoesComboBox.addItemListener(new java.awt.event.ItemListener() {
+        transformacoesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        transformacoesComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                operacoesComboBoxItemStateChanged(evt);
+                transformacoesComboBoxItemStateChanged(evt);
             }
         });
-        operacoesComboBox.addActionListener(new java.awt.event.ActionListener() {
+        transformacoesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                operacoesComboBoxActionPerformed(evt);
+                transformacoesComboBoxActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Operações entre Imagens");
+        jLabel1.setText("Transformações de Imagens");
 
         aplicarNoObjetoButton.setText("Aplicar no Objeto");
         aplicarNoObjetoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +138,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setText("Selecionar Imagem1");
+        jLabel2.setText("Selecionar Imagem");
 
         panelImageOriginal.setPreferredSize(new java.awt.Dimension(300, 300));
 
@@ -163,32 +160,6 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             }
         });
 
-        panelImageOriginal2.setPreferredSize(new java.awt.Dimension(300, 300));
-
-        javax.swing.GroupLayout panelImageOriginal2Layout = new javax.swing.GroupLayout(panelImageOriginal2);
-        panelImageOriginal2.setLayout(panelImageOriginal2Layout);
-        panelImageOriginal2Layout.setHorizontalGroup(
-            panelImageOriginal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        panelImageOriginal2Layout.setVerticalGroup(
-            panelImageOriginal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jLabel3.setText("Imagem 1");
-
-        jLabel4.setText("Imagem 2");
-
-        selecionarImgButton2.setText("Selecionar");
-        selecionarImgButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecionarImgButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Selecionar Imagem2");
-
         panelImageResult.setPreferredSize(new java.awt.Dimension(300, 300));
 
         javax.swing.GroupLayout panelImageResultLayout = new javax.swing.GroupLayout(panelImageResult);
@@ -202,109 +173,165 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        jLabel6.setText("Imagem Resultado");
+        jLabel3.setText("Imagem Original");
+
+        jLabel4.setText("Imagem Resultado");
+
+        valorLabel.setText("A:");
+
+        valor2Label.setText("B:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(49, 49, 49))
+                        .addContainerGap()
+                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(valorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valorText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(selecionarImgButton)
-                                .addComponent(aplicarNoObjetoButton)
-                                .addComponent(jLabel5)
-                                .addComponent(selecionarImgButton2))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(operacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panelImageOriginal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(327, 327, 327)
+                            .addComponent(jLabel2)
+                            .addComponent(selecionarImgButton)
+                            .addComponent(aplicarNoObjetoButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(valor2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valor2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(51, 51, 51)
+                .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(222, 222, 222)
                 .addComponent(jLabel4)
-                .addGap(162, 162, 162))
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelImageOriginal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(operacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valorLabel)
+                            .addComponent(valorText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valor2Label)
+                            .addComponent(valor2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addComponent(aplicarNoObjetoButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selecionarImgButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selecionarImgButton2)))
+                        .addComponent(selecionarImgButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel6)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void transformacoesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformacoesComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transformacoesComboBoxActionPerformed
+
+    private void transformacoesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_transformacoesComboBoxItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Gamma")) {
+            valorLabel.setText("Gamma:");
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+            valor2Label.setVisible(false);
+            valor2Text.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Negative")) {
+            valorLabel.setVisible(false);
+            valorText.setVisible(false);
+            valor2Label.setVisible(false);
+            valor2Text.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Logarithm")) {
+            valorLabel.setText("Constante:");
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+            valor2Label.setVisible(false);
+            valor2Text.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Linear")) {
+            valorLabel.setText("Constante A:");
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+            valor2Label.setText("Constante B:");
+            valor2Label.setVisible(true);
+            valor2Text.setVisible(true);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Dynamic Range")) {
+            valorLabel.setText("Alvo:");
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Sigmoid")) {
+            valorLabel.setText("Grey Center:");
+            valorLabel.setVisible(true);
+            valorText.setVisible(true);
+            valor2Label.setText("Sigma:");
+            valor2Label.setVisible(true);
+            valor2Text.setVisible(true);
+        }
+    }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
+
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
-        if(operacoesComboBox.getSelectedItem().equals("Soma")) {
-            this.imageResult = Operator.addition(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        if(transformacoesComboBox.getSelectedItem().equals("Gamma")) {
+            valor = Integer.parseInt(valorText.getText());
+            this.imageResult = Transformation.gamma(imageMatrix, valor, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(operacoesComboBox.getSelectedItem().equals("Divisao")) {
-            this.imageResult = Operator.division(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        } else if(transformacoesComboBox.getSelectedItem().equals("Negative")) {
+            this.imageResult = Transformation.negative(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(operacoesComboBox.getSelectedItem().equals("Multiplicacao")) {
-            this.imageResult = Operator.multiplication(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        } else if(transformacoesComboBox.getSelectedItem().equals("Logarithm")) {
+            valor = Integer.parseInt(valorText.getText());
+            this.imageResult = Transformation.logarithm(imageMatrix, valor, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(operacoesComboBox.getSelectedItem().equals("Subtracao")) {
-            this.imageResult = Operator.subtraction(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        } else if(transformacoesComboBox.getSelectedItem().equals("Linear")) {
+            valor = Integer.parseInt(valorText.getText());
+            valor2 = Integer.parseInt(valor2Text.getText());
+            this.imageResult = Transformation.linear(imageMatrix, valor, valor2, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(operacoesComboBox.getSelectedItem().equals("OR")) {
-            this.imageResult = Operator.OR(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        } else if(transformacoesComboBox.getSelectedItem().equals("Dynamic Range")) {
+            valor = Integer.parseInt(valorText.getText());
+            this.imageResult = Transformation.dynamicRange(imageMatrix, valor, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(operacoesComboBox.getSelectedItem().equals("AND")) {
-            this.imageResult = Operator.AND(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
-
-        } else if(operacoesComboBox.getSelectedItem().equals("XOR")) {
-            this.imageResult = Operator.XOR(imageMatrix, imageMatrix2, true);
-            this.getGraphics().drawImage(imageResult, 380, 420, null);
+        } else if(transformacoesComboBox.getSelectedItem().equals("Sigmoid")) {
+            valor = Integer.parseInt(valorText.getText());
+            valor2 = Integer.parseInt(valor2Text.getText());
+            this.imageResult = Transformation.sigmoid(imageMatrix, valor, valor2, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -341,49 +368,6 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
         }
     }//GEN-LAST:event_selecionarImgButtonActionPerformed
-
-    private void operacoesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacoesComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_operacoesComboBoxActionPerformed
-
-    private void operacoesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_operacoesComboBoxItemStateChanged
-        // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("Soma")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("Divisao")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("Multiplicacao")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("Subtracao")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("OR")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("AND")) {
-
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && operacoesComboBox.getSelectedItem().equals("XOR")) {
-
-        }
-    }//GEN-LAST:event_operacoesComboBoxItemStateChanged
-
-    private void selecionarImgButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgButton2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("src/images/"));
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File path = fileChooser.getSelectedFile();
-                System.out.println(path);
-                createImage2(path.getAbsolutePath());
-                this.repaint();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "OPS! N�o foi possivel carregar a imagem.");
-        }
-    }//GEN-LAST:event_selecionarImgButton2ActionPerformed
 
     /**
      *  Ler o arquivo pgm e monta a popula a matriz imagem
@@ -485,63 +469,29 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
         */
         return imageMatrix;
     }
-    
-    public int[][] createImage2(String path) {
-        int width;
-        int height;
-
-        InputStream inputStream = null;
-        Scanner scan = null;
-        try {
-            System.out.println(path);
-            inputStream = new FileInputStream(path);
-            scan = new Scanner(inputStream);
-
-            // Descarta a primeira linha
-            scan.nextLine();
-            // Read pic width, height and max value
-            width = scan.nextInt();
-            height = scan.nextInt();
-            imgValorMaximo = scan.nextInt();
-
-            BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            System.out.printf ("W : %d\n", width);
-            System.out.printf ("H : %d\n", height);
-
-            imageMatrix2 = new int[width][height];
-
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    // Popula a matriz com os pixels da imagem
-                    imageMatrix2[row][col] = scan.nextInt();
-                }
-            }
-            inputStream.close();
-
-            /**
-            * Monta a matriz imagem com os pixels da imagem selecionada
-            */
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    // Prepara a imagem para ser desenhada no jpanel
-                    bimg.setRGB(col, row, getCorPixel(imageMatrix2[row][col]));
-                }
-            }
-
-            this.image2 = bimg;
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "OPS! criar a imagem.");
-        }
-        return imageMatrix2;
-    }
 
     /**
      * Exibe a imagem no jPanel
      *
      */
+    public void populaImgInPanel(int[][] img, JPanel imgPanel) {
+        /**
+         * Monta a matriz imagem com os pixels da imagem selecionada
+         */
+        BufferedImage imagemInput = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
+        for (int row = 0; row < img.length; row++) {
+            for (int col = 0; col < img[0].length; col++) {
+                // Prepara a imagem para ser desenhada no jpanel
+                imagemInput.setRGB(col, row, getCorPixel(imageMatrix[row][col]));
+            }
+        }
+        /**
+         * Exibe a imagem no jpanel
+         */
+        //panelImageOriginal.setImage(imagemInput);
+        panelImageOriginal.getGraphics().drawImage(imagemInput, 75, 75, null);
+        //panelImageOriginal.repaint();
+    }
 
     /**
      * Retorna o valor em RGB de acordo com o valor do pixel
@@ -556,13 +506,13 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JComboBox<String> operacoesComboBox;
     private javax.swing.JPanel panelImageOriginal;
-    private javax.swing.JPanel panelImageOriginal2;
     private javax.swing.JPanel panelImageResult;
     private javax.swing.JButton selecionarImgButton;
-    private javax.swing.JButton selecionarImgButton2;
+    private javax.swing.JComboBox<String> transformacoesComboBox;
+    private javax.swing.JLabel valor2Label;
+    private javax.swing.JTextField valor2Text;
+    private javax.swing.JLabel valorLabel;
+    private javax.swing.JTextField valorText;
     // End of variables declaration//GEN-END:variables
 }
