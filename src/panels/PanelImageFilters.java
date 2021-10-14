@@ -77,7 +77,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(image, 285, 50, null);
+        g.drawImage(image, 270, 50, null);
         //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
     }
 
@@ -103,11 +103,13 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        panelImageOriginal = new JPanel();
+        panelImageOriginal = new javax.swing.JPanel();
         selecionarImgButton = new javax.swing.JButton();
         panelImageResult = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        valorBoostLabel = new javax.swing.JLabel();
+        valorBoostText = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Filtros de Imagem");
@@ -173,6 +175,8 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Imagem Resultado");
 
+        valorBoostLabel.setText("Valor do Boost:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,21 +187,24 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(selecionarImgButton)
+                            .addComponent(aplicarNoObjetoButton)))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(aplicarNoObjetoButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(selecionarImgButton))))
+                        .addContainerGap()
+                        .addComponent(valorBoostLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valorBoostText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addComponent(panelImageOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelImageResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
@@ -216,6 +223,10 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valorBoostLabel)
+                            .addComponent(valorBoostText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(aplicarNoObjetoButton)
                         .addGap(18, 18, 18)
@@ -226,7 +237,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,21 +250,29 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private void transformacoesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_transformacoesComboBoxItemStateChanged
         // TODO add your handling code here:
         if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Media")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Mediana")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Passa alta basico")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Roberts")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Prewitt")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
-            
+            valorBoostLabel.setVisible(true);
+            valorBoostText.setVisible(true);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Sobel")) {
-            
+            valorBoostLabel.setVisible(false);
+            valorBoostText.setVisible(false);
         }
     }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
 
@@ -261,21 +280,35 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Media")) {
             this.imageResult = Filter.mean(imageMatrix, true);
-            //this.imageResult = Filter.mean(imageMatrix, false);
-            panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            
         } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
-
+            this.imageResult = Filter.median(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
+            
         } else if(transformacoesComboBox.getSelectedItem().equals("Passa alta basico")) {
+            this.imageResult = Filter.highPass(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Roberts")) {
+            this.imageResult = Filter.roberts(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
+            this.imageResult = Filter.robertCrossed(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Prewitt")) {
+            this.imageResult = Filter.prewitt(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
+            this.imageResult = Filter.hightBoost(imageMatrix, Integer.parseInt(valorBoostText.getText()), true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Sobel")) {
+            this.imageResult = Filter.sobel(imageMatrix, true);
+            this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
@@ -454,5 +487,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelImageResult;
     private javax.swing.JButton selecionarImgButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
+    private javax.swing.JLabel valorBoostLabel;
+    private javax.swing.JTextField valorBoostText;
     // End of variables declaration//GEN-END:variables
 }

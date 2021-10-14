@@ -27,7 +27,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private int assistantY1 = 0;
     private int assistantX2 = 0;
     private int assistantY2 = 0;
-    private int radius;
+    private int radius, smallerRadius, biggerRadius;
     private Polygon polygon = new Polygon(PolygonType.PRIMITIVE);
     private PanelBoard panelBoard;
     
@@ -66,13 +66,14 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     public PanelPrimitive() {
         initComponents();
         
-        transformacoesComboBox.removeAllItems();
-        transformacoesComboBox.addItem("Bresenham");
-        transformacoesComboBox.addItem("Coordinates");
-        transformacoesComboBox.addItem("DDA");
-        transformacoesComboBox.addItem("Mid Point Circle");
-        transformacoesComboBox.addItem("Polynomial Circle");
-        transformacoesComboBox.addItem("Trigonometric Circle");
+        primitivasComboBox.removeAllItems();
+        primitivasComboBox.addItem("Bresenham");
+        primitivasComboBox.addItem("Coordinates");
+        primitivasComboBox.addItem("DDA");
+        primitivasComboBox.addItem("Mid Point Circle");
+        primitivasComboBox.addItem("Polynomial Circle");
+        primitivasComboBox.addItem("Trigonometric Circle");
+        primitivasComboBox.addItem("Mid Point Ellipse");
     }
 
     /**
@@ -86,7 +87,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
         emY1Label = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
-        transformacoesComboBox = new javax.swing.JComboBox<>();
+        primitivasComboBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         emX1Label = new javax.swing.JLabel();
         emX1Text = new javax.swing.JTextField();
@@ -111,15 +112,15 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             }
         });
 
-        transformacoesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        transformacoesComboBox.addItemListener(new java.awt.event.ItemListener() {
+        primitivasComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        primitivasComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                transformacoesComboBoxItemStateChanged(evt);
+                primitivasComboBoxItemStateChanged(evt);
             }
         });
-        transformacoesComboBox.addActionListener(new java.awt.event.ActionListener() {
+        primitivasComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transformacoesComboBoxActionPerformed(evt);
+                primitivasComboBoxActionPerformed(evt);
             }
         });
 
@@ -202,7 +203,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(primitivasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel5))
@@ -220,7 +221,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(primitivasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(point1Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,49 +250,56 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
-        if(transformacoesComboBox.getSelectedItem().equals("Bresenham")) {
+        if(primitivasComboBox.getSelectedItem().equals("Bresenham")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             assistantX2 = Integer.parseInt(emX2Text.getText());
             assistantY2 = Integer.parseInt(emY2Text.getText());
             Line.bresenham(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
+        } else if(primitivasComboBox.getSelectedItem().equals("Coordinates")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             polygon.setPolygon(Coordinate.world_to_normalized(new int[][]{{assistantX1}, {assistantY1}}, panelBoard.getWidth(), panelBoard.getHeight()));
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("DDA")) {
+        } else if(primitivasComboBox.getSelectedItem().equals("DDA")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             assistantX2 = Integer.parseInt(emX2Text.getText());
             assistantY2 = Integer.parseInt(emY2Text.getText());
             Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Mid Point Circle")) {
+        } else if(primitivasComboBox.getSelectedItem().equals("Mid Point Circle")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             radius = Integer.parseInt(emX2Text.getText());
             Circle.mid_point_circle(this.polygon, assistantX1, assistantY2, radius);
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Polynomial Circle")) {
+        } else if(primitivasComboBox.getSelectedItem().equals("Polynomial Circle")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             radius = Integer.parseInt(emX2Text.getText());
             Circle.polynomial_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
-        } else if(transformacoesComboBox.getSelectedItem().equals("Trigonometric Circle")) {
+        } else if(primitivasComboBox.getSelectedItem().equals("Trigonometric Circle")) {
             assistantX1 = Integer.parseInt(emX1Text.getText());
             assistantY1 = Integer.parseInt(emY1Text.getText());
             radius = Integer.parseInt(emX2Text.getText());
             Circle.trigonometric_circle(this.polygon, assistantX1, assistantY1, radius);
             panelBoard.repaint();
+        } else if(primitivasComboBox.getSelectedItem().equals("Mid Point Ellipse")) {
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            smallerRadius = Integer.parseInt(emX2Text.getText());
+            biggerRadius = Integer.parseInt(emY2Text.getText());
+            Circle.midPointEllipse(polygon, assistantX1, assistantY1, smallerRadius, biggerRadius);
+            panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
-    private void transformacoesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformacoesComboBoxActionPerformed
+    private void primitivasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primitivasComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_transformacoesComboBoxActionPerformed
+    }//GEN-LAST:event_primitivasComboBoxActionPerformed
 
     private void emX1TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emX1TextActionPerformed
         // TODO add your handling code here:
@@ -301,9 +309,9 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emY1TextActionPerformed
 
-    private void transformacoesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_transformacoesComboBoxItemStateChanged
+    private void primitivasComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_primitivasComboBoxItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Bresenham")) {
+        if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Bresenham")) {
             point1Label.setText("Point 1");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -314,9 +322,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Label.setText("Em X:");
             emX2Label.setVisible(true);
             emX2Text.setVisible(true);
+            emY2Label.setText("Em Y:");
             emY2Label.setVisible(true);
             emY2Text.setVisible(true);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Coordinates")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Coordinates")) {
             point1Label.setText("Point");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -329,7 +338,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(false);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("DDA")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("DDA")) {
             point1Label.setText("Point 1");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -340,9 +349,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Label.setText("Em X:");
             emX2Label.setVisible(true);
             emX2Text.setVisible(true);
+            emY2Label.setText("Em Y:");
             emY2Label.setVisible(true);
             emY2Text.setVisible(true);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Mid Point Circle")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -355,7 +365,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Polynomial Circle")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Polynomial Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -368,7 +378,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Trigonometric Circle")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Trigonometric Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
             emX1Label.setVisible(true);
@@ -381,8 +391,22 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX2Text.setVisible(true);
             emY2Label.setVisible(false);
             emY2Text.setVisible(false);
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Ellipse")) {
+            point1Label.setText("Coordinates");
+            point1Label.setVisible(true);
+            emX1Label.setVisible(true);
+            emX1Text.setVisible(true);
+            emY1Label.setVisible(true);
+            emY1Text.setVisible(true);
+            point2Label.setVisible(false);
+            emX2Label.setText("S Radius:");
+            emX2Label.setVisible(true);
+            emX2Text.setVisible(true);
+            emY2Label.setText("B Radius:");
+            emY2Label.setVisible(true);
+            emY2Text.setVisible(true);
         }
-    }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
+    }//GEN-LAST:event_primitivasComboBoxItemStateChanged
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
@@ -412,7 +436,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel point1Label;
     private javax.swing.JLabel point2Label;
+    private javax.swing.JComboBox<String> primitivasComboBox;
     private javax.swing.JButton resetButton;
-    private javax.swing.JComboBox<String> transformacoesComboBox;
     // End of variables declaration//GEN-END:variables
 }
