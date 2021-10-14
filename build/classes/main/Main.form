@@ -53,10 +53,18 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuOperacoesEntreImagens">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Operacoes entre Imagens"/>
+                <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es entre Imagens"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuOperacoesEntreImagensActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuTransformacoesDeImagens">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Transforma&#xe7;&#xf5;es de Imagens"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuTransformacoesDeImagensActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

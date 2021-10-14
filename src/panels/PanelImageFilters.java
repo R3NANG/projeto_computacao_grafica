@@ -61,15 +61,15 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     public PanelImageFilters() {
         initComponents();
         
-        transformacoesComboBox.removeAllItems();
-        transformacoesComboBox.addItem("Media");
-        transformacoesComboBox.addItem("Mediana");
-        transformacoesComboBox.addItem("Passa alta basico");
-        transformacoesComboBox.addItem("Operador de Roberts");
-        transformacoesComboBox.addItem("Operador de Roberts Cruzado");
-        transformacoesComboBox.addItem("Operador de Prewitt");
-        transformacoesComboBox.addItem("Alto Reforco (Hight-Boost)");
-        transformacoesComboBox.addItem("Operador de Sobel");
+        filtrosComboBox.removeAllItems();
+        filtrosComboBox.addItem("Media");
+        filtrosComboBox.addItem("Mediana");
+        filtrosComboBox.addItem("Passa alta basico");
+        filtrosComboBox.addItem("Operador de Roberts");
+        filtrosComboBox.addItem("Operador de Roberts Cruzado");
+        filtrosComboBox.addItem("Operador de Prewitt");
+        filtrosComboBox.addItem("Alto Reforco (Hight-Boost)");
+        filtrosComboBox.addItem("Operador de Sobel");
         panelImageOriginal.setBackground(Color.GRAY);
         panelImageResult.setBackground(Color.GRAY);
     }
@@ -99,7 +99,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        transformacoesComboBox = new javax.swing.JComboBox<>();
+        filtrosComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         aplicarNoObjetoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -115,15 +115,15 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         setTitle("Filtros de Imagem");
         setPreferredSize(new java.awt.Dimension(890, 444));
 
-        transformacoesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        transformacoesComboBox.addItemListener(new java.awt.event.ItemListener() {
+        filtrosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filtrosComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                transformacoesComboBoxItemStateChanged(evt);
+                filtrosComboBoxItemStateChanged(evt);
             }
         });
-        transformacoesComboBox.addActionListener(new java.awt.event.ActionListener() {
+        filtrosComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transformacoesComboBoxActionPerformed(evt);
+                filtrosComboBoxActionPerformed(evt);
             }
         });
 
@@ -194,7 +194,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                             .addComponent(aplicarNoObjetoButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(valorBoostLabel)
@@ -222,7 +222,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(transformacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(filtrosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(valorBoostLabel)
@@ -243,70 +243,70 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void transformacoesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformacoesComboBoxActionPerformed
+    private void filtrosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrosComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_transformacoesComboBoxActionPerformed
+    }//GEN-LAST:event_filtrosComboBoxActionPerformed
 
-    private void transformacoesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_transformacoesComboBoxItemStateChanged
+    private void filtrosComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrosComboBoxItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Media")) {
+        if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Media")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Mediana")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Mediana")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Passa alta basico")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Passa alta basico")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Roberts")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Prewitt")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Prewitt")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
             valorBoostLabel.setVisible(true);
             valorBoostText.setVisible(true);
-        } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Operador de Sobel")) {
+        } else if(evt.getStateChange() == ItemEvent.SELECTED && filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
             valorBoostLabel.setVisible(false);
             valorBoostText.setVisible(false);
         }
-    }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
+    }//GEN-LAST:event_filtrosComboBoxItemStateChanged
 
     private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
         // TODO add your handling code here:
-        if(transformacoesComboBox.getSelectedItem().equals("Media")) {
+        if(filtrosComboBox.getSelectedItem().equals("Media")) {
             this.imageResult = Filter.mean(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(transformacoesComboBox.getSelectedItem().equals("Mediana")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Mediana")) {
             this.imageResult = Filter.median(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
-        } else if(transformacoesComboBox.getSelectedItem().equals("Passa alta basico")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Passa alta basico")) {
             this.imageResult = Filter.highPass(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Roberts")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Roberts")) {
             this.imageResult = Filter.roberts(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Roberts Cruzado")) {
             this.imageResult = Filter.robertCrossed(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Prewitt")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Prewitt")) {
             this.imageResult = Filter.prewitt(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(transformacoesComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
             this.imageResult = Filter.hightBoost(imageMatrix, Integer.parseInt(valorBoostText.getText()), true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
-        } else if(transformacoesComboBox.getSelectedItem().equals("Operador de Sobel")) {
+        } else if(filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
             this.imageResult = Filter.sobel(imageMatrix, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
@@ -479,6 +479,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;
+    private javax.swing.JComboBox<String> filtrosComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -486,7 +487,6 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelImageOriginal;
     private javax.swing.JPanel panelImageResult;
     private javax.swing.JButton selecionarImgButton;
-    private javax.swing.JComboBox<String> transformacoesComboBox;
     private javax.swing.JLabel valorBoostLabel;
     private javax.swing.JTextField valorBoostText;
     // End of variables declaration//GEN-END:variables
