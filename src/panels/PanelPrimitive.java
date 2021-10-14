@@ -32,6 +32,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private int assistantX4 = 0;
     private int assistantY4 = 0;
     private int radius, smallerRadius, biggerRadius;
+    private boolean clippingDraw = false;
     private Polygon polygon = new Polygon(PolygonType.PRIMITIVE);
     private PanelBoard panelBoard;
     
@@ -54,12 +55,33 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                 g.drawLine(board.getCenterX(), 0, board.getCenterX(), board.getHeight());
 
                 g.setColor(Color.black);
+                if (clippingDraw) {
+                    g.drawLine(
+                            board.getCenterX() + Line.xMin, board.getCenterY() - Line.yMin, 
+                            board.getCenterX() + Line.xMin, board.getCenterY() - Line.yMin - Line.yMax);
+
+                    g.drawLine(
+                            board.getCenterX() + Line.xMin, board.getCenterY() - Line.yMin - Line.yMax, 
+                            board.getCenterX() + Line.xMin + Line.xMax, board.getCenterY() - Line.yMin - Line.yMax);
+
+                    g.drawLine(
+                            board.getCenterX() + Line.xMin + Line.xMax, board.getCenterY() - Line.yMin - Line.yMax,
+                            board.getCenterX() + Line.xMin + Line.xMax, board.getCenterY() - Line.yMin);
+
+                    g.drawLine(
+                            board.getCenterX() + Line.xMin, board.getCenterY() - Line.yMin,
+                            board.getCenterX() + Line.xMin + Line.xMax, board.getCenterY() - Line.yMin);
+                
+                }
+
                 for (int i = 0; i < board.getPolygon().getSize(); i++)
                 {
                     g.drawRect(
                             board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
                             board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i], 1, 1);
                 }
+
+
             }
         });
     }
@@ -383,15 +405,26 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             Circle.midPointEllipse(polygon, assistantX1, assistantY1, smallerRadius, biggerRadius);
             panelBoard.repaint();
         } else if(primitivasComboBox.getSelectedItem().equals("Cohen Suther Land Clip")) {
-            assistantX1 = Integer.parseInt(emX1Text.getText());
-            assistantY1 = Integer.parseInt(emY1Text.getText());
-            assistantX2 = Integer.parseInt(emX2Text.getText());
-            assistantY2 = Integer.parseInt(emY2Text.getText());
+            // Botão para desenhar o retangulo.
             assistantX3 = Integer.parseInt(emX3Text.getText());
             assistantY3 = Integer.parseInt(emY3Text.getText());
             assistantX4 = Integer.parseInt(emX4Text.getText());
             assistantY4 = Integer.parseInt(emY4Text.getText());
+
             Line.clippingArea(assistantX3, assistantY3, assistantX4, assistantY4);
+            this.clippingDraw = true;
+            panelBoard.repaint();
+
+            // Colocar No botão de desenhar reta
+            assistantX1 = Integer.parseInt(emX1Text.getText());
+            assistantY1 = Integer.parseInt(emY1Text.getText());
+            assistantX2 = Integer.parseInt(emX2Text.getText());
+            assistantY2 = Integer.parseInt(emY2Text.getText());
+
+            Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
+            panelBoard.repaint();
+
+            // Botão de corte.
             Line.cohenSutherlandClip(polygon, assistantX1, assistantY1, assistantX2, assistantY2);
             panelBoard.repaint();
         }
@@ -609,6 +642,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
         polygon.resetPrimitive();
+        this.clippingDraw = false;
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 

@@ -14,10 +14,10 @@ public class Line {
     // Defining x_max, y_max and x_min, y_min for
     // clipping rectangle. Since diagonal points are
     // enough to define a rectangle
-    private static int xMin;
-    private static int xMax;
-    private static int yMin;
-    private static int yMax;
+    public static int xMin;
+    public static int xMax;
+    public static int yMin;
+    public static int yMax;
 
 
     public static void bresenham (Polygon polygon, int x1, int y1, int x2, int y2) {
