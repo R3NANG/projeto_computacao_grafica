@@ -51,6 +51,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
     private int imgHeight;
     private int imgValorMaximo;
     private int valor, valor2;
+    private float valor3;
 
     /*
     public void setPanelImageInput(PanelImage panel) {
@@ -303,8 +304,8 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
     private void aplicarNaImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNaImagemButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Gamma")) {
-            valor = Integer.parseInt(valorText.getText());
-            this.imageResult = Transformation.gamma(imageMatrix, valor, true);
+            valor3 = Float.parseFloat(valorText.getText());
+            this.imageResult = Transformation.gamma(imageMatrix, valor3, true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
             
         } else if(transformacoesComboBox.getSelectedItem().equals("Negative")) {
