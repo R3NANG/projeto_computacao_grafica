@@ -4,6 +4,13 @@ import java.awt.Graphics;
 import math.Polygon;
 
 public class Line {
+    // Defining region codes
+    final int INSIDE = 0; // 0000
+    final int LEFT = 1; // 0001
+    final int RIGHT = 2; // 0010
+    final int BOTTOM = 4; // 0100
+    final int TOP = 8; // 1000
+        
     public static void bresenham (Polygon polygon, int x1, int y1, int x2, int y2) {
         /*
         int delta_x = Math.abs(x2 - x1);
@@ -83,4 +90,27 @@ public class Line {
             current_y += increment_y;
         }
     }
+
+    public static void cohen_sutherland(int minX, int minY, int maxX, int maxY) {
+    }
+
+    /*
+    // Function to compute region code for a point(x, y)
+    int computeCode(double x, double y) {
+        // initialized as being inside
+        int code = INSIDE;
+
+        if (x < x_min) // to the left of rectangle
+            code |= LEFT;
+        else if (x > x_max) // to the right of rectangle
+            code |= RIGHT;
+        if (y < y_min) // below the rectangle
+            code |= BOTTOM;
+        else if (y > y_max) // above the rectangle
+            code |= TOP;
+
+        return code;
+    }
+    */
+
 }

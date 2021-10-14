@@ -774,15 +774,24 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantZ = Integer.parseInt(emZText.getText());
             assistantZ = -assistantZ;
             
+            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.scaling(polygon.getPolygon(), assistantX, assistantY, assistantZ));
+            System.out.println("==============================================");
+            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
             
-            //polygon.setPolygon(transformation3D.rotation(objectMatrix, assistantX, title));
+            Matrix.show (polygon.getPolygon());
+            polygon.setPolygon(transformation3D.rotation(polygon.getPolygon(), assistantX, title));
+            System.out.println("==============================================");
+            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-            //polygon.setPolygon(transformation3D.reflection(objectMatrix, emXText.getText()));
+            Matrix.show (polygon.getPolygon());
+            polygon.setPolygon(transformation3D.reflection(polygon.getPolygon(), emXText.getText()));
+            System.out.println("==============================================");
+            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
             assistantX = Integer.parseInt(emXText.getText());

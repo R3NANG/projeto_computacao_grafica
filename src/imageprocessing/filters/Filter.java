@@ -229,7 +229,7 @@ public class Filter {
                 int approximationY = 0;
 
                 // Aproximação em Y
-                if (j + 1 < width) {
+                if (i + 1 < height && j + 1 < width) {
                     approximationY = image[i][j + 1] - image[i + 1][j];
                 } else {
                     approximationY = image[i][j];
