@@ -136,6 +136,8 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         emX4Label = new javax.swing.JLabel();
         emX4Text = new javax.swing.JTextField();
         emY4Text = new javax.swing.JTextField();
+        desenharRetaButton = new javax.swing.JButton();
+        corteButton = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Primitivas Geométricas");
@@ -240,6 +242,20 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             }
         });
 
+        desenharRetaButton.setText("Desenhar Reta");
+        desenharRetaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desenharRetaButtonActionPerformed(evt);
+            }
+        });
+
+        corteButton.setText("Corte");
+        corteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                corteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,72 +263,79 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(primitivasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(point1Label))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(resetButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(emX3Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(72, 72, 72)
+                                        .addComponent(point1Label))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(emX3Label)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(emX3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(emX2Label)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(emY2Label)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(106, 106, 106)
+                                            .addComponent(emY3Label)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emY3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(emX1Label)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(40, 40, 40)
+                                            .addComponent(emY1Label)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(72, 72, 72)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(xMinLabel)
+                                            .addComponent(point2Label)
+                                            .addComponent(xMaxLabel)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(106, 106, 106)
+                                        .addComponent(emY4Label)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(emY4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(emX4Label)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(emX4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 19, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(corteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(resetButton))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(aplicarNoObjetoButton)
-                                    .addComponent(emX3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(emX1Label)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(emX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(emY1Label)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(emY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(emX2Label)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(emX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(emY2Label)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(106, 106, 106)
-                                    .addComponent(emY3Label)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(emY3Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(desenharRetaButton)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(xMinLabel)
-                                    .addComponent(point2Label)
-                                    .addComponent(xMaxLabel)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(29, 29, 29)
+                                .addComponent(primitivasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(emX4Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emX4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(emY4Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emY4Text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(primitivasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +357,7 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                     .addComponent(emY2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(xMinLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emX3Label)
                     .addComponent(emX3Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,11 +371,15 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
                     .addComponent(emX4Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emY4Label)
                     .addComponent(emY4Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(aplicarNoObjetoButton)
-                .addGap(18, 18, 18)
-                .addComponent(resetButton)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(desenharRetaButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(corteButton)
+                    .addComponent(resetButton))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -414,19 +441,6 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             Line.clippingArea(assistantX3, assistantY3, assistantX4, assistantY4);
             this.clippingDraw = true;
             panelBoard.repaint();
-
-            // Colocar No botão de desenhar reta
-            assistantX1 = Integer.parseInt(emX1Text.getText());
-            assistantY1 = Integer.parseInt(emY1Text.getText());
-            assistantX2 = Integer.parseInt(emX2Text.getText());
-            assistantY2 = Integer.parseInt(emY2Text.getText());
-
-            Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
-            panelBoard.repaint();
-
-            // Botão de corte.
-            Line.cohenSutherlandClip(polygon, assistantX1, assistantY1, assistantX2, assistantY2);
-            panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
 
@@ -469,6 +483,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Coordinates")) {
             point1Label.setText("Point");
             point1Label.setVisible(true);
@@ -492,6 +510,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("DDA")) {
             point1Label.setText("Point 1");
             point1Label.setVisible(true);
@@ -517,6 +539,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -541,6 +567,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
             emY3Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Polynomial Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -564,6 +594,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Trigonometric Circle")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -587,6 +621,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Mid Point Ellipse")) {
             point1Label.setText("Coordinates");
             point1Label.setVisible(true);
@@ -611,6 +649,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(false);
             emY4Label.setVisible(false);
             emY4Text.setVisible(false);
+            
+            aplicarNoObjetoButton.setText("Aplicar no Objeto");
+            desenharRetaButton.setVisible(false);
+            corteButton.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && primitivasComboBox.getSelectedItem().equals("Cohen Suther Land Clip")) {
             point1Label.setText("Point 1");
             point1Label.setVisible(true);
@@ -636,6 +678,10 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
             emX4Text.setVisible(true);
             emY4Label.setVisible(true);
             emY4Text.setVisible(true);
+            
+            aplicarNoObjetoButton.setText("Desenhar Retângulo");
+            desenharRetaButton.setVisible(true);
+            corteButton.setVisible(true);
         }
     }//GEN-LAST:event_primitivasComboBoxItemStateChanged
 
@@ -670,9 +716,30 @@ public class PanelPrimitive extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emY4TextActionPerformed
 
+    private void desenharRetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desenharRetaButtonActionPerformed
+        // TODO add your handling code here:
+        // Colocar No botão de desenhar reta
+        assistantX1 = Integer.parseInt(emX1Text.getText());
+        assistantY1 = Integer.parseInt(emY1Text.getText());
+        assistantX2 = Integer.parseInt(emX2Text.getText());
+        assistantY2 = Integer.parseInt(emY2Text.getText());
+        
+        Line.digital_differential_analyzer(this.polygon, assistantX1, assistantY1, assistantX2, assistantY2);
+        panelBoard.repaint();
+    }//GEN-LAST:event_desenharRetaButtonActionPerformed
+
+    private void corteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corteButtonActionPerformed
+        // TODO add your handling code here:
+        // Botão de corte.
+        Line.cohenSutherlandClip(polygon, assistantX1, assistantY1, assistantX2, assistantY2);
+        panelBoard.repaint();
+    }//GEN-LAST:event_corteButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarNoObjetoButton;
+    private javax.swing.JButton corteButton;
+    private javax.swing.JButton desenharRetaButton;
     private javax.swing.JLabel emX1Label;
     private javax.swing.JTextField emX1Text;
     private javax.swing.JLabel emX2Label;
