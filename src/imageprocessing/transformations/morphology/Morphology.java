@@ -8,7 +8,8 @@ public class Morphology {
      *  Operação de dilatação morfológica binaria.
      */
     public static int[][] binaryDilation (int[][] imageMatrix, int[][] structuringElement) {
-        int width = imageMatrix[0].length;
+        /*
+	int width = imageMatrix[0].length;
         int height = imageMatrix.length;
 
         //Cria a imagem de saída
@@ -46,27 +47,27 @@ public class Morphology {
         }
 
         // Percorrendo toda imagem pixel a pixel para realizar dilatação
-        for (int x = 0; x < imageMatrix.length - 1; x++) {
-            for (int y = 0; y < imageMatrix[x].length; y++) {
+        for (int x = 1; x < imageMatrix.length - 1; x++) {
+            for (int y = 1; y < imageMatrix[x].length - 1; y++) {
                  // Só aplica em pixels ativos
                  if (imageMatrix[x][y] == pNew) {
                      // soma a posição do pixel pelo elemento estruturante
-                      for (int xEE = 0; xEE < structuringElement.length; xEE++) {
+                      for (int xEE = 0; xEE < structuringElement.length - 1; xEE++) {
                           for (int yEE = 0; yEE < structuringElement[xEE].length - 1; yEE++) {
                               // Somando a posição de x, y na imagem com a posição de x, y do elemento estruturante
                               positionX = x + structuringElement[xEE][yEE];
                               positionY = y + structuringElement[xEE][yEE + 1];
                               // se essa posição já está com pixel ativo, nao muda nada
-                              if (positionX >= 0 && positionY >= 0 && positionX <= 256 && positionY <= 256 &&
+                              if (positionX >= 0 && positionY >= 0 && positionX < 256 && positionY < 256 &&
                                       binaryImage[positionX][positionY] != pNew) {
                                    binaryImage[positionX][positionY] = pNew;
-                              }
 
-                              // atribui a outputImage pixel a pixel o resultado obtido em "matrizImagemBinaria[x][y]"
-                              outputImage.setRGB(positionX, positionY, toColor(
-                                          binaryImage[positionX][positionY],
-                                          binaryImage[positionX][positionY],
-                                          binaryImage[positionX][positionY]));
+                              }
+                                // atribui a outputImage pixel a pixel o resultado obtido em "matrizImagemBinaria[x][y]"
+                                outputImage.setRGB(positionX, positionY, toColor(
+                                            binaryImage[positionX][positionY],
+                                            binaryImage[positionX][positionY],
+                                            binaryImage[positionX][positionY]));
                           }
                       }
                  } else {
@@ -76,6 +77,7 @@ public class Morphology {
         }
         //exibirBin(binaryImage, imageMatrix);
         return binaryImage;
+	
     }
 
     /**
@@ -117,12 +119,12 @@ public class Morphology {
         }
 
         //percorre toda imagem pixel a pixel para realizar dilatacao
-        for (int x = 0; x < imageMatrix.length - 1; x++) {
-            for (int y = 0; x < imageMatrix[x].length; y++) {
+        for (int x = 1; x < imageMatrix.length - 1; x++) {
+            for (int y = 1; y < imageMatrix[x].length - 1; y++) {
                 // so aplica em pixels ativos
                 if (imageMatrix[x][y] == pNew) {
                     // soma a posicao do pixel pelo elemento estruturante
-                    for (int xEE = 0; xEE < structuringElement.length; xEE++) {
+                    for (int xEE = 0; xEE < structuringElement.length - 1; xEE++) {
                          for (int yEE = 0; yEE < structuringElement[xEE].length - 1; yEE++) {
                              // somando a posicao de x, y na imagem com a posicao de x, y do elemento estruturante
                              positionX = x - structuringElement[xEE][yEE];

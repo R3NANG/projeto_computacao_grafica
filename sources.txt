@@ -8,6 +8,7 @@
 ./src/panels/PanelImageFilters.java
 ./src/panels/PanelPrimitive.java
 ./src/panels/PanelImage.java
+./src/panels/PanelImageMorphology.java
 ./src/imageprocessing/transformations/Histogram.java
 ./src/imageprocessing/transformations/Transformation.java
 ./src/imageprocessing/transformations/morphology/Morphology.java
