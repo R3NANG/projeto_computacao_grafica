@@ -11,6 +11,7 @@ import panels.PanelBoard;
 import panels.PanelImageFilters;
 import panels.PanelPrimitive;
 import panels.PanelImage;
+import panels.PanelImageOperations;
 /**
  *
  * @author Renan
@@ -40,6 +41,7 @@ public class Main extends javax.swing.JFrame {
         itemDeMenuTransformacoes3D = new javax.swing.JMenuItem();
         menuImagens = new javax.swing.JMenu();
         itemDeMenuFiltrosDeImagens = new javax.swing.JMenuItem();
+        itemDeMenuOperacoesEntreImagens = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +88,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menuImagens.add(itemDeMenuFiltrosDeImagens);
+
+        itemDeMenuOperacoesEntreImagens.setText("Operacoes entre Imagens");
+        itemDeMenuOperacoesEntreImagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDeMenuOperacoesEntreImagensActionPerformed(evt);
+            }
+        });
+        menuImagens.add(itemDeMenuOperacoesEntreImagens);
 
         menu.add(menuImagens);
 
@@ -174,6 +184,14 @@ public class Main extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_itemDeMenuFiltrosDeImagensActionPerformed
 
+    private void itemDeMenuOperacoesEntreImagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuOperacoesEntreImagensActionPerformed
+        // TODO add your handling code here:
+        PanelImageOperations panelImageOperations = new PanelImageOperations();
+        panelImageOperations.setVisible(true);
+        this.add(panelImageOperations);
+        this.setSize(906, 800);
+    }//GEN-LAST:event_itemDeMenuOperacoesEntreImagensActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,6 +229,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemDeMenuFiltrosDeImagens;
+    private javax.swing.JMenuItem itemDeMenuOperacoesEntreImagens;
     private javax.swing.JMenuItem itemDeMenuTransformacoes2D;
     private javax.swing.JMenuItem itemDeMenuTransformacoes3D;
     private javax.swing.JMenuBar menu;
