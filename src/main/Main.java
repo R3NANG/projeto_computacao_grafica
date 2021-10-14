@@ -11,6 +11,7 @@ import panels.PanelBoard;
 import panels.PanelImageFilters;
 import panels.PanelPrimitive;
 import panels.PanelImage;
+import panels.PanelImageHistograms;
 import panels.PanelImageOperations;
 import panels.PanelImageTransformations;
 /**
@@ -44,6 +45,7 @@ public class Main extends javax.swing.JFrame {
         itemDeMenuFiltrosDeImagens = new javax.swing.JMenuItem();
         itemDeMenuOperacoesEntreImagens = new javax.swing.JMenuItem();
         itemDeMenuTransformacoesDeImagens = new javax.swing.JMenuItem();
+        itemDeMenuHistograma = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +108,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menuImagens.add(itemDeMenuTransformacoesDeImagens);
+
+        itemDeMenuHistograma.setText("Histograma");
+        itemDeMenuHistograma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDeMenuHistogramaActionPerformed(evt);
+            }
+        });
+        menuImagens.add(itemDeMenuHistograma);
 
         menu.add(menuImagens);
 
@@ -210,6 +220,14 @@ public class Main extends javax.swing.JFrame {
         this.setSize(906, 504);
     }//GEN-LAST:event_itemDeMenuTransformacoesDeImagensActionPerformed
 
+    private void itemDeMenuHistogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuHistogramaActionPerformed
+        // TODO add your handling code here:
+        PanelImageHistograms panelImageHistograms = new PanelImageHistograms();
+        panelImageHistograms.setVisible(true);
+        this.add(panelImageHistograms);
+        this.setSize(906, 800);
+    }//GEN-LAST:event_itemDeMenuHistogramaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +265,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemDeMenuFiltrosDeImagens;
+    private javax.swing.JMenuItem itemDeMenuHistograma;
     private javax.swing.JMenuItem itemDeMenuOperacoesEntreImagens;
     private javax.swing.JMenuItem itemDeMenuTransformacoes2D;
     private javax.swing.JMenuItem itemDeMenuTransformacoes3D;

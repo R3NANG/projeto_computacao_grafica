@@ -101,7 +101,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
 
         transformacoesComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        aplicarNoObjetoButton = new javax.swing.JButton();
+        aplicarNaImagemButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panelImageOriginal = new javax.swing.JPanel();
         selecionarImgButton = new javax.swing.JButton();
@@ -131,10 +131,10 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Transformações de Imagens");
 
-        aplicarNoObjetoButton.setText("Aplicar no Objeto");
-        aplicarNoObjetoButton.addActionListener(new java.awt.event.ActionListener() {
+        aplicarNaImagemButton.setText("Aplicar na Imagem");
+        aplicarNaImagemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aplicarNoObjetoButtonActionPerformed(evt);
+                aplicarNaImagemButtonActionPerformed(evt);
             }
         });
 
@@ -203,7 +203,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(selecionarImgButton)
-                            .addComponent(aplicarNoObjetoButton)))
+                            .addComponent(aplicarNaImagemButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(valor2Label)
@@ -241,7 +241,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
                             .addComponent(valor2Label)
                             .addComponent(valor2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
-                        .addComponent(aplicarNoObjetoButton)
+                        .addComponent(aplicarNaImagemButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -300,7 +300,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_transformacoesComboBoxItemStateChanged
 
-    private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
+    private void aplicarNaImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNaImagemButtonActionPerformed
         // TODO add your handling code here:
         if(transformacoesComboBox.getSelectedItem().equals("Gamma")) {
             valor = Integer.parseInt(valorText.getText());
@@ -334,7 +334,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         }
-    }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
+    }//GEN-LAST:event_aplicarNaImagemButtonActionPerformed
 
     private void selecionarImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgButtonActionPerformed
         // TODO add your handling code here:
@@ -343,7 +343,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
             fileChooser.setCurrentDirectory(new File("src/images/"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
             fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
+            int returnVal = fileChooser.showOpenDialog(aplicarNaImagemButton);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 //imageMatrix1 = createImage(fileChooser.getSelectedFile());
                 //populaImgInPanel(imageMatrix1, panelImageOriginal);
@@ -501,7 +501,7 @@ public class PanelImageTransformations extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aplicarNoObjetoButton;
+    private javax.swing.JButton aplicarNaImagemButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

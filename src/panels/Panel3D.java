@@ -24,6 +24,7 @@ import transformations.Transformation3D;
 public class Panel3D extends javax.swing.JInternalFrame {
     private int assistantX = 0, assistantY = 0, assistantZ = 0;
     private int assistantBX = 0, assistantBY = 0, assistantBZ = 0;
+    private String assistantString;
     private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION3D);
     private PanelBoard panelBoard;
     private Transformation3D transformation3D = new Transformation3D();
@@ -781,9 +782,9 @@ public class Panel3D extends javax.swing.JInternalFrame {
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
-            
+            assistantString = emYText.getText();
             Matrix.show (polygon.getPolygon());
-            polygon.setPolygon(transformation3D.rotation(polygon.getPolygon(), assistantX, title));
+            polygon.setPolygon(transformation3D.rotation(polygon.getPolygon(), assistantX, assistantString));
             System.out.println("==============================================");
             Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
@@ -868,12 +869,12 @@ public class Panel3D extends javax.swing.JInternalFrame {
             emZBLabel.setVisible(false);
             emZBText.setVisible(false);
         } else if(evt.getStateChange() == ItemEvent.SELECTED && transformacoesComboBox.getSelectedItem().equals("Rotation")) {
-            emXLabel.setText("Rotação:");
+            emXLabel.setText("Ângulo:");
             emXLabel.setVisible(true);
             emXText.setVisible(true);
-            emYLabel.setText("Em Y:");
-            emYLabel.setVisible(false);
-            emYText.setVisible(false);
+            emYLabel.setText("Eixo:");
+            emYLabel.setVisible(true);
+            emYText.setVisible(true);
             emZLabel.setText("Em Z:");
             emZLabel.setVisible(false);
             emZText.setVisible(false);

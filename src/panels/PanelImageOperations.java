@@ -104,7 +104,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
 
         operacoesComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        aplicarNoObjetoButton = new javax.swing.JButton();
+        aplicarNaImagemButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panelImageOriginal = new javax.swing.JPanel();
         selecionarImgButton = new javax.swing.JButton();
@@ -134,10 +134,10 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Operações entre Imagens");
 
-        aplicarNoObjetoButton.setText("Aplicar no Objeto");
-        aplicarNoObjetoButton.addActionListener(new java.awt.event.ActionListener() {
+        aplicarNaImagemButton.setText("Aplicar na Imagem");
+        aplicarNaImagemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aplicarNoObjetoButtonActionPerformed(evt);
+                aplicarNaImagemButtonActionPerformed(evt);
             }
         });
 
@@ -221,7 +221,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(selecionarImgButton)
-                                .addComponent(aplicarNoObjetoButton)
+                                .addComponent(aplicarNaImagemButton)
                                 .addComponent(jLabel5)
                                 .addComponent(selecionarImgButton2))
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -250,7 +250,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(operacoesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(aplicarNoObjetoButton)
+                        .addComponent(aplicarNaImagemButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,13 +270,13 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(jLabel6)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void aplicarNoObjetoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNoObjetoButtonActionPerformed
+    private void aplicarNaImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarNaImagemButtonActionPerformed
         // TODO add your handling code here:
         if(operacoesComboBox.getSelectedItem().equals("Soma")) {
             this.imageResult = Operator.addition(imageMatrix, imageMatrix2, true);
@@ -307,7 +307,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             this.getGraphics().drawImage(imageResult, 380, 420, null);
 
         }
-    }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed
+    }//GEN-LAST:event_aplicarNaImagemButtonActionPerformed
 
     private void selecionarImgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarImgButtonActionPerformed
         // TODO add your handling code here:
@@ -316,7 +316,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             fileChooser.setCurrentDirectory(new File("src/images/"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
             fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
+            int returnVal = fileChooser.showOpenDialog(aplicarNaImagemButton);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 //imageMatrix1 = createImage(fileChooser.getSelectedFile());
                 //populaImgInPanel(imageMatrix1, panelImageOriginal);
@@ -372,7 +372,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
             fileChooser.setCurrentDirectory(new File("src/images/"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("PGM Images", "pgm");
             fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(aplicarNoObjetoButton);
+            int returnVal = fileChooser.showOpenDialog(aplicarNaImagemButton);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File path = fileChooser.getSelectedFile();
                 System.out.println(path);
@@ -551,7 +551,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aplicarNoObjetoButton;
+    private javax.swing.JButton aplicarNaImagemButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -47,7 +47,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="selecionarImgButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="aplicarNoObjetoButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="aplicarNaImagemButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -94,7 +94,7 @@
                           <Component id="valor2Text" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="aplicarNoObjetoButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="aplicarNaImagemButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -136,12 +136,12 @@
         <Property name="text" type="java.lang.String" value="Transforma&#xe7;&#xf5;es de Imagens"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="aplicarNoObjetoButton">
+    <Component class="javax.swing.JButton" name="aplicarNaImagemButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aplicar no Objeto"/>
+        <Property name="text" type="java.lang.String" value="Aplicar na Imagem"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aplicarNoObjetoButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aplicarNaImagemButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

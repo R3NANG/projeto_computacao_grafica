@@ -37,7 +37,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="selecionarImgButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="aplicarNoObjetoButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="aplicarNaImagemButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -55,7 +55,7 @@
               <Component id="panelImageOriginal" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="panelImageResult" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -83,7 +83,7 @@
                           <Component id="valorBoostText" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="aplicarNoObjetoButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="aplicarNaImagemButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -125,12 +125,12 @@
         <Property name="text" type="java.lang.String" value="Filtros de Imagem"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="aplicarNoObjetoButton">
+    <Component class="javax.swing.JButton" name="aplicarNaImagemButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aplicar no Objeto"/>
+        <Property name="text" type="java.lang.String" value="Aplicar na Imagem"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aplicarNoObjetoButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aplicarNaImagemButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
