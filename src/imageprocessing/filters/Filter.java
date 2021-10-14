@@ -249,7 +249,7 @@ public class Filter {
         return doNormalize? Normalization.imageNormalization(imageMatrix) : Normalization.matrixToBufferedImage(imageMatrix); 
     }
 
-    public static BufferedImage hightBoost(int[][] image, int coefficient, boolean doNormalize) {
+    public static BufferedImage hightBoost(int[][] image, double coefficient, boolean doNormalize) {
         int width = image[0].length;
         int height = image.length;
         int[][] imageMatrix = new int[height][width];
@@ -258,7 +258,7 @@ public class Filter {
             for (int j = 0; j < width; j++) {
 
                 // definindo o array mascara 3X3
-                int[] array = new int[9];
+                double[] array = new double[9];
 
                 array[0] = image[i][j]*(9*coefficient - 1);
                 if (i - 1 >= 0 && j - 1 >= 0) {
@@ -286,8 +286,8 @@ public class Filter {
                     array[8] = image[i + 1][j + 1]*-1;
                 }
 
-                int sum = Arrays.stream(array).sum();
-                imageMatrix[i][j] = Normalization.pixelNormalization(sum);
+                double sum = Arrays.stream(array).sum();
+                imageMatrix[i][j] = Normalization.pixelNormalization((int)Math.round(sum));
             }
         }
 

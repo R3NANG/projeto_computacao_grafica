@@ -1,5 +1,7 @@
 package math;
 
+import java.util.Stack;
+
 public class Matrix {
     public static void show (double[][] matrix) {
         for (int i = 0; i < matrix.length; i++)
@@ -23,6 +25,22 @@ public class Matrix {
                     resultingMatrix[i][j] += matrixA[i][k]*matrixB[k][j];
                 }
             }
+        }
+        return resultingMatrix;
+    }
+
+    public double[][] composed (Stack<double[][]> transformationList, double[][] objectMatrix) {
+        Stack<double[][]> transformationListCopy = (Stack<double[][]>) transformationList.clone();
+
+        double[][] resultingMatrix = new double[objectMatrix.length][objectMatrix[0].length];
+        resultingMatrix = transformationListCopy.pop();
+        try {
+            while (!transformationListCopy.isEmpty()) {
+                resultingMatrix = Matrix.multiplication (resultingMatrix, transformationListCopy.pop());
+            }
+            resultingMatrix = Matrix.multiplication(resultingMatrix, objectMatrix);
+        }catch (Exception e) {
+            System.err.println("Error, transformação composta");
         }
         return resultingMatrix;
     }

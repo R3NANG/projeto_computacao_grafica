@@ -61,7 +61,7 @@ public class Transformation {
         return doNormalize? Normalization.imageNormalization(imageMatrix) : Normalization.matrixToBufferedImage(imageMatrix);
     }
 
-    public static BufferedImage linear (int[][] image, int aConstant, int bConstant, boolean doNormalize) {
+    public static BufferedImage linear (int[][] image, float aConstant, float bConstant, boolean doNormalize) {
         int width = image[0].length;
         int height = image.length;
 

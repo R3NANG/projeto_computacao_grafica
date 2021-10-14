@@ -304,7 +304,7 @@ public class PanelImageFilters extends javax.swing.JInternalFrame {
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Alto Reforco (Hight-Boost)")) {
-            this.imageResult = Filter.hightBoost(imageMatrix, Integer.parseInt(valorBoostText.getText()), true);
+            this.imageResult = Filter.hightBoost(imageMatrix, Double.parseDouble(valorBoostText.getText()), true);
             this.getGraphics().drawImage(imageResult, 590, 50, null);
 
         } else if(filtrosComboBox.getSelectedItem().equals("Operador de Sobel")) {
