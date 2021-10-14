@@ -798,11 +798,19 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantY = Integer.parseInt(emYText.getText());
             assistantZ = Integer.parseInt(emZText.getText());
             
+            assistantZ = -assistantZ;
+
             assistantBX = Integer.parseInt(emXBText.getText());
             assistantBY = Integer.parseInt(emYBText.getText());
             assistantBZ = Integer.parseInt(emZBText.getText());
             
-            //polygon.setPolygon(transformation3D.shear(objectMatrix, assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
+            assistantBZ = -assistantBZ;
+
+            Matrix.show (polygon.getPolygon());
+            polygon.setPolygon(transformation3D.shear(polygon.getPolygon(), 
+                        assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
+            System.out.println("==============================================");
+            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed

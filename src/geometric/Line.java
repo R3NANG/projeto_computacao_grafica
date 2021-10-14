@@ -5,12 +5,21 @@ import math.Polygon;
 
 public class Line {
     // Defining region codes
-    final int INSIDE = 0; // 0000
-    final int LEFT = 1; // 0001
-    final int RIGHT = 2; // 0010
-    final int BOTTOM = 4; // 0100
-    final int TOP = 8; // 1000
-        
+    public static final int INSIDE = 0;
+    public static final int LEFT   = 1;
+    public static final int RIGHT  = 2;
+    public static final int BOTTOM = 4;
+    public static final int TOP    = 8;
+
+    // Defining x_max, y_max and x_min, y_min for
+    // clipping rectangle. Since diagonal points are
+    // enough to define a rectangle
+    private static int xMin;
+    private static int xMax;
+    private static int yMin;
+    private static int yMax;
+
+
     public static void bresenham (Polygon polygon, int x1, int y1, int x2, int y2) {
         /*
         int delta_x = Math.abs(x2 - x1);
@@ -91,26 +100,96 @@ public class Line {
         }
     }
 
-    public static void cohen_sutherland(int minX, int minY, int maxX, int maxY) {
+    // Implementing Cohen-Sutherland algorithm
+    // Clipping a line from P1 = (x2, y2) to P2 = (x2, y2)
+    public static void cohenSutherlandClip(
+            Polygon polygon,
+            int x3, int y3, int x4, int y4)
+    {
+        // Execute line clipping using Cohen-Sutherland
+        int x0 = x3;
+        int y0 = y3;
+        int x1 = x4;
+        int y1 = y4;
+
+        // Compute region codes for P1, P2
+        int outCode0 = computeOutCode(x0, y0);
+        int outCode1 = computeOutCode(x1, y1);
+
+        boolean accept = false;
+
+        while (true) {
+            if ((outCode0 | outCode1) == 0) { // Bitwise OR is 0. Trivially accept
+                accept = true;
+                break;
+            } else if ((outCode0 & outCode1) != 0) { // Bitwise AND is not 0. Trivially reject
+                break;
+            } else {
+                int x, y;
+
+                // Pick at least one point outside rectangle
+                int outCodeOut = (outCode0 != 0) ? outCode0 : outCode1;
+
+                // Now find the intersection point;
+                // use formulas y = y0 + slope * (x - x0), x = x0 + (1 / slope) * (y - y0)
+                if ((outCodeOut & TOP) != 0) {
+                    x = x0 + (x1 - x0) * (yMax - y0) / (y1 - y0);
+                    y = yMax;
+                } else if ((outCodeOut & BOTTOM) != 0) {
+                    x = x0 + (x1 - x0) * (yMin - y0) / (y1 - y0);
+                    y = yMin;
+                } else if ((outCodeOut & RIGHT) != 0) {
+                    y = y0 + (y1 - y0) * (xMax - x0) / (x1 - x0);
+                    x = xMax;
+                } else {
+                    y = y0 + (y1 - y0) * (xMin - x0) / (x1 - x0);
+                    x = xMin;
+                }
+
+                // Now we move outside point to intersection point to clip
+                if (outCodeOut == outCode0) {
+                    x0 = x;
+                    y0 = y;
+                    outCode0 = computeOutCode(x0, y0);
+                } else {
+                    x1 = x;
+                    y1 = y;
+                    outCode1 = computeOutCode(x1, y1);
+                }
+            }
+        }
+
+        if (accept) {
+            polygon.resetPrimitive();
+            digital_differential_analyzer(polygon, x0, y0, x1, y1);
+        }
+        //return null;
     }
 
-    /*
-    // Function to compute region code for a point(x, y)
-    int computeCode(double x, double y) {
-        // initialized as being inside
+
+    // Define clipping rectangle. Since diagonal points are
+    // enough to define a rectangle
+    public static void clippingArea(int minX, int minY, int maxX, int maxY) {
+        xMin = minX;
+        yMin = minY;
+        xMax = maxX;
+        yMax = maxY;
+    }
+
+    private static int computeOutCode(double x, double y) {
         int code = INSIDE;
 
-        if (x < x_min) // to the left of rectangle
+        if (x < xMin) {
             code |= LEFT;
-        else if (x > x_max) // to the right of rectangle
+        } else if (x > xMax) {
             code |= RIGHT;
-        if (y < y_min) // below the rectangle
+        }
+        if (y < yMin) {
             code |= BOTTOM;
-        else if (y > y_max) // above the rectangle
+        } else if (y > yMax) {
             code |= TOP;
+        }
 
         return code;
     }
-    */
-
 }

@@ -44,6 +44,7 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
     private BufferedImage image, image2;
     private BufferedImage imageResult;
     private int[][] imageMatrix;
+    private int[][] imageMatrix1;
     private int[][] imageMatrix2; 
     private int imgWidth;
     private int imgHeight;
@@ -78,6 +79,8 @@ public class PanelImageOperations extends javax.swing.JInternalFrame {
         super.paint(g);
         g.drawImage(image, 230, 50, null);
         g.drawImage(image2, 550, 50, null);
+        //g.drawImage(imageResult, 380, 420, null);
+
         //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
     }
 
