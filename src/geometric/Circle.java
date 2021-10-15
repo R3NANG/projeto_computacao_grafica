@@ -39,7 +39,6 @@ public class Circle {
     {
         for (float point_x = -radius, point_y = radius; point_x <= radius; ++point_x)
         {
-            //point_y = (float)Math.sqrt(Math.pow(radius,2) - Math.pow(point_x,2));
 
             polygon.insertPrimitive(
                     (int)(Math.round(circle_center_x + point_x)), 
@@ -49,14 +48,6 @@ public class Circle {
                     (int)(Math.round(circle_center_x + point_x)), 
                     (int)(Math.round(circle_center_y - (-1 * Math.sqrt(Math.pow(radius,2) - Math.pow(point_x,2))))));
             /*
-            polygon.insertPrimitive (Math.round(circle_center_x + point_x), Math.round(circle_center_y + point_y));
-            polygon.insertPrimitive (Math.round(circle_center_x + point_y), Math.round(circle_center_y + point_x));
-            polygon.insertPrimitive (Math.round(circle_center_x - point_y), Math.round(circle_center_y + point_x));
-            polygon.insertPrimitive (Math.round(circle_center_x - point_x), Math.round(circle_center_y + point_y));
-            polygon.insertPrimitive (Math.round(circle_center_x - point_x), Math.round(circle_center_y - point_y));
-            polygon.insertPrimitive (Math.round(circle_center_x - point_y), Math.round(circle_center_y - point_x));
-            polygon.insertPrimitive (Math.round(circle_center_x + point_y), Math.round(circle_center_y - point_x));
-            polygon.insertPrimitive (Math.round(circle_center_x + point_x), Math.round(circle_center_y - point_y));
             */
         }
     }

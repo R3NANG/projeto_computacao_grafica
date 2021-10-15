@@ -64,16 +64,6 @@ public class Panel2D extends javax.swing.JInternalFrame {
                 }
             }
         });
-        /*
-        this.panelBoard.addMouseListener (new MouseAdapter() {
-            @Override 
-            public void mousePressed(MouseEvent e) {
-                //polygon.insert2D(e.getX(), e.getY());
-                polygon.insert2D((int)point[0][0], (int)point[1][0]);
-                panelBoard.repaint();
-            }
-        });   
-        */
     }
 
     /**

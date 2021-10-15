@@ -71,77 +71,6 @@ public class Panel3D extends javax.swing.JInternalFrame {
 
 
                 /*
-                // A - B
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0],
-                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1]
-                );
-
-                // B - C 
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1],
-                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2]
-                );
-
-                // C - D
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2],
-                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3]
-                );
-
-                // D - A
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3],
-                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0]
-                );
-
-                // D - E
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][3], (int)board.getPolygon().getPolygon()[1][3],
-                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4]
-                );
-
-                // E - F
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4],
-                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5]
-                );
-                
-                // F - G
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5],
-                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6]
-                );
-                
-                // G - H
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6],
-                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7]
-                );
-
-                // H - E
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7],
-                        (int)board.getPolygon().getPolygon()[0][4], (int)board.getPolygon().getPolygon()[1][4]
-                );
-
-                // C - H
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][2], (int)board.getPolygon().getPolygon()[1][2],
-                        (int)board.getPolygon().getPolygon()[0][7], (int)board.getPolygon().getPolygon()[1][7] 
-                );
-
-                // B - G
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][1], (int)board.getPolygon().getPolygon()[1][1],
-                        (int)board.getPolygon().getPolygon()[0][6], (int)board.getPolygon().getPolygon()[1][6]
-                );
-
-                // F - A
-                g.drawLine(
-                        (int)board.getPolygon().getPolygon()[0][0], (int)board.getPolygon().getPolygon()[1][0],
-                        (int)board.getPolygon().getPolygon()[0][5], (int)board.getPolygon().getPolygon()[1][5]
-                );
                 */
                 
                 
@@ -286,33 +215,6 @@ public class Panel3D extends javax.swing.JInternalFrame {
                 );
                 
                 /*
-                g.drawLine(
-                        board.getCenterX() + x, board.getCenterY() + y,
-                        board.getCenterX() + x + cos * depth, board.getCenterY() + y - sin * depth
-                );
-
-                g.drawLine(
-                        board.getCenterX() + x + cos, board.getCenterY() + y - sin,
-                        board.getCenterX() + x + cos, board.getCenterY() + y - sin * height
-                );
-                */
-                /*
-                for (int i = 0; i < board.getPolygon().getSize(); i++)
-                {
-                    if (i == board.getPolygon().getSize() - 1) {
-                            g.drawLine(
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                                    board.getCenterX() + (int)board.getPolygon().getPolygon()[0][0],
-                                    board.getCenterY() - (int)board.getPolygon().getPolygon()[1][0]);
-                            continue;
-                    }
-                    g.drawLine(
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i],
-                            board.getCenterX() + (int)board.getPolygon().getPolygon()[0][i+1],
-                            board.getCenterY() - (int)board.getPolygon().getPolygon()[1][i+1]);
-                }
                 */
             }
         });
@@ -771,14 +673,6 @@ public class Panel3D extends javax.swing.JInternalFrame {
         polygon.insert3D(x+width, y+height, z+depth);
 
         /*
-        polygon.insert3D(aX, aY);
-        polygon.insert3D(bX, bY);
-        polygon.insert3D(cX, cY);
-        polygon.insert3D(dX, dY);
-        polygon.insert3D(eX, eY);
-        polygon.insert3D(fX, fY);
-        polygon.insert3D(gX, gY);
-        polygon.insert3D(hX, hY);
         */
         panelBoard.repaint();
 
@@ -792,10 +686,7 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantZ = Integer.parseInt(emZText.getText());
             assistantZ = -assistantZ;
 
-            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.translation(polygon.getPolygon(), assistantX, assistantY, assistantZ));
-            System.out.println("==============================================");
-            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Scaling")) {
             assistantX = Integer.parseInt(emXText.getText());
@@ -803,25 +694,16 @@ public class Panel3D extends javax.swing.JInternalFrame {
             assistantZ = Integer.parseInt(emZText.getText());
             assistantZ = -assistantZ;
             
-            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.scaling(polygon.getPolygon(), assistantX, assistantY, assistantZ));
-            System.out.println("==============================================");
-            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
             assistantX = Integer.parseInt(emXText.getText());
             assistantString = emYText.getText();
             assistantX = -assistantX;
-            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.rotation(polygon.getPolygon(), assistantX, assistantString));
-            System.out.println("==============================================");
-            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
-            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.reflection(polygon.getPolygon(), emXText.getText()));
-            System.out.println("==============================================");
-            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
             assistantX = Integer.parseInt(emXText.getText());
@@ -836,11 +718,8 @@ public class Panel3D extends javax.swing.JInternalFrame {
             
             assistantBZ = -assistantBZ;
 
-            Matrix.show (polygon.getPolygon());
             polygon.setPolygon(transformation3D.shear(polygon.getPolygon(), 
                         assistantX, assistantBX, assistantY, assistantBY, assistantZ, assistantBZ));
-            System.out.println("==============================================");
-            Matrix.show (polygon.getPolygon());
             panelBoard.repaint();
         }
     }//GEN-LAST:event_aplicarNoObjetoButtonActionPerformed

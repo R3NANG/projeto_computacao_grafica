@@ -22,26 +22,6 @@ public class Line {
 
     public static void bresenham (Polygon polygon, int x1, int y1, int x2, int y2) {
         /*
-        int delta_x = Math.abs(x2 - x1);
-        int delta_y = Math.abs(y2 - y1);
-
-        int mid_point = 2*delta_y - delta_x;
-
-        for (int current_x = x1, current_y = y1; current_x <= x2; ++current_x)
-        {
-
-            //g.drawRect(current_x, current_y, 1, 1);
-            polygon.insertPrimitive(current_x, current_y);
-            if (mid_point > 0)
-            {
-                ++current_y;
-                mid_point += 2*(delta_y - delta_x);
-            }
-            else
-            {
-                mid_point += 2*delta_y;
-            }
-        }
         */
         double dx = Math.abs(x2 - x1);
         double dy = Math.abs(y2 - y1);
