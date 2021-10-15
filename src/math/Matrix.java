@@ -29,7 +29,7 @@ public class Matrix {
         return resultingMatrix;
     }
 
-    public double[][] composed (Stack<double[][]> transformationList, double[][] objectMatrix) {
+    public static double[][] composed (Stack<double[][]> transformationList, double[][] objectMatrix) {
         Stack<double[][]> transformationListCopy = (Stack<double[][]>) transformationList.clone();
 
         double[][] resultingMatrix = new double[objectMatrix.length][objectMatrix[0].length];

@@ -8,17 +8,12 @@ package panels;
 import java.awt.event.ItemEvent;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import panels.PanelBoard;
-import panels.PencilPanel;
-import math.Matrix;
 import math.Polygon;
 import math.PolygonType;
-import geometric.Coordinate;
+import java.util.Stack;
+import math.Matrix;
+import static math.Matrix.composed;
 import transformations.Transformation2D;
-import main.Main;
 
 /**
  *
@@ -29,6 +24,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
     private Polygon polygon = new Polygon(PolygonType.TRANSFORMATION2D);
     private PanelBoard panelBoard;
     private Transformation2D transformation2D = new Transformation2D();
+    Stack<double[][]> compositeTransformations = new Stack<double[][]>();
     
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
@@ -121,6 +117,8 @@ public class Panel2D extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         emYText = new javax.swing.JTextField();
         resetButton = new javax.swing.JButton();
+        addComposicaoButton = new javax.swing.JButton();
+        rodarComposicaoButton = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Transformações 2D");
@@ -212,6 +210,20 @@ public class Panel2D extends javax.swing.JInternalFrame {
             }
         });
 
+        addComposicaoButton.setText("Add na Composição");
+        addComposicaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addComposicaoButtonActionPerformed(evt);
+            }
+        });
+
+        rodarComposicaoButton.setText("Rodar Composição");
+        rodarComposicaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rodarComposicaoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,15 +261,18 @@ public class Panel2D extends javax.swing.JInternalFrame {
                         .addComponent(emXLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(aplicarNoObjetoButton)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(emXText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(emYLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addComposicaoButton)
+                                    .addComponent(aplicarNoObjetoButton)
+                                    .addComponent(rodarComposicaoButton))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +280,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
                         .addGap(84, 84, 84)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(113, 113, 113)
                         .addComponent(resetButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -300,7 +315,11 @@ public class Panel2D extends javax.swing.JInternalFrame {
                     .addComponent(emYText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(aplicarNoObjetoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addComposicaoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rodarComposicaoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(resetButton)
                 .addGap(43, 43, 43))
         );
@@ -428,8 +447,42 @@ public class Panel2D extends javax.swing.JInternalFrame {
         panelBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+    private void addComposicaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComposicaoButtonActionPerformed
+        // TODO add your handling code here:
+        if(transformacoesComboBox.getSelectedItem().equals("Translation")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+            
+            compositeTransformations.push(Matrix.translationMatrix2D(assistantX, assistantY));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Scaling")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+
+            compositeTransformations.push(Matrix.scalingMatrix2D(assistantX, assistantY));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Rotation")) {
+            assistantX = Integer.parseInt(emXText.getText());
+
+            compositeTransformations.push(Matrix.rotationMatrix2D(assistantX));
+        } else if(transformacoesComboBox.getSelectedItem().equals("Reflection")) {
+            compositeTransformations.push(Matrix.reflectionMatrix2D(emXText.getText()));
+            
+        } else if(transformacoesComboBox.getSelectedItem().equals("Shear")) {
+            assistantX = Integer.parseInt(emXText.getText());
+            assistantY = Integer.parseInt(emYText.getText());
+
+            compositeTransformations.push(Matrix.shearMatrix2D(assistantX, assistantY));
+        }
+    }//GEN-LAST:event_addComposicaoButtonActionPerformed
+
+    private void rodarComposicaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rodarComposicaoButtonActionPerformed
+        // TODO add your handling code here:
+        polygon.setPolygon(composed(compositeTransformations, polygon.getPolygon()));
+        panelBoard.repaint();
+    }//GEN-LAST:event_rodarComposicaoButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addComposicaoButton;
     private javax.swing.JTextField alturaText;
     private javax.swing.JButton aplicarNoObjetoButton;
     private javax.swing.JButton desenharObjetoButton;
@@ -445,6 +498,7 @@ public class Panel2D extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField larguraText;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton rodarComposicaoButton;
     private javax.swing.JComboBox<String> transformacoesComboBox;
     private javax.swing.JTextField x;
     private javax.swing.JTextField y;

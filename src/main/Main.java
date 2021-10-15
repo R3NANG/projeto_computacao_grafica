@@ -161,7 +161,7 @@ public class Main extends javax.swing.JFrame {
         panelBoard.setLocation(222, 0);
         panelBoard.setVisible(true);
         this.add(panelBoard);
-        this.setSize(595, 505);
+        this.setSize(595, 515);
     }//GEN-LAST:event_itemDeMenuTransformacoes3DActionPerformed
 
     private void itemDeMenuTransformacoes2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTransformacoes2DActionPerformed
