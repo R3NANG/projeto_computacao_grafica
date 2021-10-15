@@ -59,9 +59,6 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
     boolean ker[][] = new boolean[1][1];
 
     /*
-    public void setPanelImageInput(PanelImage panel) {
-        this.panelImageInput = panel;
-    }
     */
     /**
      * Creates new form PanelImageFilters
@@ -85,17 +82,9 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(image, 230, 50, null);
-        //panelImageResult.getGraphics().drawImage(imageResult, 320, 50, null);
     }
 
     /*
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
-        panelImageOriginal.repaint();
-
-    }
     */
     /**
      * This method is called from within the constructor to initialize the form.
@@ -323,22 +312,10 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
             fileChooser.setFileFilter(filter);
             int returnVal = fileChooser.showOpenDialog(aplicarNaImagemButton);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                //imageMatrix1 = createImage(fileChooser.getSelectedFile());
-                //populaImgInPanel(imageMatrix1, panelImageOriginal);
-               // createImage(fileChooser.getSelectedFile());
                
                 File path = fileChooser.getSelectedFile();
                 System.out.println(path);
                 createImage(path.getAbsolutePath());
-                //btAplicaFiltro.setEnabled(true);
-                //panelImgOutput.repaint();
-                //panelImageOriginal.setImage(imgT);
-
-                //panelImageInput.setImage(image);
-                //panelImageInput.repaint();
-
-                //panelImageOriginal.getGraphics().drawImage(image, 0, 0, null);
-                //panelImageOriginal.repaint();
                 this.repaint();
             }
         } catch (Exception e) {
@@ -352,23 +329,7 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
      */
     public int[][] createImage(String path) {
         /*
-        FileInputStream fileInputStream = null;
-        Scanner scan = null;
-        try {
-            fileInputStream = new FileInputStream(file);
-            scan = new Scanner(fileInputStream);
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Descarta a primeira linha
-        scan.nextLine();
-        // Read pic width, height and max value
-        imgWidth = scan.nextInt();
-        imgHeight = scan.nextInt();
-        imgValorMaximo = scan.nextInt();
         */ 
-        //BufferedImage bimg = null;
         int width;
         int height;
 
@@ -388,23 +349,6 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
             imgValorMaximo = scan.nextInt();
 
             BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            System.out.printf ("W : %d\n", width);
-            System.out.printf ("H : %d\n", height);
-
-            //width = i.getWidth();
-            //height = i.getHeight();
-            /*
-            if (path == null)
-                System.out.println("File Null");
-            if (inputStream == null) 
-                System.out.println("input Null");
-            if (bimg == null)
-                System.out.println("bimg Null");
-
-            width = bimg.getWidth();
-            height = bimg.getHeight();
-            */
-            //this.image = bimg;
 
             /**
             * Monta a matriz imagem com os pixels da imagem selecionada
@@ -439,11 +383,6 @@ public class PanelImageMorphology extends javax.swing.JInternalFrame {
 
 
         /*
-        try {
-            fileInputStream.close();
-        } catch (IOException ex) {
-            //Logger.getLogger(PanelOperacoes.class.getName()).log(Level.SEVERE, null, ex);
-        }
         */
         return imageMatrix;
     }
